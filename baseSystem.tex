@@ -507,6 +507,10 @@ We use this norm because of a bound presented by [AUTHORS], which states that ()
 
 We proceed to work with timing in a Pacman environment. The transition structure of this environment is shown in Figure 2. Again we use 10000 observation sequences per PSR and compute the average of 10 PSRs. 
 
+\subsection{Multiple Observations}
+
+To test whether the Base System would translate to multiple observations we construct a double loop environment where one loop is green and the other is blue. The lengths of each loop are also varied. We fix the length of observations to be $loop1 + loop2 * 3$. To build empirical estimates of probabilities we set f(x)=prefix-occ(x)/num-strings-length>=x.
+
 \section{ Acknowledgments}
 AAAI is especially grateful to Peter Patel Schneider for his work in implementing the aaai.sty file, liberally using the ideas of other style hackers, including Barbara Beeton. We also acknowledge with thanks the work of George Ferguson for his guide to using the style and BibTeX files --- which has been incorporated into this document  --- and Hans Guesgen, who provided several timely modifications, as well as the many others who have, from time to time, sent in suggestions on improvements to the AAAI style. 
 
