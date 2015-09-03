@@ -1,8 +1,14 @@
 \section{Fully Data-Driven Learning}
 
+\subsection{Overview}
+
+In the previous section we showed examples of Multi-PSRs whose $\Sigma$' and $\kappa$ parameters were independent of the environment. As the Multi-PSRs seem to offer improvements over the traditional PSR (results section), it would make sense to make these parameters a function of the observations of one's environment. 
+
 \subsection{Learning Transition Operators}
 
-Here we present a greedy heuristic which learns our transition sequences $\sum'$ from observation data. We start with some notation. Let ... 
+Here we present a greedy heuristic which learns multi-step transition sequences $\Sigma'$ from observation data. Coupled with the algorithm for decomposition sequences, a good $\Sigma'$ will minimize the number of operators used when performing probability queries. While this is not the explicit goal, in practice the algorithm will typically pick substrings from one's observation set which are long, frequent, and diverse. From an intuitive standpoint, it can be useful to view the types of operators learned from an environment as a reflection of the degree of entropy in the observations that it produces. This is generally what we think of when we refer to structured environments.
+
+The algorithm evaluates substrings based on how much they would reduce the number of transition operators used on one's observation data. The algorithm does this iteratively with $\Sigma' initialized to \sum$. More formally at the ith iteration of the algorithm it computes $min_{substring \in observations.substrings} of \sum k_(obs,\Sigma'_i \cup sub)$. The algorithm terminates after the Nth iteration. Here, N+|$\sum$| is a parameter of choice of the user corresponding to the desired size of $\Sigma'$.
 
 \begin{algorithm}
 \caption{Base Selection Algorithm}
@@ -37,9 +43,11 @@ Here we present a greedy heuristic which learns our transition sequences $\sum'$
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{Learning the encoding function}
+\subsection{Learning the Encoding Function}
 
-Here we provide a dynamic programming algorithm which can serve as $kappa$ for any M-PSR. Given a query string Q, and a set of transition sequences $\sum'$, the algorithm minimizes the number of sequences used in the partition. In other words, the algorithm minimizes $|k(Q)|$.
+Here we provide a dynamic programming algorithm which can serve as $kappa$ for any M-PSR. Given a query string Q, and a set of transition sequences $\Sigma'$, the algorithm minimizes the number of sequences used in the partition. In other words, the algorithm minimizes $|k(Q)|$. For the single observation case, the algorithm is equivalent to the coin change problem.
+
+For a given string S, the algorithm inductively computes the optimal string composition for the prefix s[:i]. It does so by minimizing over all $s \in \Sigma'$ which terminate at s[i].
 
 \begin{algorithm}
 \caption{Encoding Algorithm}
@@ -55,7 +63,7 @@ Here we provide a dynamic programming algorithm which can serve as $kappa$ for a
 \State $sequencesEnding[0] \gets ""$
 
 \For{i in range(Q.length)}
-	 $sequencesEnding[i] \gets \{x \in \sum' s.t Q[i-x.length:i] == x\}$
+	 $sequencesEnding[i] \gets \{x \in \Sigma' s.t Q[i-x.length:i] == x\}$
 \EndFor
 
 \For{i in range(Q.length)}
