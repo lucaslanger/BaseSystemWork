@@ -1,0 +1,33 @@
+\section{M-PSR: Definition and Learning}
+
+\subsection{Multi-Step PSR}
+
+A linear \emph{predictive state representation} for an autonomous dynamical system with discrete observations in a set $\Sigma$ is a tuple $\psrA = \psrsigma$ where: BLA BLA.
+
+To define our model for multi-step PSR we basically augment a PSR with two extra objects: a set of \emph{multi-step observations} $\Sigma' \subset \Sigma^+$ containing non-empty strings formed by basic observations, and a \emph{coding function} $\kappa : \Sigma^\star \to {\Sigma'}^{\star}$ that given a string of basic observations produces an equivalent string composed using multi-step observations.
+%
+The choice of $\Sigma'$ and $\kappa$ can be quite application-dependent, in order to reflect the particular patterns arising from different environments. However, we assume this objects satisfy a basic set of requirements for the sake of simplicity and to avoid degenerate situations:
+\begin{enumerate}
+\item The set $\Sigma'$ must contain all symbols in $\Sigma$; i.e.\ $\Sigma \subseteq \Sigma'$
+\item The function $\kappa$ satisfies $\partial(\kappa(x)) = x$ for all $x \in \Sigma^\star$, where $\partial : {\Sigma'}^\star \to \Sigma^\star$ is the \emph{decoding morphism} between free monoids given by $\partial(z) = z \in \Sigma^\star$ for all $z \in \Sigma'$. Note this implies that $\kappa(\epsilon) = \epsilon$, $\kappa(\sigma) = \sigma$ for all $\sigma \in \Sigma$, and $\kappa$ is injective.
+\end{enumerate}
+
+Using these definitions, a \emph{multi-step PSR} (M-PSR) is a tuple $\psrA' = \mpsrsigma$.
+
+\subsection{Spectral Learning Algorithm}
+
+We extend \cite{bootspsr}...
+
+\subsection{Examples}
+
+%\textbf{Base PSR for Duration Models} BLA BLA...
+
+In this section we will go through a few examples of Multi-PSRs which are particularly relevant to our experiment section. 
+
+For the timing case one can use a M-PSR which we call the \textbf{Base System}. For this type of M-PSR, $\sum'$ will consist of $\{a^{2^k} \forall k <= n\}$. To describe the encoding map we write an observation $a^m = a^{2^n1} ... \cdot a^{2^nf}$  With this equality a natural encoding map $\kappa$ which is natural to use is: $\kappa(a^n) = \{a^{2^n_1},...,\{a^{2^n_f}\}$. 
+
+For the multiple observation case one can also use The Base System. In this case $\sum' = \{\sigma^{2^k}\forall \sigma \in \sum, \forall k <= n\}$. For the encoding map $\kappa$ we first split the string into sequences of a fixed symbol and then use the same encoding as for timing. The Base System for multiple observations clearly aims at environments where observation symbols come in streaks.
+ 
+Another example for the multiple observation case is an M-PSR we will call the \textbf{Tree System}. For the Tree System, we set $\sum'=$ the set of all possible strings of length $<= L$. For the decoding map $\kappa$, we first split a string x into $x_1x_2...x_ny$, where $xi$ $\forall i<=n$ have length L and y has length $len(x) - n \times L$. With this we set $\kappa(x) = \{x_1,x_2,...,y\}$.
+
+The the construction of the above multi-PSRs is not dependent on the environment. In practice, if one would like to learn a M-PSR which has the best performance, namely a M-PSR whose parameters best reflect the types of observations seen from one's environment. 
