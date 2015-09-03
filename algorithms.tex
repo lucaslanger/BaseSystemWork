@@ -4,11 +4,76 @@
 
 Here we present a greedy heuristic which learns our transition sequences $\sum'$ from observation data. We start with some notation. Let ... 
 
-ALGORITHM CODE:
+\begin{algorithm}
+\caption{Base Selection Algorithm}
+\label{Base Selection}
+\begin{algorithmic}[1]
+\Procedure{Base Selection}{}
+\State $BaseSystem \gets \{s, s \in \sum \}$
+\State $bestSubstring \gets null$
+\State $i\gets 0$\
+\State $bestImprovement \gets null$
+\While{$i<desiredBaseSize$}
+	\For{each substring $s$ $\in Observations$ }
+		\State $improvement \gets 0$
+		\For{each observation $o$ in Observations}
+			$improvement +=$ optimalOrder($o$) - previousBest($o$)
+		\EndFor
+		
+		\If{$improvement>bestImprovement$}
+			\State $bestSubstring \gets observation$
+			\State $bestImprovement \gets improvement$
+		\EndIf
+		
+	\EndFor
+
+	\State $BaseSystem \gets BaseSystem \cup bestSubstrings$
+	\State $bestSubstring \gets null$
+	\State $bestImprovement \gets null$
+
+\EndWhile
+\Return $BaseSystem$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
 
 \subsection{Learning the encoding function}
 
 Here we provide a dynamic programming algorithm which can serve as $kappa$ for any M-PSR. Given a query string Q, and a set of transition sequences $\sum'$, the algorithm minimizes the number of sequences used in the partition. In other words, the algorithm minimizes $|k(Q)|$.
 
-ALGORITHM CODE:
+\begin{algorithm}
+\caption{Encoding Algorithm}
+\label{Encoding Algorithm}
+\begin{algorithmic}[1]
+\Procedure{Encoding}{}
 
+\State $Map<Int,String[]> bestPartition \gets null$
+\State $sequencesEnding[] \gets new String[Q.length]$
+\State $minPartition[] \gets new Int[Q.length]$
+
+\State $minPartition[] \gets 0$
+\State $sequencesEnding[0] \gets ""$
+
+\For{i in range(Q.length)}
+	 $sequencesEnding[i] \gets \{x \in \sum' s.t Q[i-x.length:i] == x\}$
+\EndFor
+
+\For{i in range(Q.length)}
+	\State $bestOp \gets null$
+	\State $bestPartition \gets null$ 
+	\For{$s \in sequencesEnding[i]$}
+		\State $partitionVal \gets minPartition[i-s.length]$
+		\If{$bestPartition == null or partitionVal < bestPartition$}
+			\State $bestPartition \gets partitionVal$ 
+			\State $bestOp \gets s$
+		\EndIf
+	\EndFor
+	\State $minPartition[i] \gets minPartition[i-bestOp.length] + 1$
+	\State $bestPartition[i] \gets bestPartition.get(i).add(bestOp) $
+\EndFor
+
+\Return $bestPartition[Q.length]$
+
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
