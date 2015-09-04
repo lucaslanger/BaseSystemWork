@@ -57,12 +57,18 @@ For Timing, M-PSRs all perform perform significantly better than the standard PS
 
 \subsection{Multiple Observations}
 
-We now move to the multiple observation case. Here the Data-Driven M-PSRs really show their strength as observation sequences are more complex. We construct a Double Loop environment where one loop is green and the other is blue. The lengths of each loop are also varied, see Figure 4 and Figure 5. We fix the length of observations to be $loop1 + loop2 * 3$. To build empirical estimates of probabilities we set f(x)=prefix-occ(x)/num-strings-length>=x. This means that the PSRs will compute the probability of a prefix occuring.
+We now move to the multiple observation case. Here the Data-Driven M-PSRs really show their strength as observation sequences are more complex. We construct a Double Loop environment where one loop is green and the other is blue. The lengths of each loop are also varied, see Figure 4 and Figure 5. We fix the length of observations to be $loop1 + loop2 * 3$. To build empirical estimates of probabilities we set f(x)=prefix-occ(x)/num-strings-length>=x. This means that the PSRs will compute the probability of a prefix occurring.
 
 \subsection{Multiple Observations Results}
 
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=60mm]{uCOREPICS/PacManTimingHeuristicsIncluded.png}
+\caption{Double Loop Performance\label{overflow}}
+\end{figure}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=60mm]{uCOREPICS/doubleLoopImageMO.png}
 \caption{Double Loop Environment\label{overflow}}
 \end{figure}
