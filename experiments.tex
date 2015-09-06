@@ -1,7 +1,7 @@
 \section{Experiments}
 We assess the performance of PSRs and different kinds of Multi-PSRs on labyrinth environments. We look to see how performance varies as parameters are varied. Parameters include the model size, the number of observations used, and the type of environment. For all the plots, the x-axis is model size of the PSR/M-PSRs and the y-axis is an error measurement of the learned PSR/M-PSRs.
 
-\subsection{Obtaining observation sequences}
+\subsection{Obtaining Observation Sequences}
 In all the experiments we consider, an agent is positioned in a starting location and stochastically navigates the environment based on transition probabilities between states. When state-to-state transitions occur an observation symbol is produced. When the agent exits the labyrinth, we say the trajectory is finished, and we record the concatenation of the symbols produced. We call this concatenation the observation sequence for that trajectory.  
 
 \subsection{Learning Implementation: Timing v.s Multiple Symbols}
@@ -29,33 +29,105 @@ For a fixed dataset of observations, we compare the performance of a PSR and dif
 
 For timing, we start by considering a double loop environment. The lengths of the loops correspond to the number of states in the loop. A trajectory begins with the agent starting at the intersection of the two loops. At the intersection of the two loops, the agent has a 50 percent chance of entering either loop. At intermediate states in the loops the agent moves to the next state in the loop with probability 1-P and remains in its current state with probability P. Here, P represents the self-transition probability for internal states. Exit states are located halfway between each loop. At an exit state, the agent has a 50 percent probability of exiting the environment. 
 
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=60mm]{uCOREPICS/DL/doubleLoopImage.png}
+\caption{Double Loop Environment\label{overflow}}
+\end{figure}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=60mm]{uCOREPICS/DL/64-16-10000.png}
+\caption{Double Loop 64-16\label{overflow}}
+\end{figure}
+
 \subsection{Amount of Data}
 
 Here, we vary the number of observations used in our dataset. PSRs/M-PSRs learned in Figure 4 use 100 observation sequences, while those in Figure 5 use 10000. In both cases the M-PSRs outperform the standard PSR for reduced model sizes.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=60mm]{uCOREPICS/DL/64-16-100.png}
+\caption{Double Loop 64-16\label{overflow}}
+\end{figure}
 
 \subsection{Noise: Parameter P}
 
 Next, we vary the self-transition probability P to simulate noise in an environment. Figure 5 is a 64-16 double loop with P=0.2, and Figure 6 is a 64-16 double loop with P=0. We find that the noisy loops are more compressible, but the performance is worse for higher models. Nevertheless, M-PSRs still significantly outperform the standard PSR for reduced model sizes.
 
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=60mm]{uCOREPICS/DL/NoiseInfo.png}
+\caption{Double Loop 64-16\label{overflow}}
+\end{figure}
+
 \subsection{Loop Lengths}
 
 So far we have been using a 64-16 Double Loops. Here observations will come in low multiples of large powers of two. Intuitively, in this case the Base M-PSR should shine the most. In Figure 8, we plot the results of a 47-27 labyrinth where observations will not be so easily expressed from the Base M-PSR. Once again, M-PSRs outperform the standard PSR for reduced model sizes. In addition we see that the Data-Driven M-PSR does better than the Base M-PSR.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=60mm]{uCOREPICS/DL/47-27-10000.png}
+\caption{Double Loop 47-27\label{overflow}}
+\end{figure}
 
 \section{Large Labyrinth Timing}
 
 We proceed to work with a more complex labyrinth environment. Figure 10 shows it's graphical representation. We test a larger environment as results in such a system would transfer to applications such as pacman. Transitions to new states occur with equal probability. The weight between transitions corresponds to the number of time steps. We add an additional parameter sF: stretchFactor, which multiplies all of the weights in the graph. 
 
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=60mm]{uCOREPICS/Pacman/Pacman10k.png}
+\caption{Pacman Labyrinth\label{overflow}}
+\end{figure}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=40mm,height=60mm]{uCOREPICS/Pacman/graphPacMan.png}
+\caption{Graph of pacman\label{overflow}}
+\end{figure}
+
 \subsection{Amount of Data}
 
 In Figures 11 and 12 we vary the number of observations used to learn PSRs/M-PSRs. We find that ().
 
-\subsection{StretchFactor sF}
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=60mm]{uCOREPICS/Pacman/Pacman500.png}
+\caption{Pacman Labyrinth\label{overflow}}
+\end{figure}
+
+\subsection{StretchFactor}
 
 In Figures 13 and 14 we vary the stretchFactor parameter. We find that ().
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=60mm]{uCOREPICS/Pacman/PacmanSF=1.png}
+\caption{Pacman Labyrinth\label{overflow}}
+\end{figure}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=60mm]{uCOREPICS/Pacman/PacmanSF=5.png}
+\caption{Pacman Labyrinth\label{overflow}}
+\end{figure}
 
 \section{Multiple Observations: Colored Loops}
 
 We now move to the multiple observation case. Here the Data-Driven M-PSRs really show their strength as observation sequences are more complex. We construct a Double Loop environment where one loop is green and the other is blue. The lengths of each loop are also varied, see Figure 4 and Figure 5. We fix the length of observations to be $TrajectoryLength := (len(loop1) + len(loop2))*3$. To build empirical estimates of probabilities we set $f(x)=(pocc(x)/numstringslength>=x$. This means that the PSRs will compute the probability of a prefix occurring.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=60mm]{uCOREPICS/DLMO/MO_1k.png}
+\caption{Colored Loops 27-17\label{overflow}}
+\end{figure}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=60mm]{uCOREPICS/DLMO/doubleLoopImageMO.png}
+\caption{Colored Loops Environment\label{overflow}}
+\end{figure}
 
 \subsection{Amount of Data}
 
@@ -64,37 +136,6 @@ As for the timing case, we vary the amount of data to learn PSRS/M-PSRs in Figur
 \subsection{Loop Lengths}
 In figures 17,18 we vary the loop lengths. When the GCD loop lengths is a high power of 2, the Base M-PSR does similar to the Data-Driven M-PSR. However, when the loop lengths are 27-17, we find that the Data-Driven M-PSR does far better. This shows that learning $\Sigma'$ from data offers a significant advantage.
 
-
-\begin{figure}[ht!]
-\centering
-\includegraphics[width=60mm]{uCOREPICS/doubleLoopImage.png}
-\caption{Double Loop Environment\label{overflow}}
-\end{figure}
-
-\begin{figure}[ht!]
-\centering
-\includegraphics[width=60mm]{uCOREPICS/DoubleLoop47-27Heuristics.png}
-\caption{Double Loop 47-27\label{overflow}}
-\end{figure}
-
-\begin{figure}[ht!]
-\centering
-\includegraphics[width=60mm]{uCOREPICS/DoubleLoop64-16Heuristics.png}
-\caption{Double Loop 64-16\label{overflow}}
-\end{figure}
-
-\begin{figure}[ht!]
-\centering
-\includegraphics[width=60mm]{uCOREPICS/PacManTimingHeuristicsIncluded.png}
-\caption{Pacman Labyrinth\label{overflow}}
-\end{figure}
-
-\begin{figure}[ht!]
-\centering
-\includegraphics[width=40mm,height=60mm]{uCOREPICS/graphPacMan.png}
-\caption{Graph of pacman\label{overflow}}
-\end{figure}
-
 \subsection{Data Driven Sequences}
 For the double loop case the data-driven greedy approach learns multiples of the loop lengths which results in partitions which use fewer operators. As an example, for the 47-27 labyrinth the greedy heuristic picked the following operators: $\Sigma'=\{\sigma^{47}, \sigma^{27}, \sigma^{74}, \sigma^{94} ...\}$. For Pacman, the learned strings are multiples of the stretch factor. For Colored Double Loops, $\Sigma' = \{g^{27},b^{17},g^{27}b^{17},\}$ The top 7 of 10 operators are usually learned consistently, while the other strings vary slightly dependent on the generated dataset.
 
@@ -102,14 +143,3 @@ For the double loop case the data-driven greedy approach learns multiples of the
 
 some discussion of results...
 
-\begin{figure}[ht!]
-\centering
-\includegraphics[width=60mm]{uCOREPICS/MultipleObservationsHeuristics.png}
-\caption{Colored Loops 27-17\label{overflow}}
-\end{figure}
-
-\begin{figure}[ht!]
-\centering
-\includegraphics[width=60mm]{uCOREPICS/doubleLoopImageMO.png}
-\caption{Colored Loops Environment\label{overflow}}
-\end{figure}
