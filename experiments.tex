@@ -133,8 +133,11 @@ We now move to the multiple observation case. Here the Data-Driven M-PSRs really
 
 As for the timing case, we vary the amount of data to learn PSRS/M-PSRs in Figures 15 and 16. Once again we find ().
 
-\subsection{Loop Lengths}
-In figures 17,18 we vary the loop lengths. When the GCD loop lengths is a high power of 2, the Base M-PSR does similar to the Data-Driven M-PSR. However, when the loop lengths are 27-17, we find that the Data-Driven M-PSR does far better. This shows that learning $\Sigma'$ from data offers a significant advantage.
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=60mm]{uCOREPICS/DLMO/MO_50.png}
+\caption{Colored Loops 27-17\label{overflow}}
+\end{figure}
 
 \subsection{Data Driven Sequences}
 For the double loop case the data-driven greedy approach learns multiples of the loop lengths which results in partitions which use fewer operators. As an example, for the 47-27 labyrinth the greedy heuristic picked the following operators: $\Sigma'=\{\sigma^{47}, \sigma^{27}, \sigma^{74}, \sigma^{94} ...\}$. For Pacman, the learned strings are multiples of the stretch factor. For Colored Double Loops, $\Sigma' = \{g^{27},b^{17},g^{27}b^{17},\}$ The top 7 of 10 operators are usually learned consistently, while the other strings vary slightly dependent on the generated dataset.
