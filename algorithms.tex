@@ -2,7 +2,7 @@
 
 \subsection{Overview}
 
-In the previous section we showed examples of Multi-PSRs whose $\Sigma$' and $\kappa$ parameters were independent of the environment. As the Multi-PSRs seem to offer improvements over the traditional PSR (results section), it would make sense to make these parameters a function of the observations of one's environment. 
+In this section, we provide two algorithms: the first being a general algorithm for $\kappa$ and the second for choosing $\Sigma'$ from Data. We present these algorithms together in the context of \textbf{Data-Driven M-PSRs} as the Data-Driven algorithm for choosing $\Sigma'$ makes use of the algorithm for our choice of $\kappa$.
 
 \subsection{Notation}
 
@@ -12,17 +12,17 @@ In the previous section we showed examples of Multi-PSRs whose $\Sigma$' and $\k
 
 \textbf{Q}: A query string (a string for which one wishes to determine the probability of).
 
-\textbf{bestP}: A map from indices i of Q to the optimal encoding of Q[:i].
+\textbf{bestE}: A map from indices i of Q to the optimal encoding of Q[:i].
 
-\textbf{minP}: A map from indices i of Q to $|bestP[i]|$
+\textbf{minE}: A map from indices i of Q to $|bestE[i]|$
 
 \textbf{opEnd}: A map from indices i of Q to the set of strings in $\Sigma'$: $\{x \in \Sigma' s.t Q[i-x.length:i] == x\}$
 
-\textbf{numOperators}: The desired number of operators one wants in $\Sigma'$
+\textbf{numOps}: The desired number of operators one wants in $\Sigma'$. I.e numOps =  $|\Sigma'|$
 
 \subsection{Learning the Encoding Function}
 
-Here we provide a dynamic programming algorithm which can serve as $\kappa$ for any M-PSR. Given a query string Q, and a set of transition sequences $\Sigma'$, the algorithm minimizes the number of sequences used in the partition $\kappa(Q)$. In other words, the algorithm minimizes $|k(Q)|$. For the single observation case, the algorithm is equivalent to the coin change problem.
+Here we provide a dynamic programming algorithm which can serve as $\kappa$ for any M-PSR. Given a query string Q, and a set of transition sequences $\Sigma'$, the algorithm minimizes the number of sequences used in the partition $\kappa(Q)$. In other words, the algorithm minimizes $|\kappa(Q)|$. For the single observation case, the algorithm is equivalent to the coin change problem.
 
 For a given string Q, the algorithm inductively computes the optimal string encoding for the prefix Q[:i]. It does so by minimizing over all $s \in \Sigma'$ which terminate at the index i of Q.
 
@@ -32,33 +32,31 @@ For a given string Q, the algorithm inductively computes the optimal string enco
 \begin{algorithmic}[1]
 \Procedure{DPEncode}{}
 
-\State $Map<Int,String[]> bestP \gets null$
-\State $minP[] \gets new Int[Q.length]$
-\State $opEnd \gets new String[Q.length]$
-
-\State $minP[] \gets 0$
+\State $bestE[] \gets null$
+\State $minE[] \gets new Int[Q.length]$
+\State $opEnd[] \gets new String[Q.length]$
 
 \For{i in range(Q.length)}
-	 $opEnd[i] \gets \{x \in \Sigma' s.t Q[i-x.length:i] == x\}$
+	 \State $opEnd[i] \gets \{s \in \Sigma', Q[i-s.length:i] == s\}$
 \EndFor
 
 \For{i in range(Q.length)}
 	\State $bestOp \gets null$
 	\State $m \gets null$ 
 	\For{$s \in opEnd[i]$}
-		\State $tempInt \gets minP[i-s.length]$ + 1
+		\State $tempInt \gets minE[i-s.length] + 1$
 		\If{$m == null or tempInt < m$}
 			\State $m \gets temp$ 
 			\State $bestOp \gets s$
 		\EndIf
 	\EndFor
-	\State $minP[i] \gets m$
-	\State $bestP[i] \gets bestP[i-bestOp.length] + bestOp$
+	\State $minE[i] \gets m$
+	\State $bestE[i] \gets bestE[i-bestOp.length] + bestOp$
 \EndFor
 
 $ADD OFF BY ONE STUFF$
 
-\Return $bestP[Q.length]$
+\Return $bestE[Q.length]$
 
 \EndProcedure
 \end{algorithmic}
@@ -66,31 +64,35 @@ $ADD OFF BY ONE STUFF$
 
 \subsection{Learning Transition Operators}
 
-Here we present a greedy heuristic which learns multi-step transition sequences $\Sigma'$ from observation data. A $\Sigma'$ which reflects the types of observations produces by one's system will allow of short encodings when coupled with the a dynamic programming encoding algorithm. In practice this greedy algorithm will pick substrings from one's observation set which are long, frequent, and diverse. From an intuitive standpoint, it can be useful to view the types of operators learned from an environment reflects the level of entropy in the observations that it produces. One can see this as a way of measuring the amount of structure in an environment. 
+Here we present a greedy heuristic which learns the multi-step transition sequences $\Sigma'$ from observation data. Having a $\Sigma'$ which reflects the types of observations produces by one's system will allow of short encodings when coupled with our a dynamic programming encoding algorithm. In practice, this greedy algorithm will pick substrings from one's observation set which are long, frequent, and diverse. From an intuitive standpoint, one can view structure in observation sequences as relating to the level of entropy in the system's observations. 
 
-The algorithm evaluates substrings based on how much they would reduce the number of transition operators used on one's observation data. The algorithm does this iteratively with $\Sigma' initialized to \Sigma$. More formally at the i'th iteration of the algorithm it computes $min_{sub \in SubObs} of \sum{obs \in Obs}^{}\kappa(obs,\Sigma'_i \cup sub)$. The algorithm terminates after the N'th iteration. Here, N+|$\sum$| is a parameter of choice of the user corresponding to the desired size of $\Sigma'$.
+The algorithm evaluates substrings based on how much they reduce the number of transition operators used on one's observation data. The algorithm adds the best operator iteratively with $\Sigma'$ initialized to $\Sigma$. More formally at the i'th iteration of the algorithm the following is computed: $min_{sub \in SubObs} \sum\nolimits_{obs \in Obs}|\kappa(obs,\Sigma'_i \cup sub)|$. The algorithm terminates after the \textbf{numOps} iterations. 
 
 \begin{algorithm}
 \caption{Base Selection Algorithm}
 \label{Base Selection}
 \begin{algorithmic}[1]
 \Procedure{Base Selection}{}
-\State $Sigma' \gets \{s, s \in \sum \}$
+\State $\Sigma' \gets \{s, s \in \sum \}$
 \State $bestOp \gets null$
 \State $i\gets 0$\
-\State $bestImprovement \gets null$
-\State $previousBestEncoding \gets null$
+\State $bestImp \gets null$
+
+\State $prevBestE \gets null$
+\For{each obs in Obs}
+	\State $prevBestEncoding[obs] \gets obs.length$
+\EndFor
 
 \While{$i<numOperators$}
-	\For{each s $\in Obs$ }
-		\State $improvement \gets 0$
-		\For{each $obs$ in Obs}
-			$improvement +=$ DPEncode($obs$) - previousBestEncoding($obs$)
+	\For{each s $\in ObsSub$ }
+		\State $temp \gets 0$
+		\For{each obs in Obs}
+			\State $temp \gets temp + DPEncode(obs) - prevBestE(obs)$
 		\EndFor
 		
-		\If{$improvement>bestImprovement$}
+		\If{temp$>$bestImp}
 			\State $bestOp \gets observation$
-			\State $bestImprovement \gets improvement$
+			\State $bestImp \gets temp$
 		\EndIf
 		
 	
@@ -98,14 +100,14 @@ The algorithm evaluates substrings based on how much they would reduce the numbe
 	\EndFor
 
 	\State $\Sigma' \gets \Sigma' \cup bestOp$
-	\For{each $obs$ in Obs}
-		$previousBestEncoding \gets DPEncode(obs,\Sigma'$) 
+	\For{each obs in Obs}
+		\State $prevBestE \gets DPEncode(obs,\Sigma'$) 
 	\EndFor	
 	
 	\State $bestOp \gets null$
-	\State $bestImprovement \gets null$
-
-\EndWhile
+	\State $bestImp \gets null$
+	\State $i \gets i + 1$
+\EndWhile 
 \Return $BaseSystem$
 
 \EndProcedure
