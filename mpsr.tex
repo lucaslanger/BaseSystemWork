@@ -18,16 +18,16 @@ Using these definitions, a \emph{multi-step PSR} (M-PSR) is a tuple $\psrA' = \m
 
 We extend \cite{bootspsr}...
 
-\subsection{Examples}
+\subsection{Examples of M-PSRs}
 
 %\textbf{Base PSR for Duration Models} BLA BLA...
 
-In this section we will go through a few examples of Multi-PSRs which are particularly relevant to our experiment section. 
+In this section we go through examples of Multi-PSRs which are relevant to our experiment section. 
 
-For the timing case one can use a M-PSR which we call the \textbf{Base System}. For this type of M-PSR, $\sum'$ will consist of $\{a^{2^k} \forall k <= n\}$. To describe the encoding map we write an observation $a^m = a^{2^n1} ... \cdot a^{2^nf}$  With this equality a natural encoding map $\kappa$ which is natural to use is: $\kappa(a^n) = \{a^{2^n_1},...,\{a^{2^n_f}\}$. 
+For the timing case one can use a M-PSR which we call the \textbf{Base M-PSR}. For the Base M-PSR, $\Sigma'$ is  $\{a^{2^k} \forall k <= n\}$. For the encoding map we write an observation $a^m = a^{2^n1} ... \cdot a^{2^nf}$.  With this equality we use the natural encoding map $\kappa(a^n) = \{a^{2^n_1},...,\{a^{2^n_f}\}$. 
 
-For the multiple observation case one can also use The Base System. In this case $\sum' = \{\sigma^{2^k}\forall \sigma \in \sum, \forall k <= n\}$. For the encoding map $\kappa$ we first split the string into sequences of a fixed symbol and then use the same encoding as for timing. The Base System for multiple observations clearly aims at environments where observation symbols come in streaks.
+For the multiple observation case one can also use The Base System. In this case $\Sigma' = \{\sigma^{2^k}\forall \sigma \in \sum, \forall k <= n\}$. For the encoding map $\kappa$ we first split the string into sequences of a fixed symbol and then use the same encoding as for timing. For example $\kappa(a^5b^3)=\{a^4,a,b^2,b\}$.
  
-Another example for the multiple observation case is an M-PSR we will call the \textbf{Tree System}. For the Tree System, we set $\sum'=$ the set of all possible strings of length $<= L$. For the decoding map $\kappa$, we first split a string x into $x_1x_2...x_ny$, where $xi$ $\forall i<=n$ have length L and y has length $len(x) - n \times L$. With this we set $\kappa(x) = \{x_1,x_2,...,y\}$.
+Another example for the multiple observation case is an M-PSR we will call the \textbf{Tree M-PSR}. For the Tree System, we set $\Sigma'= \{s \in \Sigma^{*}, len(s)<= L\}$. Here L is a parameter of choice. For the decoding map $\kappa$, we first split a string x as $x=x_1x_2...x_ny$, where $|x_i|=L, \forall i<=n$ and $|y|=len(x) - (n \cdot L)$. With this we set $\kappa(x) = \{x_1,x_2,...,x_n,y\}$.
 
-The the construction of the above multi-PSRs is not dependent on the environment. In practice, if one would like to learn a M-PSR which has the best performance, namely a M-PSR whose parameters best reflect the types of observations seen from one's environment. 
+The constructions of the M-PSRs above are not dependent on the environment. In our results section, we find that performance of M-PSRs depend heavily on how $\Sigma'$ reflects the observations in one's environment. Thus, we develop an algorithm for choosing $\Sigma'$. In addition, we provide a $\kappa$ which one can apply to any M-PSR and which delivers good experimental performance. Together, these yield another type of M-PSR, which we call a \textbf{Data-Driven M-PSR}.
