@@ -1,10 +1,16 @@
-\section{Fully Data-Driven Learning}
+\section{Learning Algorithm for M-PSR}
 
-\subsection{Overview}
+In this section, we describe a learning algorithm for M-PSR which combines the standard spectral algorithm for PSR \cite{bootspsr} with a data-driven greedy algorithm for building an extended set of symbols $\Sigma'$ containing frequent patterns that minimise a coding cost for a general choice of coding function $\kappa$.
 
-In this section, we provide two algorithms: the first being a general algorithm for $\kappa$ and the second for choosing $\Sigma'$ from Data. We present these algorithms together in the context of \textbf{Data-Driven M-PSRs} as the Data-Driven algorithm for choosing $\Sigma'$ makes use of the algorithm for our choice of $\kappa$.
+\subsection{Spectral Learning Algorithm}
+
+We extend \cite{bootspsr} to M-PSR under the assumption that $\kappa$ and $\Sigma'$ are given.
+
+\borja{Need to fill this. Probably copy-paste from the ODM paper will do.}
 
 \subsection{Notation}
+
+\borja{We should move this into the two subsections below}
 
 \textbf{Obs}: A mapping from observation sequences to the number of occurrences of that sequence in one's dataset. 
 
@@ -20,7 +26,7 @@ In this section, we provide two algorithms: the first being a general algorithm 
 
 \textbf{numOps}: The desired number of operators one wants in $\Sigma'$. I.e numOps =  $|\Sigma'|$
 
-\subsection{Learning the Encoding Function}
+\subsection{A General Coding Function}
 
 Here we provide a dynamic programming algorithm which can serve as $\kappa$ for any M-PSR. Given a query string Q, and a set of transition sequences $\Sigma'$, the algorithm minimizes the number of sequences used in the partition $\kappa(Q)$. In other words, the algorithm minimizes $|\kappa(Q)|$. For the single observation case, the algorithm is equivalent to the coin change problem.
 
@@ -62,7 +68,7 @@ $ADD OFF BY ONE STUFF$
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{Learning Transition Operators}
+\subsection{Greedy Selection of Multi-Step Observations}
 
 Here we present a greedy heuristic which learns the multi-step transition sequences $\Sigma'$ from observation data. Having a $\Sigma'$ which reflects the types of observations produces by one's system will allow of short encodings when coupled with our a dynamic programming encoding algorithm. In practice, this greedy algorithm will pick substrings from one's observation set which are long, frequent, and diverse. From an intuitive standpoint, one can view structure in observation sequences as relating to the level of entropy in the system's observations. 
 

@@ -1,8 +1,10 @@
-\section{M-PSR: Definition and Learning}
+\section{The Muti-Step PSR}
 
-\subsection{Multi-Step PSR}
-
-A linear \emph{predictive state representation} for an autonomous dynamical system with discrete observations in a set $\Sigma$ is a tuple $\psrA = \psrsigma$ where: BLA BLA.
+A linear \emph{predictive state representation} (PSR) for an autonomous dynamical system with discrete observations is a tuple $\psrA = \psrsigma$ where: $\Sigma$ is a finite set of possible observations, $\aone, \ainf \in \Rset^n$ are vectors of initial and final weights, and $\A_\sigma \in \Rset^{n \times n}$ are the transition operators associated with each possible observation. The dimension $n$ is the number of states of $\psrA$. Formally, a PSR is a \emph{weighted finite automata} (WFA) \cite{BLA} computing a function given by the probability distribution of sequences of observations in a partially observable dynamical system with finite state. The function $f_{\psrA} : \Sigma^\star \to \Rset$ computed by $\psrA$ is given by
+\begin{equation*}
+f_{\psrA}(x) = f_{\psrA}(x_1 \cdots x_t) = \aone^\top \A_{x_1} \cdots \A_{x_t} \ainf = \aone^\top \A_x \ainf \enspace.
+\end{equation*}
+The value of $f_{\psrA}(x)$ is interpreted as the probability that the system produces the sequence of observations $x = x_1 \cdots x_t$ starting from the initial state specified by $\aone$.
 
 To define our model for multi-step PSR we basically augment a PSR with two extra objects: a set of \emph{multi-step observations} $\Sigma' \subset \Sigma^+$ containing non-empty strings formed by basic observations, and a \emph{coding function} $\kappa : \Sigma^\star \to {\Sigma'}^{\star}$ that given a string of basic observations produces an equivalent string composed using multi-step observations.
 %
@@ -12,19 +14,19 @@ The choice of $\Sigma'$ and $\kappa$ can be quite application-dependent, in orde
 \item The function $\kappa$ satisfies $\partial(\kappa(x)) = x$ for all $x \in \Sigma^\star$, where $\partial : {\Sigma'}^\star \to \Sigma^\star$ is the \emph{decoding morphism} between free monoids given by $\partial(z) = z \in \Sigma^\star$ for all $z \in \Sigma'$. Note this implies that $\kappa(\epsilon) = \epsilon$, $\kappa(\sigma) = \sigma$ for all $\sigma \in \Sigma$, and $\kappa$ is injective.
 \end{enumerate}
 
-Using these definitions, a \emph{multi-step PSR} (M-PSR) is a tuple $\psrA' = \mpsrsigma$.
+Using these definitions, a \emph{multi-step PSR} (M-PSR) is a tuple $\psrA' = \mpsrsigma$ containing a PSR with observations in $\Sigma'$, together with the basic observations $\Sigma$ and the corresponding coding function $\kappa$.
 
-\subsection{Spectral Learning Algorithm}
+\borja{For now, this is enough}
 
-We extend \cite{bootspsr}...
+\subsection{Examples}
 
-\subsection{Examples of M-PSRs}
+We now describe several examples of M-PSR, and put special emphasis on models that will be used in our experiments.
 
-%\textbf{Base PSR for Duration Models} BLA BLA...
+A PSR with a single observation $\Sigma = \{a\}$ can be used to measure the time -- i.e.\ number of discrete time-steps -- until a certain event happens \cite{ODM}. In this case, a natural approach to build an M-PSR for timing models is to build a set of multi-step observations containing sequences whose lengths are powers of a fixed base. That is, given an integer $b > 0$, we build the set of multi-step observations as $\Sigma' = \{a,a^b, a^{b^2}, \ldots, a^{b^K}\}$ for some positive $K$. A natural choice of coding map in this case is the one that represents any length $t$ as a number in base $b$, with the difference that the largest power $b$ that is allowed is $b^K$. This corresponds to writing (in a unique way) $t = t_0 b^0 + t_1 b^1 + t_2 b^2 + \cdots + t_K b^K$, where $0 \leq t_k \leq b - 1$ for $0 \leq k \leq K-1$, and $t_K \geq 0$. With this decomposition we obtain the coding map $\kappa(a^t) = (a^{b^K})^{t_K} (a^{b^{K-1}})^{t_{K-1}} \cdots (a^b)^{t_1} (a)^{t_0}$. Note that we choose to write powers of longer multi-step observations first, followed by powers of shorter multi-step observations.
+%
+For further reference, we will call this model the \emph{base M-PSR} (with base $b$ and largest power $K$) for modelling distributions over time.
 
-In this section we go through examples of Multi-PSRs which are relevant to our experiment section. 
-
-For the timing case one can use a M-PSR which we call the \textbf{Base M-PSR}. For the Base M-PSR, $\Sigma'$ is  $\{a^{2^k} \forall k <= n\}$. For the encoding map we write an observation $a^m = a^{2^n1} ... \cdot a^{2^nf}$.  With this equality we use the natural encoding map $\kappa(a^n) = \{a^{2^n_1},...,\{a^{2^n_f}\}$. 
+\borja{Re-wrote the presentation of the base M-PSR a little bit}
 
 For the multiple observation case one can also use The Base System. In this case $\Sigma' = \{\sigma^{2^k}\forall \sigma \in \sum, \forall k <= n\}$. For the encoding map $\kappa$ we first split the string into sequences of a fixed symbol and then use the same encoding as for timing. For example $\kappa(a^5b^3)=\{a^4,a,b^2,b\}$.
  
