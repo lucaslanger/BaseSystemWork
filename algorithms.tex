@@ -39,8 +39,11 @@ For a given string Q, the algorithm inductively computes the optimal string enco
 \Procedure{DPEncode}{}
 
 \State $bestE[] \gets null$
-\State $minE[] \gets new Int[Q.length]$
-\State $opEnd[] \gets new String[Q.length]$
+\State $minE[] \gets new Int[Q.length+1]$
+\State $opEnd[] \gets new String[Q.length+1]$
+
+\State $bestEnd[0] = ""$
+\State $minE[0] = 0$
 
 \For{i in range(Q.length)}
 	 \State $opEnd[i] \gets \{s \in \Sigma', Q[i-s.length:i] == s\}$
@@ -50,17 +53,15 @@ For a given string Q, the algorithm inductively computes the optimal string enco
 	\State $bestOp \gets null$
 	\State $m \gets null$ 
 	\For{$s \in opEnd[i]$}
-		\State $tempInt \gets minE[i-s.length] + 1$
+		\State $tempInt \gets minE[i-s.length+1] + 1$
 		\If{$m == null or tempInt < m$}
 			\State $m \gets temp$ 
 			\State $bestOp \gets s$
 		\EndIf
 	\EndFor
-	\State $minE[i] \gets m$
-	\State $bestE[i] \gets bestE[i-bestOp.length] + bestOp$
+	\State $minE[i+1] \gets m$
+	\State $bestE[i+1] \gets bestE[i-bestOp.length+1] + bestOp$
 \EndFor
-
-$ADD OFF BY ONE STUFF$
 
 \Return $bestE[Q.length]$
 

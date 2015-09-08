@@ -11,9 +11,9 @@ For the timing case, we construct our empirical hankel matrix by including $\{\s
 For multiple observations a slightly more complex approach is required to construct the empirical hankel matrix. For prefixes P, we select the k most frequent prefixes from our observations set. For suffixes S, we take all suffixes that occur from our set of prefixes. We also require prefix completeness. That is if p' is a prefix of p $\in P$, then p' $\in P$. This heuristic for constructing empirical hankel matrices was given in previous work by [] and it showed that (). For \textbf{Base M-PSR}, we set $\Sigma'$ to be $\{x^{2^k},\forall x \in \Sigma', k<=256 \}$. For the \textbf{Tree M-PSR} we set L to 7.
 
 \subsection{Measuring Performance}
-For timing, the goal is to make predictions about how long the agent will survive the environment. One can also ask conditional queries such as how long the agent should expect to survive given that t seconds have elapsed $f(\sigma^m|\sigma^n) = (eqns)$. 
+For timing, the goal is to make predictions about how long the agent will survive the environment. One can also ask conditional queries such as how long the agent should expect to survive given that t seconds have elapsed $f(\sigma^m|\sigma^n) = \dfrac{\alpha_{\lambda} \cdot A(\kappa(\sigma^m)) \cdot \alpha_\infty}{\alpha_\lambda \cdot (I-A_{\sigma})^{-1} \cdot \alpha_{\infty} }$. 
 
-The goal for the multiple observation labyrinths is to make predictions about seeing observation sequences. Conditional queries are also possible here $f(a^{m_1}b^{m_2}|a^{n_1}b^{n_2}) = (eqns)$.
+The goal for the multiple observation labyrinths is to make predictions about seeing observation sequences. Conditional queries are also possible here $f(a^{m_1}b^{m_2}|a^{n_1}b^{n_2}) = \dfrac{\alpha_{\lambda} \cdot A(\kappa(a^{m_1}b^{m_2})) \cdot \alpha_\infty}{\alpha_\lambda \cdot A(\kappa(a^{n_1}b^{n_2})) \cdot \alpha_{\infty} }$.
 
 //DOUBLE CHECK THE ABOVE.
 
@@ -140,5 +140,5 @@ For the double loop case the data-driven greedy approach learns multiples of the
 
 \subsection{Discussion}
 
-some discussion of results...
+The experiments above indicate that M-PSRs are far better means of making predictions for smaller models than PSRs. Although not discussed in the experiments, queries performed by M-PSRs are much faster in general systems as they involve fewer matrices. 
 
