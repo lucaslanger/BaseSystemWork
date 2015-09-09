@@ -89,7 +89,7 @@ We proceed to work with a more complex labyrinth environment. Figure 10 shows it
 
 \subsection{Amount of Data}
 
-In Figures 11 and 12 we vary the number of observations used to learn PSRs/M-PSRs. We find that ().
+In Figures 11 and 12 we vary the number of observations used for learning. First we note that performance of all models is significantly worse for less data. Nevertheless, M-PSRs outperform the traditional PSR regardless.
 
 \begin{figure}[ht!]
 \centering
@@ -99,23 +99,23 @@ In Figures 11 and 12 we vary the number of observations used to learn PSRs/M-PSR
 
 \subsection{StretchFactor}
 
-In Figures 13 and 14 we vary the stretchFactor parameter. We find that ().
+In Figures 13 and 14 we vary the stretch factor parameter. We find that a higher values of sF allow for increased improvement of the M-PSR relative to the performance of the standard PSR.
 
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=60mm]{uCOREPICS/Pacman/PacmanSF=1.png}
-\caption{Pacman Labyrinth\label{overflow}}
+\caption{Stretch Factor: 1\label{overflow}}
 \end{figure}
 
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=60mm]{uCOREPICS/Pacman/PacmanSF=5.png}
-\caption{Pacman Labyrinth\label{overflow}}
+\caption{Stretch Factor: 5\label{overflow}}
 \end{figure}
 
 \section{Multiple Observations: Colored Loops}
 
-We now move to the multiple observation case. Here the Data-Driven M-PSRs really show their strength as observation sequences are more complex. We construct a Double Loop environment where one loop is green and the other is blue. The lengths of each loop are also varied, see Figure 4 and Figure 5. We fix the length of observations to be $TrajectoryLength := (len(loop1) + len(loop2))*3$. To build empirical estimates of probabilities we set $f(x)=(pocc(x)/numstringslength>=x$. This means that the PSRs will compute the probability of a prefix occurring.
+We now move to the multiple observation case. Here the Data-Driven M-PSRs really show their strength as observation sequences are more complex. We construct a Double Loop environment where one loop is green and the other is blue. The lengths of each loop are also varied, see Figure 4 and Figure 5. We fix the length of observations to be $TrajectoryLength := (len(loop1) + len(loop2))*3$. To build empirical estimates of probabilities we set $f(x)=\dfrac{\#occurances of x}{counts(s \in Obs, len(s)>=x)}$. This means that the PSRs will compute the probability of x occurring as a prefix.
 
 \begin{figure}[ht!]
 \centering
@@ -127,7 +127,7 @@ We now move to the multiple observation case. Here the Data-Driven M-PSRs really
 
 \subsection{Amount of Data}
 
-As for the timing case, we vary the amount of data to learn PSRS/M-PSRs in Figures 15 and 16. Once again we find ().
+As for the timing case, we vary the amount of data to learn PSRS/M-PSRs in Figures 15 and 16. Once again we find M-PSRs perform far better, especially the Data-Driven M-PSR. This makes sense as when complexity in observations increases only custom M-PSRs will express transitions compactly.
 
 \begin{figure}[ht!]
 \centering
