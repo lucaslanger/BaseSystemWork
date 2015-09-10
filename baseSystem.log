@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2015.4.16)  7 SEP 2015 17:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2015.4.16)  9 SEP 2015 20:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -541,9 +541,6 @@ LaTeX Warning: Label `overflow' multiply defined.
 
 LaTeX Warning: Label `overflow' multiply defined.
 
-
-LaTeX Warning: Label `overflow' multiply defined.
-
 )
 \openout1 = `baseSystem.aux'.
 
@@ -661,17 +658,18 @@ Overfull \hbox (12.00816pt too wide) detected at line 6
 [][]\OML/cmm/m/it/10 :
  []
 
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 21.
-
-LaTeX Warning: Citation `ODM' on page 1 undefined on input line 25.
-
 [1{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
 
-])
-(./algorithms.tex) (./experiments.tex [2]
+]
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 21.
+
+
+LaTeX Warning: Citation `ODM' on page 2 undefined on input line 25.
+
+) (./algorithms.tex) (./experiments.tex [2] [3]
 Underfull \hbox (badness 10000) in paragraph at lines 20--22
 []\OT1/ptm/m/n/10 To mea-sure the per-for-mance of a PSR/M-
  []
@@ -687,7 +685,7 @@ Underfull \hbox (badness 6741) in paragraph at lines 20--22
 []$\OT1/ptm/m/n/10 . We use this norm
  []
 
-[3] <uCOREPICS/DL/doubleLoopImage.png, id=32, 751.30687pt x 459.21562pt>
+<uCOREPICS/DL/doubleLoopImage.png, id=32, 751.30687pt x 459.21562pt>
 File: uCOREPICS/DL/doubleLoopImage.png Graphic file (type png)
 
 <use uCOREPICS/DL/doubleLoopImage.png>
@@ -715,23 +713,23 @@ File: uCOREPICS/DL/NoiseInfo.png Graphic file (type png)
 <use uCOREPICS/DL/NoiseInfo.png>
 Package pdftex.def Info: uCOREPICS/DL/NoiseInfo.png used on input line 60.
 (pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
-
-<uCOREPICS/DL/47-27-10000.png, id=37, 578.16pt x 433.62pt>
+ [4 <./uCOREPICS/DL/doubleLoopImage.png> <./uCOREPICS/DL/64-16-10000.png> <./uC
+OREPICS/DL/64-16-100.png>]
+<uCOREPICS/DL/47-27-10000.png, id=43, 578.16pt x 433.62pt>
 File: uCOREPICS/DL/47-27-10000.png Graphic file (type png)
 
 <use uCOREPICS/DL/47-27-10000.png>
 Package pdftex.def Info: uCOREPICS/DL/47-27-10000.png used on input line 70.
 (pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
- [4 <./uCOREPICS/DL/doubleLoopImage.png> <./uCOREPICS/DL/64-16-10000.png> <./uC
-OREPICS/DL/64-16-100.png> <./uCOREPICS/DL/NoiseInfo.png>] <uCOREPICS/Pacman/Pac
-man10k.png, id=45, 578.16pt x 433.62pt>
+
+<uCOREPICS/Pacman/Pacman10k.png, id=44, 578.16pt x 433.62pt>
 File: uCOREPICS/Pacman/Pacman10k.png Graphic file (type png)
 
 <use uCOREPICS/Pacman/Pacman10k.png>
 Package pdftex.def Info: uCOREPICS/Pacman/Pacman10k.png used on input line 80.
 (pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
 
-<uCOREPICS/Pacman/graphPacMan.png, id=46, 683.55376pt x 1384.17125pt>
+<uCOREPICS/Pacman/graphPacMan.png, id=45, 683.55376pt x 1384.17125pt>
 File: uCOREPICS/Pacman/graphPacMan.png Graphic file (type png)
 
 <use uCOREPICS/Pacman/graphPacMan.png>
@@ -739,14 +737,14 @@ Package pdftex.def Info: uCOREPICS/Pacman/graphPacMan.png used on input line 86
 .
 (pdftex.def)             Requested size: 113.80365pt x 170.6977pt.
 
-<uCOREPICS/Pacman/Pacman500.png, id=47, 578.16pt x 433.62pt>
+<uCOREPICS/Pacman/Pacman500.png, id=46, 578.16pt x 433.62pt>
 File: uCOREPICS/Pacman/Pacman500.png Graphic file (type png)
 
 <use uCOREPICS/Pacman/Pacman500.png>
 Package pdftex.def Info: uCOREPICS/Pacman/Pacman500.png used on input line 96.
 (pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
 
-<uCOREPICS/Pacman/PacmanSF=1.png, id=48, 578.16pt x 433.62pt>
+<uCOREPICS/Pacman/PacmanSF=1.png, id=47, 578.16pt x 433.62pt>
 File: uCOREPICS/Pacman/PacmanSF=1.png Graphic file (type png)
 
 <use uCOREPICS/Pacman/PacmanSF=1.png>
@@ -754,56 +752,44 @@ Package pdftex.def Info: uCOREPICS/Pacman/PacmanSF=1.png used on input line 106
 .
 (pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
 
-<uCOREPICS/Pacman/PacmanSF=5.png, id=49, 578.16pt x 433.62pt>
+<uCOREPICS/Pacman/PacmanSF=5.png, id=48, 578.16pt x 433.62pt>
 File: uCOREPICS/Pacman/PacmanSF=5.png Graphic file (type png)
 
 <use uCOREPICS/Pacman/PacmanSF=5.png>
 Package pdftex.def Info: uCOREPICS/Pacman/PacmanSF=5.png used on input line 112
 .
 (pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
-
-<uCOREPICS/DLMO/MO_1k.png, id=50, 578.16pt x 433.62pt>
+ [5 <./uCOREPICS/DL/NoiseInfo.png> <./uCOREPICS/DL/47-27-10000.png> <./uCOREPIC
+S/Pacman/Pacman10k.png> <./uCOREPICS/Pacman/graphPacMan.png> <./uCOREPICS/Pacma
+n/Pacman500.png>]
+<uCOREPICS/DLMO/MO_1k.png, id=57, 578.16pt x 433.62pt>
 File: uCOREPICS/DLMO/MO_1k.png Graphic file (type png)
 
 <use uCOREPICS/DLMO/MO_1k.png>
 Package pdftex.def Info: uCOREPICS/DLMO/MO_1k.png used on input line 122.
 (pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
 
-<uCOREPICS/DLMO/doubleLoopImageMO.png, id=51, 751.30687pt x 459.21562pt>
-File: uCOREPICS/DLMO/doubleLoopImageMO.png Graphic file (type png)
-
-<use uCOREPICS/DLMO/doubleLoopImageMO.png>
-Package pdftex.def Info: uCOREPICS/DLMO/doubleLoopImageMO.png used on input lin
-e 128.
-(pdftex.def)             Requested size: 170.71652pt x 104.34209pt.
-
-<uCOREPICS/DLMO/MO_50.png, id=52, 578.16pt x 433.62pt>
+<uCOREPICS/DLMO/MO_50.png, id=58, 578.16pt x 433.62pt>
 File: uCOREPICS/DLMO/MO_50.png Graphic file (type png)
 
 <use uCOREPICS/DLMO/MO_50.png>
-Package pdftex.def Info: uCOREPICS/DLMO/MO_50.png used on input line 138.
+Package pdftex.def Info: uCOREPICS/DLMO/MO_50.png used on input line 134.
 (pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
- [5 <./uCOREPICS/DL/47-27-10000.png> <./uCOREPICS/Pacman/Pacman10k.png> <./uCOR
-EPICS/Pacman/graphPacMan.png> <./uCOREPICS/Pacman/Pacman500.png> <./uCOREPICS/P
-acman/PacmanSF=1.png>]
-
-LaTeX Warning: Text page 6 contains only floats.
-
-) (./baseSystem.bbl) [6 <./uCOREPICS/Pacman/PacmanSF=5.png> <./uCOREPICS/DLMO/M
-O_1k.png> <./uCOREPICS/DLMO/doubleLoopImageMO.png> <./uCOREPICS/DLMO/MO_50.png>
-] (./baseSystem.aux)
+) (./baseSystem.bbl) [6 <./uCOREPICS/Pacman/PacmanSF=1.png> <./uCOREPICS/Pacman
+/PacmanSF=5.png> <./uCOREPICS/DLMO/MO_1k.png> <./uCOREPICS/DLMO/MO_50.png>] (./
+baseSystem.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 13633 strings out of 493109
- 266023 string characters out of 6135004
- 313595 words of memory out of 5000000
- 16756 multiletter control sequences out of 15000+600000
+ 13629 strings out of 493109
+ 265866 string characters out of 6135004
+ 316621 words of memory out of 5000000
+ 16753 multiletter control sequences out of 15000+600000
  24638 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,11n,80p,1164b,630s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,11n,80p,1330b,630s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/te
 xlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/tex
@@ -822,10 +808,10 @@ st/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2014/texmf-dist
 dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2014/texmf-dist/fonts
 /type1/urw/times/utmr8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/urw
 /times/utmri8a.pfb>
-Output written on baseSystem.pdf (6 pages, 779458 bytes).
+Output written on baseSystem.pdf (6 pages, 739183 bytes).
 PDF statistics:
- 122 PDF objects out of 1000 (max. 8388607)
+ 120 PDF objects out of 1000 (max. 8388607)
  70 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 78 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 73 words of extra memory for PDF output out of 10000 (max. 10000000)
 
