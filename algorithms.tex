@@ -38,32 +38,32 @@ For a given string Q, the algorithm inductively computes the optimal string enco
 \begin{algorithmic}[1]
 \Procedure{DPEncode}{}
 
-\State $bestE[] \gets null$
-\State $minE[] \gets new Int[Q.length+1]$
-\State $opEnd[] \gets new String[Q.length+1]$
+\State $bestE[] \gets new String[len(Q)+1]$
+\State $minE[] \gets new Int[len(Q)+1]$
+\State $opEnd[] \gets new String[len(Q)+1][]$
 
-\State $bestEnd[0] = ""$
+\State $bestEnd[0] = Q[0]$
 \State $minE[0] = 0$
 
-\For{i in range(Q.length)}
-	 \State $opEnd[i] \gets \{s \in \Sigma', Q[i-s.length:i] == s\}$
+\For{i in range[1,Q.length]}
+	 \State $opEnd[i] \gets \{s \in \Sigma', Q[i-len(s):i] == s\}$
 \EndFor
 
-\For{i in range(Q.length)}
+\For{i in range[1,Q.length]}
 	\State $bestOp \gets null$
 	\State $m \gets null$ 
 	\For{$s \in opEnd[i]$}
-		\State $tempInt \gets minE[i-s.length+1] + 1$
-		\If{$m == null or tempInt < m$}
+		\State $tempInt \gets minE[i-len(s)] + 1$
+		\If{$m == null$ or $tempInt < m$}
 			\State $m \gets temp$ 
 			\State $bestOp \gets s$
 		\EndIf
 	\EndFor
 	\State $minE[i+1] \gets m$
-	\State $bestE[i+1] \gets bestE[i-bestOp.length+1] + bestOp$
+	\State $bestE[i+1] \gets bestE[i-len(bestOp)] + bestOp$
 \EndFor
 
-\Return $bestE[Q.length]$
+\Return $bestE[len(Q)]$
 
 \EndProcedure
 \end{algorithmic}
@@ -81,28 +81,26 @@ The algorithm evaluates substrings based on how much they reduce the number of t
 \begin{algorithmic}[1]
 \Procedure{Base Selection}{}
 \State $\Sigma' \gets \{s, s \in \sum \}$
-\State $bestOp \gets null$
-\State $i\gets 0$\
-\State $bestImp \gets null$
 
 \State $prevBestE \gets null$
 \For{each obs in Obs}
-	\State $prevBestEncoding[obs] \gets obs.length$
+	\State $prevBestEncoding[obs] \gets len(obs)$
 \EndFor
 
+\State $i\gets 0$\
 \While{$i<numOperators$}
+	\State $bestOp \gets null$
+	\State $bestImp \gets null$
 	\For{each s $\in ObsSub$ }
-		\State $temp \gets 0$
+		\State $c \gets 0$
 		\For{each obs in Obs}
-			\State $temp \gets temp + DPEncode(obs) - prevBestE(obs)$
+			\State $c \gets c+DPEncode(obs)-prevBestE(obs)$
 		\EndFor
 		
-		\If{temp$>$bestImp}
+		\If{$c>bestImp$}
 			\State $bestOp \gets observation$
-			\State $bestImp \gets temp$
+			\State $bestImp \gets c$
 		\EndIf
-		
-	
 		
 	\EndFor
 
@@ -111,11 +109,9 @@ The algorithm evaluates substrings based on how much they reduce the number of t
 		\State $prevBestE \gets DPEncode(obs,\Sigma'$) 
 	\EndFor	
 	
-	\State $bestOp \gets null$
-	\State $bestImp \gets null$
 	\State $i \gets i + 1$
 \EndWhile 
-\Return $BaseSystem$
+\Return $\Sigma'$
 
 \EndProcedure
 \end{algorithmic}

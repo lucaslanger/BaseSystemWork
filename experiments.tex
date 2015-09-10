@@ -6,24 +6,29 @@ In all the experiments we consider, an agent is positioned in a starting locatio
 
 \subsection{Learning Implementation: Timing v.s Multiple Symbols}
 
-For the timing case, we construct our empirical hankel matrix by including $\{\sigma^i, \forall i<=n\}$. With this choice, the empirical hankel matrix will be a nxn matrix with the prefixes and suffixes being the same.The parameter n depends on the application. For Double Loop environments we set n := 150, while for the pacman labyrinth n := 600. We verify for this choice of n that as the amount of data gets large the learned PSR with the true model size becomes increasingly close to the true model. For Base M-PSR, we set $\Sigma'$ to be {$\sigma^{2^k}, k<=256 $}.
+For the timing case, we construct our empirical hankel matrix by taking P,S = $\{\sigma^i, \forall i<=n\}$. The parameter n depends on the application. For Double Loop environments we set n = 150, while for the pacman labyrinth n = 600. For these choices of n, we verify that as the amount of data gets large the learned PSR with the true model size becomes increasingly close to the true model. For Base M-PSR, we set $\Sigma'$ to be {$\sigma^{2^k}, k<=256 $}.
 
-For multiple observations a slightly more complex approach is required to construct the empirical hankel matrix. For prefixes P, we select the k most frequent prefixes from our observations set. For suffixes S, we take all suffixes that occur from our set of prefixes. We also require prefix completeness. That is if p' is a prefix of p $\in P$, then p' $\in P$. This heuristic for constructing empirical hankel matrices was given in previous work by [] and it showed that (). For \textbf{Base M-PSR}, we set $\Sigma'$ to be $\{x^{2^k},\forall x \in \Sigma', k<=256 \}$. For the \textbf{Tree M-PSR} we set L to 7.
+For multiple observations a slightly more complex approach is required to choose P and S. For prefixes P, we select the k most frequent prefixes from our observations set. For suffixes S, we take all suffixes that occur from our set of prefixes. We also require prefix completeness. That is if p' is a prefix of p $\in P$, then p' $\in P$. This heuristic for constructing empirical hankel matrices was given in previous work by [] and it showed that (). For \textbf{Base M-PSR}, we set $\Sigma'$ to be $\{x^{2^k},\forall x \in \Sigma', k<=256 \}$. For the \textbf{Tree M-PSR} we set L to 7.
 
 \subsection{Measuring Performance}
-For timing, the goal is to make predictions about how long the agent will survive the environment. One can also ask conditional queries such as how long the agent should expect to survive given that t seconds have elapsed $f(\sigma^m|\sigma^n) = \dfrac{\alpha_{\lambda} \cdot A(\kappa(\sigma^m)) \cdot \alpha_\infty}{\alpha_\lambda \cdot (I-A_{\sigma})^{-1} \cdot \alpha_{\infty} }$. 
+For timing, the goal is to make predictions about how long the agent will survive the environment. One can also ask conditional queries such as how long the agent should expect to survive given that t seconds have elapsed
 
-The goal for the multiple observation labyrinths is to make predictions about seeing observation sequences. Conditional queries are also possible here $f(a^{m_1}b^{m_2}|a^{n_1}b^{n_2}) = \dfrac{\alpha_{\lambda} \cdot A(\kappa(a^{m_1}b^{m_2})) \cdot \alpha_\infty}{\alpha_\lambda \cdot A(\kappa(a^{n_1}b^{n_2})) \cdot \alpha_{\infty} }$.
+\begin{equation*}
+f(\sigma^m|\sigma^n) = \dfrac{\alpha_{\lambda} \cdot A(\kappa(\sigma^m)) \cdot \alpha_\infty}{\alpha_\lambda \cdot (I-A_{\sigma})^{-1} \cdot \alpha_{\infty} }
+\end{equation*}
 
-//DOUBLE CHECK THE ABOVE.
+The goal for the multiple observation labyrinths is to make predictions about seeing observation sequences. Conditional queries are also possible here 
+\begin{equation*}
+f(a^{m_1}b^{m_2}|a^{n_1}b^{n_2}) = \dfrac{\alpha_{\lambda} \cdot A(\kappa(a^{m_1}b^{m_2})) \cdot \alpha_\infty}{\alpha_\lambda \cdot A(\kappa(a^{n_1}b^{n_2})) \cdot \alpha_{\infty} }
+\end{equation*}
 
 To measure the performance of a PSR/M-PSR we use the following norm:
-$||f - \hat{f}|| = \sqrt{\sum\nolimits_{x \in observations}(f(x) - \hat{f(x)})^2}$. We use this norm because of a bound presented by [AUTHORS], which states that (). Here the function f denotes the true probability distribution over observations and the function $\hat{f}$ denotes the function associated with the learned M-PSR/PSR. In our environments, the function f is obtainable directly as we have access to the underlying HMMs.
+\begin{equation*}
+||f - \hat{f}|| = \sqrt{\sum\nolimits_{x \in observations}(f(x) - \hat{f(x)})^2}
+\end{equation*}
+We use this norm because of a bound presented by [AUTHORS], which states that (). Here the function f denotes the true probability distribution over observations and the function $\hat{f}$ denotes the function associated with the learned M-PSR/PSR. In our environments, the function f is obtainable directly as we have access to the underlying HMMs.
 
 Since the set of observations $\Sigma^*$ is infinite, we compute approximations to this error norm, by fixing a set of strings T and summing over T. For the timing case, we take T to be the $\{\sigma^k, \forall k<=n\}$, while for the multiple observation case, we take all possible strings producible from the prefixes and suffixes in our dataset. That is, for the multiple observation case $T = \{ps, \forall p \in P, \forall s \in S\}$.
-
-FIXED DATASET NOTE:
-For a fixed dataset of observations, we compare the performance of a PSR and different M-PSRs and then plot the average error over the 10 datasets.
 
 \section{Double Loop Timing}
 
@@ -41,7 +46,7 @@ For timing, we start by considering a double loop environment. The lengths of th
 \caption{Double Loop 64-16\label{overflow}}
 \end{figure}
 
-\subsection{Amount of Data}
+\subsection{Number of Trajectories}
 
 Here, we vary the number of observations used in our dataset. PSRs/M-PSRs learned in Figure 4 use 100 observation sequences, while those in Figure 5 use 10000. In both cases the M-PSRs outperform the standard PSR for reduced model sizes.
 
@@ -51,7 +56,7 @@ Here, we vary the number of observations used in our dataset. PSRs/M-PSRs learne
 \caption{Double Loop 64-16\label{overflow}}
 \end{figure}
 
-\subsection{Noise: Parameter P}
+\subsection{Noise: P}
 
 Next, we vary the self-transition probability P to simulate noise in an environment. Figure 5 is a 64-16 double loop with P=0.2, and Figure 6 is a 64-16 double loop with P=0. We find that the noisy loops are more compressible, but the performance is worse for higher models. Nevertheless, M-PSRs still significantly outperform the standard PSR for reduced model sizes.
 
@@ -87,7 +92,7 @@ We proceed to work with a more complex labyrinth environment. Figure 10 shows it
 \caption{Graph of pacman\label{overflow}}
 \end{figure}
 
-\subsection{Amount of Data}
+\subsection{Number of Trajectories}
 
 In Figures 11 and 12 we vary the number of observations used for learning. First we note that performance of all models is significantly worse for less data. Nevertheless, M-PSRs outperform the traditional PSR regardless.
 
@@ -97,7 +102,7 @@ In Figures 11 and 12 we vary the number of observations used for learning. First
 \caption{Pacman Labyrinth\label{overflow}}
 \end{figure}
 
-\subsection{StretchFactor}
+\subsection{Stretch Factor: sF}
 
 In Figures 13 and 14 we vary the stretch factor parameter. We find that a higher values of sF allow for increased improvement of the M-PSR relative to the performance of the standard PSR.
 
@@ -125,7 +130,7 @@ We now move to the multiple observation case. Here the Data-Driven M-PSRs really
 
 \lucas{Removed picture of colored loops. Waste of space and leaves too much evidence of MS paint.}
 
-\subsection{Amount of Data}
+\subsection{Number of Trajectories}
 
 As for the timing case, we vary the amount of data to learn PSRS/M-PSRs in Figures 15 and 16. Once again we find M-PSRs perform far better, especially the Data-Driven M-PSR. This makes sense as when complexity in observations increases only custom M-PSRs will express transitions compactly.
 
@@ -136,9 +141,4 @@ As for the timing case, we vary the amount of data to learn PSRS/M-PSRs in Figur
 \end{figure}
 
 \subsection{Data Driven Sequences}
-For the double loop case the data-driven greedy approach learns multiples of the loop lengths which results in partitions which use fewer operators. As an example, for the 47-27 labyrinth the greedy heuristic picked the following operators: $\Sigma'=\{\sigma^{47}, \sigma^{27}, \sigma^{74}, \sigma^{94} ...\}$. For Pacman, the learned strings are multiples of the stretch factor. For Colored Double Loops, $\Sigma' = \{g^{27},b^{17},g^{27}b^{17},\}$ The top 7 of 10 operators are usually learned consistently, while the other strings vary slightly dependent on the generated dataset.
-
-\subsection{Discussion}
-
-The experiments above indicate that M-PSRs are far better means of making predictions for smaller models than PSRs. Although not discussed in the experiments, queries performed by M-PSRs are much faster in general systems as they involve fewer matrices. 
-
+For the double loop case the greedy approach learns multiples of the loop lengths which results in partitions which use fewer operators. As an example, for the 47-27 labyrinth the greedy heuristic picked the following operators: $\Sigma'=\{\sigma^{47}, \sigma^{27}, \sigma^{74}, \sigma^{94} ...\}$. For Pacman, the learned strings are multiples of the stretch factor. For Colored Double Loops consistent operators in $\Sigma'$ are $\{g^{27},b^{17},g^{27}b^{17},b^{17}g^{27}\}$. 
