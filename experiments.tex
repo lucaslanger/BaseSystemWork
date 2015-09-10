@@ -76,6 +76,16 @@ So far we have been using a 64-16 Double Loops. Here observations will come in l
 \caption{Double Loop 47-27\label{overflow}}
 \end{figure}
 
+\subsection{Choice of K for Base M-PSRs}
+
+Below we plot performance of Base M-PSRs with different values of k. We note that as higher powers of operators are included performance improves.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=60mm]{uCOREPICS/DL/basePows.png}
+\caption{Double Loop 64-16\label{overflow}}
+\end{figure}
+
 \section{Large Labyrinth Timing}
 
 We proceed to work with a more complex labyrinth environment. Figure 10 shows it's graphical representation. We test a larger environment as results in such a system would transfer to applications such as pacman. Transitions to new states occur with equal probability. The weight between transitions corresponds to the number of time steps. We add an additional parameter sF: stretchFactor, which multiplies all of the weights in the graph. 
@@ -120,7 +130,11 @@ In Figures 13 and 14 we vary the stretch factor parameter. We find that a higher
 
 \section{Multiple Observations: Colored Loops}
 
-We now move to the multiple observation case. Here the Data-Driven M-PSRs really show their strength as observation sequences are more complex. We construct a Double Loop environment where one loop is green and the other is blue. The lengths of each loop are also varied, see Figure 4 and Figure 5. We fix the length of observations to be $TrajectoryLength := (len(loop1) + len(loop2))*3$. To build empirical estimates of probabilities we set $f(x)=\dfrac{\#occurances of x}{counts(s \in Obs, len(s)>=x)}$. This means that the PSRs will compute the probability of x occurring as a prefix.
+We now move to the multiple observation case. Here the Data-Driven M-PSRs really show their strength as observation sequences are more complex. We construct a Double Loop environment where one loop is green and the other is blue. The lengths of each loop are also varied, see Figure 4 and Figure 5. We fix the length of observations to be $TrajectoryLength := (len(loop1) + len(loop2))*3$. To build empirical estimates of probabilities we set
+
+\begin{equation*}
+ f(x)=\dfrac{\#occurances of x}{counts(s \in Obs, len(s)>=x)}
+\end{equation*}  This means that the PSRs will compute the probability of x occurring as a prefix.
 
 \begin{figure}[ht!]
 \centering
@@ -140,5 +154,13 @@ As for the timing case, we vary the amount of data to learn PSRS/M-PSRs in Figur
 \caption{Colored Loops 27-17\label{overflow}}
 \end{figure}
 
+
+
 \subsection{Data Driven Sequences}
-For the double loop case the greedy approach learns multiples of the loop lengths which results in partitions which use fewer operators. As an example, for the 47-27 labyrinth the greedy heuristic picked the following operators: $\Sigma'=\{\sigma^{47}, \sigma^{27}, \sigma^{74}, \sigma^{94} ...\}$. For Pacman, the learned strings are multiples of the stretch factor. For Colored Double Loops consistent operators in $\Sigma'$ are $\{g^{27},b^{17},g^{27}b^{17},b^{17}g^{27}\}$. 
+For the double loop case the greedy approach learns multiples of the loop lengths which results in partitions which use fewer operators. As an example, for the 47-27 labyrinth the greedy heuristic picked the following operators: $\Sigma'=\{\sigma^{47}, \sigma^{27}, \sigma^{74}, \sigma^{94} ...\}$. For Pacman, the learned strings are multiples of the stretch factor. For Colored Double Loops consistent operators in $\Sigma'$ are $\{g^{27},b^{17},g^{27}b^{17},b^{17}g^{27}\}$. Figure 19,20,and 21 show performance as we include more operators.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=60mm]{uCOREPICS/DLMO/numOpComparison.png}
+\caption{Colored Loops 27-17\label{overflow}}
+\end{figure}
