@@ -73,6 +73,9 @@ For a given string Q, the algorithm inductively computes the optimal string enco
 
 Here we present a greedy heuristic which learns the multi-step transition sequences $\Sigma'$ from observation data. Having a $\Sigma'$ which reflects the types of observations produces by one's system will allow of short encodings when coupled with our a dynamic programming encoding algorithm. In practice, this greedy algorithm will pick substrings from one's observation set which are long, frequent, and diverse. From an intuitive standpoint, one can view structure in observation sequences as relating to the level of entropy in the system's observations. 
 
+As a preprocessing step, we reduce the space of substrings textbf{subObs} to the k most frequent substrings in our observation set. Here frequent means the number of observation sequences a given substring $s \in subObs$ occurs in. 
+\lucas{Added substring preprocessing step}
+
 The algorithm evaluates substrings based on how much they reduce the number of transition operators used on one's observation data. The algorithm adds the best operator iteratively with $\Sigma'$ initialized to $\Sigma$. More formally at the i'th iteration of the algorithm the following is computed: $min_{sub \in SubObs} \sum\nolimits_{obs \in Obs}|\kappa(obs,\Sigma'_i \cup sub)|$. The algorithm terminates after the \textbf{numOps} iterations. 
 
 \begin{algorithm}
@@ -81,6 +84,7 @@ The algorithm evaluates substrings based on how much they reduce the number of t
 \begin{algorithmic}[1]
 \Procedure{Base Selection}{}
 \State $\Sigma' \gets \{s, s \in \sum \}$
+\State $Subs \gets \{$k frequent $s \in subObs\}$
 
 \State $prevBestE \gets null$
 \For{each obs in Obs}
@@ -91,7 +95,7 @@ The algorithm evaluates substrings based on how much they reduce the number of t
 \While{$i<numOperators$}
 	\State $bestOp \gets null$
 	\State $bestImp \gets null$
-	\For{each s $\in ObsSub$ }
+	\For{each s $\in Subs$ }
 		\State $c \gets 0$
 		\For{each obs in Obs}
 			\State $c \gets c+DPEncode(obs)-prevBestE(obs)$
