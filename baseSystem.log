@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.1.29)  11 SEP 2015 19:35
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.1.29)  11 SEP 2015 20:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -698,82 +698,91 @@ File: uCOREPICS/DL/basePows.png Graphic file (type png)
 Package pdftex.def Info: uCOREPICS/DL/basePows.png used on input line 85.
 (pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
 
-<uCOREPICS/Pacman/Pacman10k.png, id=44, 578.16pt x 433.62pt>
+<uCOREPICS/DL/numOpsTiming.png, id=44, 578.16pt x 433.62pt>
+File: uCOREPICS/DL/numOpsTiming.png Graphic file (type png)
+
+<use uCOREPICS/DL/numOpsTiming.png>
+Package pdftex.def Info: uCOREPICS/DL/numOpsTiming.png used on input line 95.
+(pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
+
+<uCOREPICS/Pacman/Pacman10k.png, id=45, 578.16pt x 433.62pt>
 File: uCOREPICS/Pacman/Pacman10k.png Graphic file (type png)
 
 <use uCOREPICS/Pacman/Pacman10k.png>
-Package pdftex.def Info: uCOREPICS/Pacman/Pacman10k.png used on input line 95.
+Package pdftex.def Info: uCOREPICS/Pacman/Pacman10k.png used on input line 105.
+
 (pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
 
-<uCOREPICS/Pacman/graphPacMan.png, id=45, 930.47626pt x 1589.94pt>
+<uCOREPICS/Pacman/graphPacMan.png, id=46, 930.47626pt x 1589.94pt>
 File: uCOREPICS/Pacman/graphPacMan.png Graphic file (type png)
 
 <use uCOREPICS/Pacman/graphPacMan.png>
-Package pdftex.def Info: uCOREPICS/Pacman/graphPacMan.png used on input line 10
+Package pdftex.def Info: uCOREPICS/Pacman/graphPacMan.png used on input line 11
 1.
 (pdftex.def)             Requested size: 113.81041pt x 170.69687pt.
 
-<uCOREPICS/Pacman/Pacman500.png, id=46, 578.16pt x 433.62pt>
+<uCOREPICS/Pacman/Pacman500.png, id=47, 578.16pt x 433.62pt>
 File: uCOREPICS/Pacman/Pacman500.png Graphic file (type png)
 
 <use uCOREPICS/Pacman/Pacman500.png>
-Package pdftex.def Info: uCOREPICS/Pacman/Pacman500.png used on input line 111.
+Package pdftex.def Info: uCOREPICS/Pacman/Pacman500.png used on input line 121.
 
 (pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
 
-<uCOREPICS/Pacman/PacmanSF=1.png, id=47, 578.16pt x 433.62pt>
+<uCOREPICS/Pacman/PacmanSF=1.png, id=48, 578.16pt x 433.62pt>
 File: uCOREPICS/Pacman/PacmanSF=1.png Graphic file (type png)
 
 <use uCOREPICS/Pacman/PacmanSF=1.png>
-Package pdftex.def Info: uCOREPICS/Pacman/PacmanSF=1.png used on input line 121
+Package pdftex.def Info: uCOREPICS/Pacman/PacmanSF=1.png used on input line 131
 .
 (pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
 
-<uCOREPICS/Pacman/PacmanSF=5.png, id=48, 578.16pt x 433.62pt>
+<uCOREPICS/Pacman/PacmanSF=5.png, id=49, 578.16pt x 433.62pt>
 File: uCOREPICS/Pacman/PacmanSF=5.png Graphic file (type png)
 
 <use uCOREPICS/Pacman/PacmanSF=5.png>
-Package pdftex.def Info: uCOREPICS/Pacman/PacmanSF=5.png used on input line 127
+Package pdftex.def Info: uCOREPICS/Pacman/PacmanSF=5.png used on input line 137
 .
 (pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
  [5 <./uCOREPICS/DL/64-16-100.png> <./uCOREPICS/DL/NoiseInfo.png> <./uCOREPICS/
-DL/47-27-10000.png> <./uCOREPICS/DL/basePows.png> <./uCOREPICS/Pacman/Pacman10k
-.png>]
-<uCOREPICS/DLMO/MO_1k.png, id=57, 578.16pt x 433.62pt>
+DL/47-27-10000.png> <./uCOREPICS/DL/basePows.png> <./uCOREPICS/DL/numOpsTiming.
+png>]
+<uCOREPICS/DLMO/MO_1k.png, id=58, 578.16pt x 433.62pt>
 File: uCOREPICS/DLMO/MO_1k.png Graphic file (type png)
 
 <use uCOREPICS/DLMO/MO_1k.png>
-Package pdftex.def Info: uCOREPICS/DLMO/MO_1k.png used on input line 141.
+Package pdftex.def Info: uCOREPICS/DLMO/MO_1k.png used on input line 151.
 (pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
-
-<uCOREPICS/DLMO/MO_50.png, id=58, 578.16pt x 433.62pt>
+ [6 <./uCOREPICS/Pacman/Pacman10k.png> <./uCOREPICS/Pacman/graphPacMan.png> <./
+uCOREPICS/Pacman/Pacman500.png> <./uCOREPICS/Pacman/PacmanSF=1.png> <./uCOREPIC
+S/Pacman/PacmanSF=5.png> <./uCOREPICS/DLMO/MO_1k.png>] <uCOREPICS/DLMO/MO_50.pn
+g, id=68, 578.16pt x 433.62pt>
 File: uCOREPICS/DLMO/MO_50.png Graphic file (type png)
 
 <use uCOREPICS/DLMO/MO_50.png>
-Package pdftex.def Info: uCOREPICS/DLMO/MO_50.png used on input line 153.
+Package pdftex.def Info: uCOREPICS/DLMO/MO_50.png used on input line 163.
 (pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
- [6 <./uCOREPICS/Pacman/graphPacMan.png> <./uCOREPICS/Pacman/Pacman500.png> <./
-uCOREPICS/Pacman/PacmanSF=1.png> <./uCOREPICS/Pacman/PacmanSF=5.png> <./uCOREPI
-CS/DLMO/MO_1k.png> <./uCOREPICS/DLMO/MO_50.png>]
-<uCOREPICS/DLMO/numOpComparison.png, id=68, 578.16pt x 433.62pt>
+
+<uCOREPICS/DLMO/numOpComparison.png, id=69, 578.16pt x 433.62pt>
 File: uCOREPICS/DLMO/numOpComparison.png Graphic file (type png)
 
 <use uCOREPICS/DLMO/numOpComparison.png>
 Package pdftex.def Info: uCOREPICS/DLMO/numOpComparison.png used on input line 
-164.
+174.
 (pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
 ) (./baseSystem.bbl) [7
 
- <./uCOREPICS/DLMO/numOpComparison.png>] (./baseSystem.aux)
+ <./uCOREPICS/DLMO/MO_50.png> <./uCOREPICS/DLMO/numOpComparison.png>] (./baseSy
+stem.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 12108 strings out of 493304
- 220230 string characters out of 6139871
+ 12113 strings out of 493304
+ 220381 string characters out of 6139871
  277821 words of memory out of 5000000
- 15241 multiletter control sequences out of 15000+600000
+ 15245 multiletter control sequences out of 15000+600000
  24638 words of font info for 53 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  63i,11n,80p,1331b,600s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -794,10 +803,10 @@ dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1
 /urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr
 i8a.pfb>
-Output written on baseSystem.pdf (7 pages, 881810 bytes).
+Output written on baseSystem.pdf (7 pages, 942418 bytes).
 PDF statistics:
- 129 PDF objects out of 1000 (max. 8388607)
+ 131 PDF objects out of 1000 (max. 8388607)
  74 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 83 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 88 words of extra memory for PDF output out of 10000 (max. 10000000)
 

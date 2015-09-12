@@ -86,6 +86,16 @@ Below we plot performance of Base M-PSRs with different values of k. We note tha
 \caption{Double Loop 64-16\label{overflow}}
 \end{figure}
 
+\subsection{Varying NumOps}
+
+Here, we look at how the varying the number of multi-step transition operators affects performance for the 64-16 double loop. In this environment, a higher number of operators improves performance up until about 20 operators.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=60mm]{uCOREPICS/DL/numOpsTiming.png}
+\caption{64-16 Double Loop\label{overflow}}
+\end{figure} 
+
 \section{Large Labyrinth Timing}
 
 We proceed to work with a more complex labyrinth environment. Figure 10 shows it's graphical representation. We test a larger environment as results in such a system would transfer to applications such as pacman. Transitions to new states occur with equal probability. The weight between transitions corresponds to the number of time steps. We add an additional parameter sF: stretchFactor, which multiplies all of the weights in the graph. 
