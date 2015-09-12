@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.1.29)  11 SEP 2015 20:09
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.1.29)  11 SEP 2015 20:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -495,6 +495,9 @@ LaTeX Warning: Label `overflow' multiply defined.
 
 LaTeX Warning: Label `overflow' multiply defined.
 
+
+LaTeX Warning: Label `overflow' multiply defined.
+
 )
 \openout1 = `baseSystem.aux'.
 
@@ -781,7 +784,7 @@ LaTeX Warning: There were multiply-defined labels.
 Here is how much of TeX's memory you used:
  12113 strings out of 493304
  220381 string characters out of 6139871
- 277821 words of memory out of 5000000
+ 277820 words of memory out of 5000000
  15245 multiletter control sequences out of 15000+600000
  24638 words of font info for 53 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
@@ -803,7 +806,7 @@ dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1
 /urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr
 i8a.pfb>
-Output written on baseSystem.pdf (7 pages, 942418 bytes).
+Output written on baseSystem.pdf (7 pages, 943668 bytes).
 PDF statistics:
  131 PDF objects out of 1000 (max. 8388607)
  74 compressed objects within 1 object stream
