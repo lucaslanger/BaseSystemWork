@@ -8,6 +8,112 @@ We extend \cite{bootspsr} to M-PSR under the assumption that $\kappa$ and $\Sigm
 
 \borja{Need to fill this. Probably copy-paste from the ODM paper will do.}
 
+\borja{BEGIN OF COPY-PASTE. NEEDS EDITS}
+
+A convenient algebraic way to summarize all the information conveyed by $f$ is
+with its \emph{Hankel matrix}, a bi-infinite matrix $\H_f \in \R^{\Sstar \times \Sstar}$ with rows and
+columns indexed by strings in $\Sstar$.
+%
+Strings indexing rows and columns are interpreted as prefixes and suffixes respectively.
+The entries in $\H_f$ are given by $\H_f(u,v) = f(u,v)$ for every $u, v
+\in \Sstar$.
+
+% THIS IS FOR THE SDM
+%$\H_f(u,v) = f_u(v) = f(u v) / f(u)$,
+%\textbf{TODO (Borja):} Beware the case $f(u) = 0$ !!
+
+Although $\H_f$ is an infinite matrix, in some cases it can have finite rank.
+%
+In particular, a well-known result states that $\H_f$ has rank at most $n$ if
+and only if  there exists a PSR $\psrA$ with $n$ states satisfying
+$f_{\psrA} = f$ \cite{CarlylePaz71,Fliess74}.
+%
+This result is the basis of recently developed spectral learning algorithms for
+PSRs \cite{bootspsr}, which we review in Sec.~\ref{sec:learning}.
+
+Instead of looking at the full Hankel matrix, algorithms usually work with finite
+sub-blocks of this matrix.
+%
+A convenient way to specify such blocks is to give the ``names'' to the rows and
+columns.
+%
+Specifically, given a finite set of prefixes $\Ps \subset \Sstar$ and a finite
+set of suffixes $\Ss \subset \Sstar$, the pair $\Bs = (\Ps,\Ss)$ is
+a \emph{basis} defining the sub-block $\H_\Bs \in \R^{\Ps \times \Ss}$ of
+$\H_f$, whose entries are given by $\H_\Bs(u,v) = \H_f(u,v)$.
+% for every $u \in
+%\Ps$ and $v \in \Ss$.
+%
+Note that every sub-block built in this way satisfies $\rank(\H_\Bs) \leq
+\rank(\H_f)$; when equality is attained, the basis $\Bs$ is
+\emph{complete}.
+
+Sometimes it is also convenient to look at one-step shifts of the finite
+Hankel matrices.
+%
+Let $\H \in \R^{\Ps \times \Ss}$ be a finite sub-block of
+$\H_f$ specified by a basis $\Bs = (\Ps,\Ss)$.
+%
+Then, for every symbol $\sigma \in \Sigma$, we define the sub-block $\H_\sigma \in
+\R^{\Ps \times \Ss}$ whose entries are given by $\H_\sigma(u,v) = \H_f(u,\sigma
+v)$.
+%
+For a fixed basis, we also consider the vectors $\mat{h}_{\Ss}
+\in \R^{\Ss}$ with entries given by $\mat{h}_{\Ss}(v) = \H_f(\lambda,v)$
+for every $v \in \Ss$, and $\mat{h}_{\Ps} \in \R^{\Ps}$ with $\mat{h}_{\Ps}(u) =
+\H_f(u,\lambda)$.
+
+The Hankel matrix $\H_f$ is tightly related to the \emph{system dynamics matrix}
+(SDM) of the stochastic process described by $f$~\cite{singh04}, but while the entries of the
+Hankel matrix represent \emph{joint} probabilities over prefixes and suffixes,
+the corresponding entry in the SDM is the \emph{conditional} probability of
+observing a suffix given the prefix.
+
+
+The algorithm takes as input $\Sigma$ and a basis
+$\Bs$ in $\Sstar$, uses them to estimate the corresponding Hankel matrices, and
+then recovers a PSR by performing singular value decomposition and
+linear algebra operations on these matrices.
+%
+%Estimating Hankel matrices containing probabilities of observed trajectories
+%from a sample is straightforward, and the details of the spectral learning
+%algorithm are reviewed below.
+%
+Although the method works almost out-of-the-box, in practice the results tend
+to be sensitive to the choice of basis.
+%
+Thus, after briefly recapitulating how the spectral learning algorithm proceeds,
+we will devote the rest of the section to describe a procedure for building a
+basis which is tailored for the case of learning option duration models.
+
+%\textbf{TODO: Now we should talk in here about Hankel matrices}
+
+Suppose the basis $\Bs$ is fixed and the desired number of states $n$ is given.
+%
+Suppose that a set of sampled trajectories was used to estimate the
+Hankel matrices $\H, \H_\sigma \in \R^{\Ps \times \Ss}$ and vectors
+$\mat{h}_{\Ps} \in \R^{\Ps}$, $\mat{h}_{\Ss} \in \R^{\Ss}$ defined in
+Sec.~\ref{sec:hankel}.
+%
+The algorithm starts by taking the truncated SVD $\mat{U}_n \mat{D}_n
+\mat{V}_n^\top$ of $\H$, where $\mat{D}_n \in \R^{n \times n}$ contains the first
+$n$ singular values of $\H$, and $\mat{U}_n \in \R^{\Ps \times n}$ and $\mat{V}_n
+\in \R^{\Ss \times n}$ contain the first left and right singular vectors
+respectively.
+%
+Finally, we compute the transition operators of a PSR as $\A_\sigma =
+\mat{D}_n^{-1} \mat{U}_n^\top \H_\sigma \mat{V}_n$, and the initial and final
+weights as $\aone^\top = \mat{h}_{\Ss}^\top \mat{V}_n$ and $\ainf =
+\mat{D}_n^{-1} \mat{U}_n^\top \mat{h}_{\Ps}$.
+%
+This yields a PSR with $n$ states. It was proved in~\cite{bootspsr} this
+algorithm is statistically consistent: if the population Hankel matrices are
+known and the basis $\Bs$ is complete, then the learned PSR is equivalent to the
+one that generated the data.
+
+
+\borja{END OF COPY-PASTE}
+
 \subsection{Notation}
 
 \borja{We should move this into the two subsections below}
