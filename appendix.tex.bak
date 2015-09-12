@@ -1,6 +1,16 @@
 
 \section{Appendix}
 
+
+\textbf{Q}: A query string (a string for which one wishes to determine the probability of).
+
+\textbf{bestE}: A map from indices i of Q to the optimal encoding of Q[:i].
+
+\textbf{minE}: A map from indices i of Q to $|bestE[i]|$
+
+\textbf{opEnd}: A map from indices i of Q to the set of strings in $\Sigma'$: $\{x \in \Sigma' s.t Q[i-x.length:i] == x\}$
+
+
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=60mm]{uCOREPICS/DL/doubleLoopImage.png}
@@ -50,7 +60,7 @@
 	
 	\State $i \gets i + 1$
 \EndWhile 
-\Return $\Sigma'$
+\State \Return $\Sigma'$
 
 \EndProcedure
 \end{algorithmic}
@@ -87,7 +97,7 @@
 	\State $bestE[i+1] \gets bestE[i-len(bestOp)] + bestOp$
 \EndFor
 
-\Return $bestE[len(Q)]$
+\State \Return $bestE[len(Q)]$
 
 \EndProcedure
 \end{algorithmic}
