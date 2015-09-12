@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.1.29)  12 SEP 2015 13:29
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.1.29)  12 SEP 2015 16:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -492,12 +492,6 @@ LaTeX Warning: Label `overflow' multiply defined.
 
 LaTeX Warning: Label `overflow' multiply defined.
 
-
-LaTeX Warning: Label `overflow' multiply defined.
-
-
-LaTeX Warning: Label `overflow' multiply defined.
-
 )
 \openout1 = `baseSystem.aux'.
 
@@ -623,36 +617,23 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
 
 ]
 
-LaTeX Warning: Citation `ODM' on page 2 undefined on input line 25.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 31--32
-[]\OT1/ptm/m/n/10 For the mul-ti-ple ob-ser-va-tion case one can
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 31--32
-\OT1/ptm/m/n/10 also use a Base M-PSR. In this case $\OT1/cmr/m/n/10 ^^F[] =
- []
-
-
-Underfull \hbox (badness 4279) in paragraph at lines 31--32
-\OMS/cmsy/m/n/10 f\OML/cmm/m/it/10 ^^[[]; ^^[[]; ^^[[]; ^^[[]; ^^[[]; ^^[[]; ::
-:; ^^[[]; ^^[[]\OMS/cmsy/m/n/10 g$\OT1/ptm/m/n/10 . Here $\OML/cmm/m/it/10 ^^[[
-]$ \OT1/ptm/m/n/10 and $\OML/cmm/m/it/10 ^^[[]$
- []
-
-
-Underfull \hbox (badness 2096) in paragraph at lines 31--32
-\OT1/ptm/m/n/10 are two ob-ser-va-tions sym-bols' this can of course be
- []
+LaTeX Warning: Citation `ODM' on page 2 undefined on input line 31.
 
 ) (./algorithms.tex
+
+LaTeX Warning: Citation `bootspsr' on page 2 undefined on input line 3.
+
+
+LaTeX Warning: Citation `bootspsr' on page 2 undefined on input line 7.
+
 
 LaTeX Warning: Citation `CarlylePaz71' on page 2 undefined on input line 29.
 
 
 LaTeX Warning: Citation `Fliess74' on page 2 undefined on input line 29.
+
+
+LaTeX Warning: Citation `bootspsr' on page 2 undefined on input line 32.
 
 
 LaTeX Warning: Reference `sec:learning' on page 2 undefined on input line 32.
@@ -665,131 +646,135 @@ LaTeX Warning: Citation `singh04' on page 2 undefined on input line 67.
 LaTeX Warning: Reference `sec:hankel' on page 3 undefined on input line 96.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 207--208
+LaTeX Warning: Citation `bootspsr' on page 3 undefined on input line 109.
+
+) (./experiments.tex [3]
+<uCOREPICS/DL/64-16-10000.png, id=32, 578.16pt x 433.62pt>
+File: uCOREPICS/DL/64-16-10000.png Graphic file (type png)
+
+<use uCOREPICS/DL/64-16-10000.png>
+Package pdftex.def Info: uCOREPICS/DL/64-16-10000.png used on input line 29.
+(pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
+
+<uCOREPICS/DL/64-16-100.png, id=34, 578.16pt x 433.62pt>
+File: uCOREPICS/DL/64-16-100.png Graphic file (type png)
+
+<use uCOREPICS/DL/64-16-100.png>
+Package pdftex.def Info: uCOREPICS/DL/64-16-100.png used on input line 39.
+(pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
+
+<uCOREPICS/DL/NoiseInfo.png, id=35, 578.16pt x 433.62pt>
+File: uCOREPICS/DL/NoiseInfo.png Graphic file (type png)
+
+<use uCOREPICS/DL/NoiseInfo.png>
+Package pdftex.def Info: uCOREPICS/DL/NoiseInfo.png used on input line 49.
+(pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
+
+<uCOREPICS/DL/47-27-10000.png, id=36, 578.16pt x 433.62pt>
+File: uCOREPICS/DL/47-27-10000.png Graphic file (type png)
+
+<use uCOREPICS/DL/47-27-10000.png>
+Package pdftex.def Info: uCOREPICS/DL/47-27-10000.png used on input line 59.
+(pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
+ [4 <./uCOREPICS/DL/64-16-10000.png> <./uCOREPICS/DL/64-16-100.png> <./uCOREPIC
+S/DL/NoiseInfo.png>]
+<uCOREPICS/DL/basePows.png, id=43, 578.16pt x 433.62pt>
+File: uCOREPICS/DL/basePows.png Graphic file (type png)
+
+<use uCOREPICS/DL/basePows.png>
+Package pdftex.def Info: uCOREPICS/DL/basePows.png used on input line 69.
+(pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
+
+<uCOREPICS/DL/numOpsTiming.png, id=44, 578.16pt x 433.62pt>
+File: uCOREPICS/DL/numOpsTiming.png Graphic file (type png)
+
+<use uCOREPICS/DL/numOpsTiming.png>
+Package pdftex.def Info: uCOREPICS/DL/numOpsTiming.png used on input line 79.
+(pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
+
+<uCOREPICS/Pacman/Pacman10k.png, id=45, 578.16pt x 433.62pt>
+File: uCOREPICS/Pacman/Pacman10k.png Graphic file (type png)
+
+<use uCOREPICS/Pacman/Pacman10k.png>
+Package pdftex.def Info: uCOREPICS/Pacman/Pacman10k.png used on input line 93.
+(pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
+
+<uCOREPICS/Pacman/Pacman500.png, id=46, 578.16pt x 433.62pt>
+File: uCOREPICS/Pacman/Pacman500.png Graphic file (type png)
+
+<use uCOREPICS/Pacman/Pacman500.png>
+Package pdftex.def Info: uCOREPICS/Pacman/Pacman500.png used on input line 99.
+(pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
+
+<uCOREPICS/Pacman/PacmanSF=1.png, id=47, 578.16pt x 433.62pt>
+File: uCOREPICS/Pacman/PacmanSF=1.png Graphic file (type png)
+
+<use uCOREPICS/Pacman/PacmanSF=1.png>
+Package pdftex.def Info: uCOREPICS/Pacman/PacmanSF=1.png used on input line 109
+.
+(pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
+
+<uCOREPICS/Pacman/PacmanSF=5.png, id=48, 578.16pt x 433.62pt>
+File: uCOREPICS/Pacman/PacmanSF=5.png Graphic file (type png)
+
+<use uCOREPICS/Pacman/PacmanSF=5.png>
+Package pdftex.def Info: uCOREPICS/Pacman/PacmanSF=5.png used on input line 115
+.
+(pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
+ [5 <./uCOREPICS/DL/47-27-10000.png> <./uCOREPICS/DL/basePows.png> <./uCOREPICS
+/DL/numOpsTiming.png> <./uCOREPICS/Pacman/Pacman10k.png> <./uCOREPICS/Pacman/Pa
+cman500.png>]
+<uCOREPICS/DLMO/MO_1k.png, id=57, 578.16pt x 433.62pt>
+File: uCOREPICS/DLMO/MO_1k.png Graphic file (type png)
+
+<use uCOREPICS/DLMO/MO_1k.png>
+Package pdftex.def Info: uCOREPICS/DLMO/MO_1k.png used on input line 138.
+(pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
+
+<uCOREPICS/DLMO/MO_50.png, id=58, 578.16pt x 433.62pt>
+File: uCOREPICS/DLMO/MO_50.png Graphic file (type png)
+
+<use uCOREPICS/DLMO/MO_50.png>
+Package pdftex.def Info: uCOREPICS/DLMO/MO_50.png used on input line 144.
+(pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
+
+<uCOREPICS/DLMO/numOpComparison.png, id=59, 578.16pt x 433.62pt>
+File: uCOREPICS/DLMO/numOpComparison.png Graphic file (type png)
+
+<use uCOREPICS/DLMO/numOpComparison.png>
+Package pdftex.def Info: uCOREPICS/DLMO/numOpComparison.png used on input line 
+154.
+(pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
+) (./appendix.tex
+<uCOREPICS/DL/doubleLoopImage.png, id=60, 751.30687pt x 459.21562pt>
+File: uCOREPICS/DL/doubleLoopImage.png Graphic file (type png)
+
+<use uCOREPICS/DL/doubleLoopImage.png>
+Package pdftex.def Info: uCOREPICS/DL/doubleLoopImage.png used on input line 6.
+
+(pdftex.def)             Requested size: 170.71652pt x 104.34209pt.
+
+<uCOREPICS/Pacman/graphPacMan.png, id=61, 930.47626pt x 1589.94pt>
+File: uCOREPICS/Pacman/graphPacMan.png Graphic file (type png)
+
+<use uCOREPICS/Pacman/graphPacMan.png>
+Package pdftex.def Info: uCOREPICS/Pacman/graphPacMan.png used on input line 12
+.
+(pdftex.def)             Requested size: 113.81041pt x 170.69687pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 36--37
 [] $\OML/cmm/m/it/10 c \OMS/cmsy/m/n/10   \OML/cmm/m/it/10 c \OT1/cmr/m/n/10 + 
 \OML/cmm/m/it/10 DPEncode\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 obs\OT1/cmr/m/n/10 )
  \OMS/cmsy/m/n/10 ^^@
  []
 
-) (./experiments.tex [3] [4]
-<uCOREPICS/DL/doubleLoopImage.png, id=35, 751.30687pt x 459.21562pt>
-File: uCOREPICS/DL/doubleLoopImage.png Graphic file (type png)
+) (./baseSystem.bbl
+Underfull \vbox (badness 3792) has occurred while \output is active []
 
-<use uCOREPICS/DL/doubleLoopImage.png>
-Package pdftex.def Info: uCOREPICS/DL/doubleLoopImage.png used on input line 41
-.
-(pdftex.def)             Requested size: 170.71652pt x 104.34209pt.
-
-<uCOREPICS/DL/64-16-10000.png, id=37, 578.16pt x 433.62pt>
-File: uCOREPICS/DL/64-16-10000.png Graphic file (type png)
-
-<use uCOREPICS/DL/64-16-10000.png>
-Package pdftex.def Info: uCOREPICS/DL/64-16-10000.png used on input line 47.
-(pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
-
-<uCOREPICS/DL/64-16-100.png, id=38, 578.16pt x 433.62pt>
-File: uCOREPICS/DL/64-16-100.png Graphic file (type png)
-
-<use uCOREPICS/DL/64-16-100.png>
-Package pdftex.def Info: uCOREPICS/DL/64-16-100.png used on input line 57.
-(pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
-
-<uCOREPICS/DL/NoiseInfo.png, id=39, 578.16pt x 433.62pt>
-File: uCOREPICS/DL/NoiseInfo.png Graphic file (type png)
-
-<use uCOREPICS/DL/NoiseInfo.png>
-Package pdftex.def Info: uCOREPICS/DL/NoiseInfo.png used on input line 67.
-(pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
-
-<uCOREPICS/DL/47-27-10000.png, id=40, 578.16pt x 433.62pt>
-File: uCOREPICS/DL/47-27-10000.png Graphic file (type png)
-
-<use uCOREPICS/DL/47-27-10000.png>
-Package pdftex.def Info: uCOREPICS/DL/47-27-10000.png used on input line 77.
-(pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
-
-<uCOREPICS/DL/basePows.png, id=41, 578.16pt x 433.62pt>
-File: uCOREPICS/DL/basePows.png Graphic file (type png)
-
-<use uCOREPICS/DL/basePows.png>
-Package pdftex.def Info: uCOREPICS/DL/basePows.png used on input line 87.
-(pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
-
-<uCOREPICS/DL/numOpsTiming.png, id=42, 578.16pt x 433.62pt>
-File: uCOREPICS/DL/numOpsTiming.png Graphic file (type png)
-
-<use uCOREPICS/DL/numOpsTiming.png>
-Package pdftex.def Info: uCOREPICS/DL/numOpsTiming.png used on input line 97.
-(pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
- [5 <./uCOREPICS/DL/doubleLoopImage.png> <./uCOREPICS/DL/64-16-10000.png> <./uC
-OREPICS/DL/64-16-100.png> <./uCOREPICS/DL/NoiseInfo.png>]
-<uCOREPICS/Pacman/graphPacMan.png, id=50, 930.47626pt x 1589.94pt>
-File: uCOREPICS/Pacman/graphPacMan.png Graphic file (type png)
-
-<use uCOREPICS/Pacman/graphPacMan.png>
-Package pdftex.def Info: uCOREPICS/Pacman/graphPacMan.png used on input line 10
-7.
-(pdftex.def)             Requested size: 113.81041pt x 170.69687pt.
-
-<uCOREPICS/Pacman/Pacman10k.png, id=51, 578.16pt x 433.62pt>
-File: uCOREPICS/Pacman/Pacman10k.png Graphic file (type png)
-
-<use uCOREPICS/Pacman/Pacman10k.png>
-Package pdftex.def Info: uCOREPICS/Pacman/Pacman10k.png used on input line 117.
-
-(pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
-
-<uCOREPICS/Pacman/Pacman500.png, id=52, 578.16pt x 433.62pt>
-File: uCOREPICS/Pacman/Pacman500.png Graphic file (type png)
-
-<use uCOREPICS/Pacman/Pacman500.png>
-Package pdftex.def Info: uCOREPICS/Pacman/Pacman500.png used on input line 123.
-
-(pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
-
-<uCOREPICS/Pacman/PacmanSF=1.png, id=53, 578.16pt x 433.62pt>
-File: uCOREPICS/Pacman/PacmanSF=1.png Graphic file (type png)
-
-<use uCOREPICS/Pacman/PacmanSF=1.png>
-Package pdftex.def Info: uCOREPICS/Pacman/PacmanSF=1.png used on input line 133
-.
-(pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
-
-<uCOREPICS/Pacman/PacmanSF=5.png, id=54, 578.16pt x 433.62pt>
-File: uCOREPICS/Pacman/PacmanSF=5.png Graphic file (type png)
-
-<use uCOREPICS/Pacman/PacmanSF=5.png>
-Package pdftex.def Info: uCOREPICS/Pacman/PacmanSF=5.png used on input line 139
-.
-(pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
- [6 <./uCOREPICS/DL/47-27-10000.png> <./uCOREPICS/DL/basePows.png> <./uCOREPICS
-/DL/numOpsTiming.png> <./uCOREPICS/Pacman/graphPacMan.png> <./uCOREPICS/Pacman/
-Pacman10k.png> <./uCOREPICS/Pacman/Pacman500.png>] <uCOREPICS/DLMO/MO_1k.png, i
-d=64, 578.16pt x 433.62pt>
-File: uCOREPICS/DLMO/MO_1k.png Graphic file (type png)
-
-<use uCOREPICS/DLMO/MO_1k.png>
-Package pdftex.def Info: uCOREPICS/DLMO/MO_1k.png used on input line 162.
-(pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
-
-<uCOREPICS/DLMO/MO_50.png, id=65, 578.16pt x 433.62pt>
-File: uCOREPICS/DLMO/MO_50.png Graphic file (type png)
-
-<use uCOREPICS/DLMO/MO_50.png>
-Package pdftex.def Info: uCOREPICS/DLMO/MO_50.png used on input line 168.
-(pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
-
-<uCOREPICS/DLMO/numOpComparison.png, id=66, 578.16pt x 433.62pt>
-File: uCOREPICS/DLMO/numOpComparison.png Graphic file (type png)
-
-<use uCOREPICS/DLMO/numOpComparison.png>
-Package pdftex.def Info: uCOREPICS/DLMO/numOpComparison.png used on input line 
-178.
-(pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
-) (./baseSystem.bbl) [7 <./uCOREPICS/Pacman/PacmanSF=1.png> <./uCOREPICS/Pacman
-/PacmanSF=5.png> <./uCOREPICS/DLMO/MO_1k.png> <./uCOREPICS/DLMO/MO_50.png> <./u
-COREPICS/DLMO/numOpComparison.png>]
-(./baseSystem.aux)
+ [6 <./uCOREPICS/Pacman/PacmanSF=1.png> <./uCOREPICS/Pacman/PacmanSF=5.png> <./
+uCOREPICS/DLMO/MO_1k.png> <./uCOREPICS/DLMO/MO_50.png> <./uCOREPICS/DLMO/numOpC
+omparison.png>]) [7 <./uCOREPICS/DL/doubleLoopImage.png> <./uCOREPICS/Pacman/gr
+aphPacMan.png>] (./baseSystem.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -798,10 +783,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 12146 strings out of 493304
- 220604 string characters out of 6139871
- 279061 words of memory out of 5000000
- 15278 multiletter control sequences out of 15000+600000
+ 12147 strings out of 493304
+ 220603 string characters out of 6139871
+ 274955 words of memory out of 5000000
+ 15277 multiletter control sequences out of 15000+600000
  24638 words of font info for 53 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  63i,11n,80p,1331b,600s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -822,7 +807,7 @@ dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1
 /urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr
 i8a.pfb>
-Output written on baseSystem.pdf (7 pages, 955709 bytes).
+Output written on baseSystem.pdf (7 pages, 956134 bytes).
 PDF statistics:
  131 PDF objects out of 1000 (max. 8388607)
  74 compressed objects within 1 object stream
