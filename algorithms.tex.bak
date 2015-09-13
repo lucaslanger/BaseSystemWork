@@ -133,11 +133,17 @@ Given $\Sigma$ and $\Sigma'$, a generic coding function $\kappa : \sstar \to {\S
 \kappa(x) = \argmin_{y \in {\Sigma'}^\star, \; \partial(y) = x} |y| \enspace.
 \end{equation*}
 Note that for the single observation case this is equivalent to the coin change problem. This has advantage of minimising the number of operators $\A_\sigma$ that will need to be multiplied to compute the value of the M-PSR on a string $x$. 
-At the same time, operators expressing long transition sequences capture intermediate contributions of weak states throughout the transition sequence. This is true even if one chooses to learn a smaller model which excludes these weak states. Thus, with this choice of $\kappa$, or for any $\kappa$ which compactly expresses transition sequences, one should be able to get much better performance with reduced models.
+
+At the same time, operators expressing long transition sequences capture intermediate contributions of all states during the transition sequence regardless of the number of states included in the M-PSR. This is a significant advantage if one works with a smaller number of states. To demonstrate this intuition we contrast the computation of the operators with a PSR with an M-PSR.
+
+\begin{equation*}
+
+\end{equation*}
 
 %At the same time, if the operators $\A_\sigma$ are noisy due to the learning process, multiplying a small number of them should also be beneficial in terms of minimising the amount of error accumulated in these multiplications.
 %
 \lucas{Changed explanation of performance increase from fewer matrices. Let me know what you think. I don't think noise is the right term here because even for very large amounts of data (basically the true model), M-PSRs do far better than PSRs. I think it has more to do with the projection intuition.}
+\borja{I'm not sure the current wording is clear enough. The concept of "weak state" sounds vague and informal to me.}
 
 The optimization problem above can be solved by dynamic programming. To do so, one inductively computes the optimal string encoding for the prefix $x_1 \cdots x_i$ for all $1 \leq i \leq |x|$. This can be obtained by minimising over all $\sigma \in \Sigma'$ which terminate at the index $i$ of $x$. We provide the full pseudo-code for this encoding function in the appendix.
 
