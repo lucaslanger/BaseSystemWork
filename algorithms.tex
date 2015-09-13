@@ -138,6 +138,7 @@ At the same time, operators expressing long transition sequences capture interme
 %At the same time, if the operators $\A_\sigma$ are noisy due to the learning process, multiplying a small number of them should also be beneficial in terms of minimising the amount of error accumulated in these multiplications.
 %
 \lucas{Changed explanation of performance increase from fewer matrices. Let me know what you think. I don't think noise is the right term here because even for very large amounts of data (basically the true model), M-PSRs do far better than PSRs. I think it has more to do with the projection intuition.}
+\borja{I'm not sure the current wording is clear enough. The concept of "weak state" sounds vague and informal to me.}
 
 The optimization problem above can be solved by dynamic programming. To do so, one inductively computes the optimal string encoding for the prefix $x_1 \cdots x_i$ for all $1 \leq i \leq |x|$. This can be obtained by minimising over all $\sigma \in \Sigma'$ which terminate at the index $i$ of $x$. We provide the full pseudo-code for this encoding function in the appendix.
 
