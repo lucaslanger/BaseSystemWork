@@ -2,11 +2,11 @@
 In this section, we assess the performance of PSRs and different kinds of Multi-PSRs. We do so over many different configurations of parameters, the most relevant ones being the model size, the number of observations used, and the type of environment. For all the plots, the x-axis is model size of the PSR/M-PSRs and the y-axis is an error measurement of the learned PSR/M-PSRs.
 
 \subsection{Obtaining Observation Sequences}
-In all the experiments, an agent is positioned in a starting location and stochastically navigates the environment based on a transition function $\delta:SxS\rightarrow[0,1]$. Whenever a transition occurs an observation symbol is produced. When the agent exits the labyrinth, we say the trajectory is finished, and we record the concatenation of the symbols produced. We call this concatenation the observation sequence for that trajectory.  
+In all the experiments, an agent is positioned in a starting location and stochastically navigates the environment based on a transition function $\delta:S \times S\rightarrow[0,1]$. Whenever a transition occurs an observation symbol is produced. When the agent exits the labyrinth, we say the trajectory is finished, and we record the concatenation of the symbols produced. We call this concatenation the observation sequence for that trajectory.  
 
 \subsection{Learning Implementation: Timing v.s Multiple Symbols}
 
-For the timing case, we construct our empirical hankel matrix by taking P,S = $\{a^i, \forall i<=n\}$. The parameter n depends on the application. For Double Loop environments we set $n = 150$, while for the pacman labyrinth $n = 600$. For these choices of n, we verify that as the amount of data gets large the learned PSR with the true model size becomes increasingly close to the true model. For Base M-PSR, we set $B=2,K=9$, so that the longest string in $\Sigma'$ is $a^256$.
+For the timing case, we construct our empirical hankel matrix by taking P,S = $\{a^i, \forall i<=n\}$. The parameter n depends on the application. For Double Loop environments we set $n = 150$, while for the pacman labyrinth $n = 600$. For these choices of n, we verify that as the amount of data gets large the learned PSR with the true model size becomes increasingly close to the true model. For Base M-PSR, we set $b=2,K=9$, so that the longest string in $\Sigma'$ is $a^{256}$.
 
 For multiple observations a slightly more complex approach is required to choose P and S. For prefixes P, we select the k most frequent prefixes from our observation set. For suffixes S, we take all suffixes that occur from P. We also require prefix completeness. That is, if p' is a prefix of p $\in P$, then p' $\in P$. This heuristic for constructing empirical hankel matrices was given in previous work by [] and it showed that (). For the Base M-PSR, we take K=8 and B=2 for both symbols $\Sigma=\{g,b\}$, g for green and b for blue. For the Tree M-PSR we set $L=7$ for a total of 128 operators, a far larger allowance than the other M-PSRs. 
 
@@ -66,7 +66,7 @@ In Figure 4, we plot the results of a 47-27 labyrinth, where observations will n
 
 \subsection{Choice of K for Base M-PSRs}
 
-Below we plot performance of Base M-PSRs with different values of L. We note that larger values of K have better performance up to K=7.
+In Figure 5, we plot performance of Base M-PSRs with different values of L. We note that larger values of K have better performance up to K=7.
 
 \begin{figure}[ht!]
 \centering
@@ -76,37 +76,37 @@ Below we plot performance of Base M-PSRs with different values of L. We note tha
 
 \subsection{Varying NumOps}
 
-In Figure, we look at how the varying the number of multi-step transition operators affects performance for the 64-16 double loop. In this environment, a higher number of operators improves performance up until about 20 operators. Here the most important operators seem to be: $\{a,a^{8},a^{24},a^{32},a^{72}\}$ which are closely tied to the environment's structure.
+In Figure 6, we look at how the varying the number of multi-step transition operators affects performance for the 64-16 double loop. In this environment, a higher number of operators improves performance up until about 20 operators. Here the most important operators seem to be: $\{a,a^{8},a^{24},a^{32},a^{72}\}$ which are closely tied to the environment's structure.
 
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=60mm]{uCOREPICS/DL/numOpsTiming.png}
-\caption{64-16 Double Loop\label{overflow}}
+\caption{Varying NumOps\label{overflow}}
 \end{figure} 
 
 \section{Large Labyrinth Timing}
 
-We proceed to work with a more complex labyrinth environment. Figure 10 shows it's graphical representation. Transitions to new states occur with equal probability. The weight $w(u,v)$ between states u and v corresponds to the number of time steps from u to v. We add an additional parameter sF: stretch factor, which scales all of the weights in the graph. 
+We proceed to work with a labyrinth environment similar to a Pacman game. A graphical representation of this labyrinth is available in the appendix. Transitions to new states occur with equal probability. The weight $w(u,v)$ between states u and v corresponds to the number of time steps from u to v. We add an additional parameter sF: stretch factor, which scales all of the weights in the graph. 
 
 \subsection{Number of Trajectories}
 
-In Figure 11,12 we vary the number of observations used for learning. M-PSRs outperform the traditional PSR regardless of the amount of data. Secondly, as expected, the performance of all models is worse for less data.
+In Figure 7,8 we vary the number of observations used for learning. M-PSRs outperform the traditional PSR regardless of the amount of data. Secondly, as expected, the performance of all models is worse for less data.
 
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=60mm]{uCOREPICS/Pacman/Pacman10k.png}
-\caption{Pacman Labyrinth\label{overflow}}
+\caption{High Data Pacman Labyrinth\label{overflow}}
 \end{figure}
 
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=60mm]{uCOREPICS/Pacman/Pacman500.png}
-\caption{Pacman Labyrinth\label{overflow}}
+\caption{Low Data Pacman Labyrinth\label{overflow}}
 \end{figure}
 
 \subsection{Stretch Factor: sF}
 
-In Figures 13 and 14 we vary the stretch factor parameter. We find that a higher values of sF allow for increased improvement of the M-PSR relative to the performance of the standard PSR.
+In Figures 7,9 and 10 we vary the stretch factor parameter with a fixed dataset. We find that a higher values of sF allow for increased improvement of the M-PSR relative to the performance of the standard PSR.
 
 \begin{figure}[ht!]
 \centering
@@ -122,39 +122,39 @@ In Figures 13 and 14 we vary the stretch factor parameter. We find that a higher
 
 \section{Multiple Observations: Coloured Loops}
 
-We now move to the multiple observation case. We construct a Double Loop environment where one loop is green with length 27 and the other is blue with length 17. We fix the length of observations to be:
+We now move to the multiple observation case. We construct a Double Loop environment where loop1 is green with $l_1=27$ and loop2 is blue with $l_2=17$. We fix the length of observations to be:
 \begin{equation*}
-TrajectoryLength := (len(loop1) + len(loop2))*3
+TrajectoryLength := (l_1 + l_2)*3
 \end{equation*} 
 
 We build empirical estimates for the hankel matrix as follows:
 \begin{equation*}
- f(x)=\dfrac{count([s \in Obs, s==x])}{count([s \in Obs, len(s)>=x])}
+ f(x)=\dfrac{count([s \in Obs, s=x])}{count([s \in Obs, |s| \geq x])}
 \end{equation*}  
 This means that the PSRs will compute the probability of x occurring as a prefix.
 
 \subsection{Number of Trajectories}
 
-As for the timing case, we vary the amount of data to learn PSRS/M-PSRs in Figures 15 and 16. Once again we find M-PSRs perform far better, especially the Data-Driven M-PSR. This makes sense as when complexity in observations increases only custom M-PSRs will express transitions compactly.
+As for the timing case, we vary the amount of data to learn PSRS/M-PSRs in Figures 11 and 12. Once again we find M-PSRs perform far better, especially the Data-Driven M-PSR. This makes sense as when complexity in observations increases only custom M-PSRs will express transitions compactly.
 
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=60mm]{uCOREPICS/DLMO/MO_1k.png}
-\caption{Colored Loops 27-17\label{overflow}}
+\caption{High Data Colored Loops 27-17\label{overflow}}
 \end{figure}
 
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=60mm]{uCOREPICS/DLMO/MO_50.png}
-\caption{Colored Loops 27-17\label{overflow}}
+\caption{Low Data Colored Loops 27-17\label{overflow}}
 \end{figure}
 
 \subsection{Varying NumOps}
 
-Here, we vary the number of multi-step transition operators learned. Here the important operators seem to be $\{a,b,a^{27},b^{17}\}$ which reflects the structure of the environment.
+In Figure 13, we vary the number of multi-step transition operators learned. Here the important operators seem to be $\{g,b,g^{27},b^{17}\}$ which reflects the structure of the environment.
 
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=60mm]{uCOREPICS/DLMO/numOpComparison.png}
-\caption{Colored Loops 27-17\label{overflow}}
+\caption{Varying NumOps\label{overflow}}
 \end{figure}

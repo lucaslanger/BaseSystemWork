@@ -1,137 +1,168 @@
 \section{Learning Algorithm for M-PSR}
 
-In this section, we describe a learning algorithm for M-PSR which combines the standard spectral algorithm for PSR \cite{bootspsr} with a data-driven greedy algorithm for building an extended set of symbols $\Sigma'$ containing frequent patterns that minimise a coding cost for a general choice of coding function $\kappa$.
+In this section, we describe a learning algorithm for M-PSR which combines the standard spectral method for PSR \cite{bootspsr} with a greedy algorithm for extracting an extended set of symbols $\Sigma'$ containing frequent patterns of observations and which minimises a coding cost for a generic choice of coding function $\kappa$.
 
 \subsection{Spectral Learning Algorithm}
 
-We extend \cite{bootspsr} to M-PSR under the assumption that $\kappa$ and $\Sigma'$ are given.
+We start by extending the spectral learning algorithm to M-PSR under the assumption that $\kappa$ and $\Sigma'$ are known. In this case, the learning procedure only need to recover the operators $\A_\sigma$ for all $\sigma \in \Sigma'$, and the initial and final weights $\aone, \ainf$. We start by recalling some basic notation about Hankel matrices, and then proceed to describe the learning algorithm. For the purpose of describing the learning algorithm we shall start by assuming that the function $f : \sstar \to \R$ associated with the target M-PSR can be evaluated at every string. Note that this does not necessarily imply that we know the M-PSR, since the values of $f$ correspond to probabilities of observations that can be effectively estimated from data. 
 
-\borja{Need to fill this. Probably copy-paste from the ODM paper will do.}
+Given $f : \sstar \to \R$ we will use its \emph{Hankel matrix} representation $\H_f \in \R^{\sstar \times \sstar}$, which is an infinite matrix whose rows and columns are indexed by strings in $\sstar$ and whose entries are given by $\H_f(u,v) = f(u v)$. To efficiently work with this matrix we shall only consider finite sub-blocks indexed by a finite set of prefixes $\Ps \subset \sstar$ and suffixes $\Ss \subset \sstar$. Both $\Ps$ and $\Ss$ are input parameters given to the algorithm, see \cite{BLA} for a discussion of how to choose them in practice. The pair $\Bs = (\Ps,\Ss)$ is sometimes called a basis, and it determines a sub-block $\H_\Bs \in \R^{\Ps \times \Ss}$ of $\H_f$ with entries given by $\H_\Bs(u,v) = \H_f(u,v)$ for all $u \in \Ps$ and $v \in \Ss$. For a fixed basis, we also consider the vectors $\mat{h}_{\Ss} \in \R^{\Ss}$ with entries given by $\mat{h}_{\Ss}(v) = \H_f(\epsilon,v)$ for every $v \in \Ss$, and $\mat{h}_{\Ps} \in \R^{\Ps}$ with $\mat{h}_{\Ps}(u) = \H_f(u,\epsilon)$.
 
-\borja{BEGIN OF COPY-PASTE. NEEDS EDITS}
+Note that so far the definitions above have only used $\Sigma$. In order to recover operators $\A_\sigma$ for all $\sigma \in \Sigma'$ we will need to consider multi-step shifts of the finite Hankel matrix $\H_{\Bs}$. In particular, given $\sigma \in \Sigma'$ we define the sub-block $\H_\sigma \in \R^{\Ps \times \Ss}$ whose entries are given by $\H_\sigma(u,v) = f(u \, \sigma \, v)$. Note that this can be interpreted as either using the lift $f(\kappa(u) \, \sigma \, \kappa(v))$ or the decoding $f(u \, \partial(\sigma) \, v)$, but the actual value in the matrix $\H_\sigma$ will be the same.
 
-A convenient algebraic way to summarize all the information conveyed by $f$ is
-with its \emph{Hankel matrix}, a bi-infinite matrix $\H_f \in \R^{\Sstar \times \Sstar}$ with rows and
-columns indexed by strings in $\Sstar$.
+Now we can give the details about the learning algorithm. Suppose the basis $\Bs$ and the desired number of states $n$ are given. Start by collecting a set of sampled trajectories and use them to estimate the matrices $\H_{\Bs}, \H_\sigma \in \R^{\Ps \times \Ss}$ and vectors $\mat{h}_{\Ps} \in \R^{\Ps}$, $\mat{h}_{\Ss} \in \R^{\Ss}$. Then take the truncated SVD $\mat{U}_n \mat{D}_n \mat{V}_n^\top$ of $\H_{\Bs}$, where $\mat{D}_n \in \R^{n \times n}$ contains the first $n$ singular values of $\H_{\Bs}$, and $\mat{U}_n \in \R^{\Ps \times n}$ and $\mat{V}_n \in \R^{\Ss \times n}$ contain the first left and right singular vectors respectively. Finally, compute the transition operators of the M-PSR as $\A_\sigma = \mat{D}_n^{-1} \mat{U}_n^\top \H_\sigma \mat{V}_n$ for all $\sigma \in \Sigma'$, and the initial and final weights as $\aone^\top = \mat{h}_{\Ss}^\top \mat{V}_n$ and $\ainf = \mat{D}_n^{-1} \mat{U}_n^\top \mat{h}_{\Ps}$.
 %
-Strings indexing rows and columns are interpreted as prefixes and suffixes respectively.
-The entries in $\H_f$ are given by $\H_f(u,v) = f(u,v)$ for every $u, v
-\in \Sstar$.
+This algorithm yields an M-PSR with $n$ states. It was proved in~\cite{bootspsr} that this algorithm is statistically consistent for PSR (under a mild condition on $\Bs$) and the same guarantees extend to M-PSR.
 
-% THIS IS FOR THE SDM
-%$\H_f(u,v) = f_u(v) = f(u v) / f(u)$,
-%\textbf{TODO (Borja):} Beware the case $f(u) = 0$ !!
+%\borja{Need to fill this. Probably copy-paste from the ODM paper will do.}
+%
+%\borja{BEGIN OF COPY-PASTE. NEEDS EDITS}
+%
+%A convenient algebraic way to summarize all the information conveyed by $f$ is
+%with its \emph{Hankel matrix}, a bi-infinite matrix $\H_f \in \R^{\Sstar \times \Sstar}$ with rows and
+%columns indexed by strings in $\Sstar$.
+%%
+%Strings indexing rows and columns are interpreted as prefixes and suffixes respectively.
+%The entries in $\H_f$ are given by $\H_f(u,v) = f(u,v)$ for every $u, v
+%\in \Sstar$.
+%
+%% THIS IS FOR THE SDM
+%%$\H_f(u,v) = f_u(v) = f(u v) / f(u)$,
+%%\textbf{TODO (Borja):} Beware the case $f(u) = 0$ !!
+%
+%Although $\H_f$ is an infinite matrix, in some cases it can have finite rank.
+%%
+%In particular, a well-known result states that $\H_f$ has rank at most $n$ if
+%and only if  there exists a PSR $\psrA$ with $n$ states satisfying
+%$f_{\psrA} = f$ \cite{CarlylePaz71,Fliess74}.
+%%
+%This result is the basis of recently developed spectral learning algorithms for
+%PSRs \cite{bootspsr}, which we review in Sec.~\ref{sec:learning}.
+%
+%Instead of looking at the full Hankel matrix, algorithms usually work with finite
+%sub-blocks of this matrix.
+%%
+%A convenient way to specify such blocks is to give the ``names'' to the rows and
+%columns.
+%%
+%Specifically, given a finite set of prefixes $\Ps \subset \Sstar$ and a finite
+%set of suffixes $\Ss \subset \Sstar$, the pair $\Bs = (\Ps,\Ss)$ is
+%a \emph{basis} defining the sub-block $\H_\Bs \in \R^{\Ps \times \Ss}$ of
+%$\H_f$, whose entries are given by $\H_\Bs(u,v) = \H_f(u,v)$.
+%% for every $u \in
+%%\Ps$ and $v \in \Ss$.
+%%
+%Note that every sub-block built in this way satisfies $\rank(\H_\Bs) \leq
+%\rank(\H_f)$; when equality is attained, the basis $\Bs$ is
+%\emph{complete}.
+%
+%Sometimes it is also convenient to look at one-step shifts of the finite
+%Hankel matrices.
+%%
+%Let $\H \in \R^{\Ps \times \Ss}$ be a finite sub-block of
+%$\H_f$ specified by a basis $\Bs = (\Ps,\Ss)$.
+%%
+%Then, for every symbol $\sigma \in \Sigma$, we define the sub-block $\H_\sigma \in
+%\R^{\Ps \times \Ss}$ whose entries are given by $\H_\sigma(u,v) = \H_f(u,\sigma
+%v)$.
+%%
+%For a fixed basis, we also consider the vectors $\mat{h}_{\Ss}
+%\in \R^{\Ss}$ with entries given by $\mat{h}_{\Ss}(v) = \H_f(\lambda,v)$
+%for every $v \in \Ss$, and $\mat{h}_{\Ps} \in \R^{\Ps}$ with $\mat{h}_{\Ps}(u) =
+%\H_f(u,\lambda)$.
+%
+%The Hankel matrix $\H_f$ is tightly related to the \emph{system dynamics matrix}
+%(SDM) of the stochastic process described by $f$~\cite{singh04}, but while the entries of the
+%Hankel matrix represent \emph{joint} probabilities over prefixes and suffixes,
+%the corresponding entry in the SDM is the \emph{conditional} probability of
+%observing a suffix given the prefix.
+%
+%
+%The algorithm takes as input $\Sigma$ and a basis
+%$\Bs$ in $\Sstar$, uses them to estimate the corresponding Hankel matrices, and
+%then recovers a PSR by performing singular value decomposition and
+%linear algebra operations on these matrices.
+%%
+%%Estimating Hankel matrices containing probabilities of observed trajectories
+%%from a sample is straightforward, and the details of the spectral learning
+%%algorithm are reviewed below.
+%%
+%Although the method works almost out-of-the-box, in practice the results tend
+%to be sensitive to the choice of basis.
+%%
+%Thus, after briefly recapitulating how the spectral learning algorithm proceeds,
+%we will devote the rest of the section to describe a procedure for building a
+%basis which is tailored for the case of learning option duration models.
+%
+%%\textbf{TODO: Now we should talk in here about Hankel matrices}
+%
+%Suppose the basis $\Bs$ is fixed and the desired number of states $n$ is given.
+%%
+%Suppose that a set of sampled trajectories was used to estimate the
+%Hankel matrices $\H, \H_\sigma \in \R^{\Ps \times \Ss}$ and vectors
+%$\mat{h}_{\Ps} \in \R^{\Ps}$, $\mat{h}_{\Ss} \in \R^{\Ss}$ defined in
+%Sec.~\ref{sec:hankel}.
+%%
+%The algorithm starts by taking the truncated SVD $\mat{U}_n \mat{D}_n
+%\mat{V}_n^\top$ of $\H$, where $\mat{D}_n \in \R^{n \times n}$ contains the first
+%$n$ singular values of $\H$, and $\mat{U}_n \in \R^{\Ps \times n}$ and $\mat{V}_n
+%\in \R^{\Ss \times n}$ contain the first left and right singular vectors
+%respectively.
+%%
+%Finally, we compute the transition operators of a PSR as $\A_\sigma =
+%\mat{D}_n^{-1} \mat{U}_n^\top \H_\sigma \mat{V}_n$, and the initial and final
+%weights as $\aone^\top = \mat{h}_{\Ss}^\top \mat{V}_n$ and $\ainf =
+%\mat{D}_n^{-1} \mat{U}_n^\top \mat{h}_{\Ps}$.
+%%
+%This yields a PSR with $n$ states. It was proved in~\cite{bootspsr} this
+%algorithm is statistically consistent: if the population Hankel matrices are
+%known and the basis $\Bs$ is complete, then the learned PSR is equivalent to the
+%one that generated the data.
+%
+%
+%\borja{END OF COPY-PASTE}
 
-Although $\H_f$ is an infinite matrix, in some cases it can have finite rank.
-%
-In particular, a well-known result states that $\H_f$ has rank at most $n$ if
-and only if  there exists a PSR $\psrA$ with $n$ states satisfying
-$f_{\psrA} = f$ \cite{CarlylePaz71,Fliess74}.
-%
-This result is the basis of recently developed spectral learning algorithms for
-PSRs \cite{bootspsr}, which we review in Sec.~\ref{sec:learning}.
+\subsection{A Generic Coding Function}
 
-Instead of looking at the full Hankel matrix, algorithms usually work with finite
-sub-blocks of this matrix.
+%Here we provide a dynamic programming algorithm which can serve as $\kappa$ for any M-PSR. Given a query string Q, and a set of transition sequences $\Sigma'$, the algorithm minimizes the number of sequences used in the partition $\kappa(Q)$. In other words, the algorithm minimizes $|\kappa(Q)|$ over all possible encodings of Q. For the single observation case, the algorithm is equivalent to the coin change problem.
 %
-A convenient way to specify such blocks is to give the ``names'' to the rows and
-columns.
-%
-Specifically, given a finite set of prefixes $\Ps \subset \Sstar$ and a finite
-set of suffixes $\Ss \subset \Sstar$, the pair $\Bs = (\Ps,\Ss)$ is
-a \emph{basis} defining the sub-block $\H_\Bs \in \R^{\Ps \times \Ss}$ of
-$\H_f$, whose entries are given by $\H_\Bs(u,v) = \H_f(u,v)$.
-% for every $u \in
-%\Ps$ and $v \in \Ss$.
-%
-Note that every sub-block built in this way satisfies $\rank(\H_\Bs) \leq
-\rank(\H_f)$; when equality is attained, the basis $\Bs$ is
-\emph{complete}.
+%For a given string Q, the algorithm inductively computes the optimal string encoding for the prefix Q[:i]. It does so by minimizing over all $s \in \Sigma'$ which terminate at the index i of Q. We provide the full pseudo code for the encoding function in the appendix.
 
-Sometimes it is also convenient to look at one-step shifts of the finite
-Hankel matrices.
-%
-Let $\H \in \R^{\Ps \times \Ss}$ be a finite sub-block of
-$\H_f$ specified by a basis $\Bs = (\Ps,\Ss)$.
-%
-Then, for every symbol $\sigma \in \Sigma$, we define the sub-block $\H_\sigma \in
-\R^{\Ps \times \Ss}$ whose entries are given by $\H_\sigma(u,v) = \H_f(u,\sigma
-v)$.
-%
-For a fixed basis, we also consider the vectors $\mat{h}_{\Ss}
-\in \R^{\Ss}$ with entries given by $\mat{h}_{\Ss}(v) = \H_f(\lambda,v)$
-for every $v \in \Ss$, and $\mat{h}_{\Ps} \in \R^{\Ps}$ with $\mat{h}_{\Ps}(u) =
-\H_f(u,\lambda)$.
+Given $\Sigma$ and $\Sigma'$, a generic coding function $\kappa : \sstar \to {\Sigma'}^\star$ can be obtained by minimising the coding length $|\kappa(x)|$ of every string $x \in \sstar$. More formally, we consider the coding $\kappa$ given by
+\begin{equation*}
+\kappa(x) = \argmin_{y \in {\Sigma'}^\star, \; \partial(y) = x} |y| \enspace.
+\end{equation*}
+Note that for the single observation case this is equivalent to the coin change problem. This has advantage of minimising the number of operators $\A_\sigma$ that will need to be multiplied to compute the value of the M-PSR on a string $x$. 
+At the same time, operators expressing long transition sequences capture intermediate contributions of weak states throughout the transition sequence. This is true even if one chooses to learn a smaller model which excludes these weak states. Thus, with this choice of $\kappa$, or for any $\kappa$ which compactly expresses transition sequences, one should be able to get much better performance with reduced models.
 
-The Hankel matrix $\H_f$ is tightly related to the \emph{system dynamics matrix}
-(SDM) of the stochastic process described by $f$~\cite{singh04}, but while the entries of the
-Hankel matrix represent \emph{joint} probabilities over prefixes and suffixes,
-the corresponding entry in the SDM is the \emph{conditional} probability of
-observing a suffix given the prefix.
-
-
-The algorithm takes as input $\Sigma$ and a basis
-$\Bs$ in $\Sstar$, uses them to estimate the corresponding Hankel matrices, and
-then recovers a PSR by performing singular value decomposition and
-linear algebra operations on these matrices.
+%At the same time, if the operators $\A_\sigma$ are noisy due to the learning process, multiplying a small number of them should also be beneficial in terms of minimising the amount of error accumulated in these multiplications.
 %
-%Estimating Hankel matrices containing probabilities of observed trajectories
-%from a sample is straightforward, and the details of the spectral learning
-%algorithm are reviewed below.
-%
-Although the method works almost out-of-the-box, in practice the results tend
-to be sensitive to the choice of basis.
-%
-Thus, after briefly recapitulating how the spectral learning algorithm proceeds,
-we will devote the rest of the section to describe a procedure for building a
-basis which is tailored for the case of learning option duration models.
+\lucas{Changed explanation of performance increase from fewer matrices. Let me know what you think. I don't think noise is the right term here because even for very large amounts of data (basically the true model), M-PSRs do far better than PSRs. I think it has more to do with the projection intuition.}
 
-%\textbf{TODO: Now we should talk in here about Hankel matrices}
-
-Suppose the basis $\Bs$ is fixed and the desired number of states $n$ is given.
-%
-Suppose that a set of sampled trajectories was used to estimate the
-Hankel matrices $\H, \H_\sigma \in \R^{\Ps \times \Ss}$ and vectors
-$\mat{h}_{\Ps} \in \R^{\Ps}$, $\mat{h}_{\Ss} \in \R^{\Ss}$ defined in
-Sec.~\ref{sec:hankel}.
-%
-The algorithm starts by taking the truncated SVD $\mat{U}_n \mat{D}_n
-\mat{V}_n^\top$ of $\H$, where $\mat{D}_n \in \R^{n \times n}$ contains the first
-$n$ singular values of $\H$, and $\mat{U}_n \in \R^{\Ps \times n}$ and $\mat{V}_n
-\in \R^{\Ss \times n}$ contain the first left and right singular vectors
-respectively.
-%
-Finally, we compute the transition operators of a PSR as $\A_\sigma =
-\mat{D}_n^{-1} \mat{U}_n^\top \H_\sigma \mat{V}_n$, and the initial and final
-weights as $\aone^\top = \mat{h}_{\Ss}^\top \mat{V}_n$ and $\ainf =
-\mat{D}_n^{-1} \mat{U}_n^\top \mat{h}_{\Ps}$.
-%
-This yields a PSR with $n$ states. It was proved in~\cite{bootspsr} this
-algorithm is statistically consistent: if the population Hankel matrices are
-known and the basis $\Bs$ is complete, then the learned PSR is equivalent to the
-one that generated the data.
-
-
-\borja{END OF COPY-PASTE}
-
-\subsection{A General Coding Function}
-
-Here we provide a dynamic programming algorithm which can serve as $\kappa$ for any M-PSR. Given a query string Q, and a set of transition sequences $\Sigma'$, the algorithm minimizes the number of sequences used in the partition $\kappa(Q)$. In other words, the algorithm minimizes $|\kappa(Q)|$ over all possible encodings of Q. For the single observation case, the algorithm is equivalent to the coin change problem.
-
-For a given string Q, the algorithm inductively computes the optimal string encoding for the prefix Q[:i]. It does so by minimizing over all $s \in \Sigma'$ which terminate at the index i of Q. We provide the full pseudo code for the encoding function in the appendix.
+The optimization problem above can be solved by dynamic programming. To do so, one inductively computes the optimal string encoding for the prefix $x_1 \cdots x_i$ for all $1 \leq i \leq |x|$. This can be obtained by minimising over all $\sigma \in \Sigma'$ which terminate at the index $i$ of $x$. We provide the full pseudo-code for this encoding function in the appendix.
 
 \subsection{Greedy Selection of Multi-Step Observations}
 
-\textbf{Obs}: The set of observation sequences in one's dataset 
+%\textbf{Obs}: The set of observation sequences in one's dataset 
+%
+%\textbf{SubObs} :All possible substrings of sequences in Obs
+%
+%\textbf{NumOps}: The number of operators included in $\Sigma'$. I.e NumOps =  $|\Sigma'|$
+%
+%Here we present a greedy heuristic which learns the multi-step transition sequences $\Sigma'$ from observation data. Having a $\Sigma'$ which reflects the types of observations produces by one's system will allow of short encodings when coupled with the encoding algorithm. In practice, this greedy algorithm will pick substrings from one's observation set which are long, frequent, and diverse. From an intuitive standpoint, one can view structure in observation sequences as relating to the level of entropy in the system's observations. 
+%
+%As a preprocessing step, we reduce the space of substrings textbf{subObs} to the k most frequent substrings in our observation set. Here frequent means the number of observation sequences a given substring $s \in subObs$ occurs in. 
+%
+%The algorithm evaluates substrings by how much they reduce the number of transition operators used on the observation data. The algorithm adds the best operator iteratively with $\Sigma'$ initialized to $\Sigma$. More formally at the i'th iteration of the algorithm the following is computed: $min_{sub \in SubObs} \sum\nolimits_{obs \in Obs}|\kappa(obs,\Sigma'_i \cup sub)|$. The algorithm terminates after $NumOps-|\Sigma\|$ iterations. Again, we provide the pseudo code for selecting $\Sigma'$ in the appendix.
 
-\textbf{SubObs} :All possible substrings of sequences in Obs
+Here we present a greedy algorithm that selects which multi-step transition sequences need to be added to $\Sigma'$ given a collection of observed trajectories. Having a $\Sigma'$ which reflects the type of observations produced the target system will promote short encodings when coupled with the coding function described above. In practice, this greedy algorithm will pick substrings appearing in the training data which are long, frequent, and diverse. From an intuitive standpoint, one can view structure in observation sequences as relating to the level of entropy in the distribution over multi-step observations produced by the system. 
 
-\textbf{NumOps}: The number of operators included in $\Sigma'$. I.e NumOps =  $|\Sigma'|$
+Here we provide a general description of how the algorithm works, and a detailed pseudo-code implementation is presented in the supplementary material. The algorithm starts by finding all possible substrings in $\sstar$ that appear in the training dataset. As a preprocessing step, and for computational reasons, this is constrained to contain only the the $M$ most frequent substrings, where $M$ is a parameter chosen by the user. Here the frequency is measured by number of observed trajectories that contain a given substring.
 
-Here we present a greedy heuristic which learns the multi-step transition sequences $\Sigma'$ from observation data. Having a $\Sigma'$ which reflects the types of observations produces by one's system will allow of short encodings when coupled with the encoding algorithm. In practice, this greedy algorithm will pick substrings from one's observation set which are long, frequent, and diverse. From an intuitive standpoint, one can view structure in observation sequences as relating to the level of entropy in the system's observations. 
+The construction of $\Sigma'$ is initialised by $\Sigma$ and a new multi-step symbol is added at each phase. A phase starts by evaluating each substrings in terms of how much they would reduce the number of transition operators used to encode the whole training set using $\kappa$ if added to $\Sigma'$. The algorithm then adds to $\Sigma'$ a multi-step symbol corresponding to the best substring, i.e.\ the one that would reduce the most the whole coding cost. More formally, at the $i$th iteration of the algorithm the following is computed:
+\begin{equation*}
+\argmin_{u \in \mathrm{sub}_M} \sum_{x \in \mathrm{train}} |\kappa_{\Sigma_i' \cup \{u\}}(x)| \enspace,
+\end{equation*}
+where $\Sigma_i'$ is the set of multi-step observations at the beginning of phase $i$ and we use $\kappa_{\Sigma'}$ to denote the encoding function with respect to a given set of multi-step observations for clarity. The algorithm terminates after $\Sigma'$ reaches a predetermined size.
 
-As a preprocessing step, we reduce the space of substrings textbf{subObs} to the k most frequent substrings in our observation set. Here frequent means the number of observation sequences a given substring $s \in subObs$ occurs in. 
-
-The algorithm evaluates substrings by how much they reduce the number of transition operators used on the observation data. The algorithm adds the best operator iteratively with $\Sigma'$ initialized to $\Sigma$. More formally at the i'th iteration of the algorithm the following is computed: $min_{sub \in SubObs} \sum\nolimits_{obs \in Obs}|\kappa(obs,\Sigma'_i \cup sub)|$. The algorithm terminates after $NumOps-|\Sigma\|$ iterations. Again, we provide the pseudo code for selecting $\Sigma'$ in the appendix.
-
-\lucas{Here I write $\kappa(Q,\Sigma'$). Could we make kappa a function of $\Sigma'$ in the first section?}
+\borja{TODO: Introduce the $\mathrm{train}$ and $\mathrm{sub}_M$ notation used above before, in the text}

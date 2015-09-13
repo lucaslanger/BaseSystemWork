@@ -8,7 +8,7 @@
 
 \textbf{minE}: A map from indices i of Q to $|bestE[i]|$
 
-\textbf{opEnd}: A map from indices i of Q to the set of strings in $\Sigma'$: $\{x \in \Sigma' s.t Q[i-x.length:i] == x\}$
+\textbf{opEnd}: A map from indices i of Q to the set of strings in $\Sigma'$: $\{x \in \Sigma' s.t Q[i-|x|:i] == x\}$
 
 
 \begin{figure}[ht!]
@@ -33,10 +33,10 @@
 
 \State $prevBestE \gets null$
 \For{each obs in Obs}
-	\State $prevBestEncoding[obs] \gets len(obs)$
+	\State $prevBestEncoding[obs] \gets |obs|$
 \EndFor
 
-\State $i\gets 0$\
+\State $i \gets 0$\
 \While{$i<numOperators$}
 	\State $bestOp \gets null$
 	\State $bestImp \gets null$
@@ -72,32 +72,32 @@
 \begin{algorithmic}[1]
 \Procedure{DPEncode}{}
 
-\State $bestE[] \gets new String[len(Q)+1]$
-\State $minE[] \gets new Int[len(Q)+1]$
-\State $opEnd[] \gets new String[len(Q)+1][]$
+\State $bestE[] \gets String[|Q|+1]$
+\State $minE[] \gets Int[|Q|+1]$
+\State $opEnd[] \gets String[|Q|+1][]$
 
 \State $bestEnd[0] = Q[0]$
 \State $minE[0] = 0$
 
-\For{i in range[1,Q.length]}
-	 \State $opEnd[i] \gets \{s \in \Sigma', Q[i-len(s):i] == s\}$
+\For{i in $[1,|Q|]$}
+	 \State $opEnd[i] \gets \{s \in \Sigma', Q[i-|s|:i] == s\}$
 \EndFor
 
-\For{i in range[1,Q.length]}
+\For{i in $[1,|Q|]$}
 	\State $bestOp \gets null$
 	\State $m \gets null$ 
 	\For{$s \in opEnd[i]$}
-		\State $tempInt \gets minE[i-len(s)] + 1$
+		\State $tempInt \gets minE[i-|s|] + 1$
 		\If{$m == null$ or $tempInt < m$}
 			\State $m \gets temp$ 
 			\State $bestOp \gets s$
 		\EndIf
 	\EndFor
 	\State $minE[i+1] \gets m$
-	\State $bestE[i+1] \gets bestE[i-len(bestOp)] + bestOp$
+	\State $bestE[i+1] \gets bestE[i-|bestOp|] + bestOp$
 \EndFor
 
-\State \Return $bestE[len(Q)]$
+\State \Return $bestE[|Q|]$
 
 \EndProcedure
 \end{algorithmic}
