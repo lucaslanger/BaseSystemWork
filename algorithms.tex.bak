@@ -134,10 +134,12 @@ Given $\Sigma$ and $\Sigma'$, a generic coding function $\kappa : \sstar \to {\S
 \end{equation*}
 Note that for the single observation case this is equivalent to the coin change problem. This has advantage of minimising the number of operators $\A_\sigma$ that will need to be multiplied to compute the value of the M-PSR on a string $x$. 
 
-At the same time, operators expressing long transition sequences capture intermediate contributions of all states during the transition sequence regardless of the number of states included in the M-PSR. This is a significant advantage if one works with a smaller number of states. To demonstrate this intuition we contrast the computation of the operators with a PSR with an M-PSR.
+At the same time, operators expressing long transition sequences capture intermediate contributions of all states during the transition sequence, regardless of the number of states included in the M-PSR. This is a significant advantage if one works with a smaller number of states. To demonstrate this intuition we contrast the computation of the operators with a PSR with an M-PSR.
 
+INSERT COMPUTATION:
+\lucas{Need to decide on a notation for truncated transition operators}
 \begin{equation*}
-
+f(x) = ...
 \end{equation*}
 
 %At the same time, if the operators $\A_\sigma$ are noisy due to the learning process, multiplying a small number of them should also be beneficial in terms of minimising the amount of error accumulated in these multiplications.
