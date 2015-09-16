@@ -1,10 +1,89 @@
 \begin{thebibliography}{}
 
+\bibitem[\protect\citeauthoryear{Bacon, Balle, and Precup}{2015}]{ODM}
+Bacon, P.-L.; Balle, B.; and Precup, D.
+\newblock 2015.
+\newblock Learning and planning with timing information in {M}arkov {D}ecision
+  {P}rocesses.
+\newblock In {\em UAI}.
+
+\bibitem[\protect\citeauthoryear{Bailly, Habrard, and Denis}{2010}]{bailly10}
+Bailly, R.; Habrard, A.; and Denis, F.
+\newblock 2010.
+\newblock A spectral approach for probabilistic grammatical inference on trees.
+\newblock In {\em ALT}.
+
+\bibitem[\protect\citeauthoryear{Balle, Quattoni, and Carreras}{2012}]{icml12}
+Balle, B.; Quattoni, A.; and Carreras, X.
+\newblock 2012.
+\newblock Local loss optimization in operator models: A new insight into
+  spectral learning.
+\newblock {\em International Conference on Machine Learning (ICML)}.
+
 \bibitem[\protect\citeauthoryear{Boots, Siddiqi, and Gordon}{2011}]{bootspsr}
 Boots, B.; Siddiqi, S.; and Gordon, G.
 \newblock 2011.
 \newblock Closing the learning planning loop with predictive state
   representations.
 \newblock {\em International Journal of Robotic Research}.
+
+\bibitem[\protect\citeauthoryear{Carlyle and Paz}{1971}]{CarlylePaz71}
+Carlyle, J.~W., and Paz, A.
+\newblock 1971.
+\newblock Realizations by stochastic finite automata.
+\newblock {\em Journal of Computer Systems Science}.
+
+\bibitem[\protect\citeauthoryear{Droste and Vogler}{2009}]{wfahandbook}
+Droste, M.~Kuich, W., and Vogler, H.
+\newblock 2009.
+\newblock {\em Handbook of weighted automata}.
+\newblock Springer.
+
+\bibitem[\protect\citeauthoryear{Fliess}{1974}]{Fliess74}
+Fliess, M.
+\newblock 1974.
+\newblock Matrices de {H}ankel.
+\newblock {\em Journal de Math\'ematiques Pures et Appliqu\'ees}.
+
+\bibitem[\protect\citeauthoryear{Hamilton, Fard, and
+  Pineau}{2013}]{Hamilton2013}
+Hamilton, W.~L.; Fard, M.~M.; and Pineau, J.
+\newblock 2013.
+\newblock Modelling sparse dynamical systems with compressed predictive state
+  representations.
+\newblock In {\em ICML}.
+
+\bibitem[\protect\citeauthoryear{Hsu, Kakade, and Zhang}{2009}]{hsu09}
+Hsu, D.; Kakade, S.; and Zhang, T.
+\newblock 2009.
+\newblock A spectral algorithm for learning {H}idden {M}arkov {M}odels.
+\newblock In {\em COLT}.
+
+\bibitem[\protect\citeauthoryear{Littman, Sutton, and Singh}{2001}]{littmanpsr}
+Littman, M.~L.; Sutton, R.~S.; and Singh, S.
+\newblock 2001.
+\newblock Predictive representations of state.
+\newblock {\em Neural Information Processing Systems Conference (NIPS)}.
+
+\bibitem[\protect\citeauthoryear{Rosencrantz, Gordon, and
+  Thrun}{2004}]{rosencrantz04}
+Rosencrantz, M.; Gordon, G.; and Thrun, S.
+\newblock 2004.
+\newblock Learning low dimensional predictive representations.
+\newblock In {\em ICML}.
+
+\bibitem[\protect\citeauthoryear{Singh, James, and Rudary}{2004}]{singh04}
+Singh, S.; James, M.~R.; and Rudary, M.~R.
+\newblock 2004.
+\newblock Predictive state representations: A new theory for modeling dynamical
+  systems.
+\newblock In {\em UAI}.
+
+\bibitem[\protect\citeauthoryear{Sutton, Precup, and Singh}{1999}]{sutton99}
+Sutton, R.~S.; Precup, D.; and Singh, S.
+\newblock 1999.
+\newblock {Between MDPs and semi-MDPs: A framework for temporal abstraction in
+  reinforcement learning}.
+\newblock {\em Artificial Intelligence}.
 
 \end{thebibliography}

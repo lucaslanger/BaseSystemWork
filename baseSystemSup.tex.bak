@@ -51,7 +51,7 @@ The pseudocode is given in Algorithm 1, using the following notation:
 
 \textbf{minEncoding}: A map from indices i of the query string x to $|bestEncoding[i]|$
 
-\textbf{opsEnding}: A map from indices i of x to the set of strings in $\Sigma'$: $\{s \in \Sigma',$ $x[i-|s|:i] == s\}$
+\textbf{opsEnding}: A map from indices i of x to the set of strings in $\Sigma'$: $\{s \in \Sigma' s.t Q[i-|s|:i] == s\}$
 
 \algnewcommand\algorithmicinput{\textbf{INPUT:}}
 \algnewcommand\algorithmicoutput{\textbf{OUTPUT:}}
@@ -81,10 +81,10 @@ The pseudocode is given in Algorithm 1, using the following notation:
 
 \For{i in $[1,|x|]$}
 	\State $bestOp \gets null$
-	\State $m \gets 0$ 
+	\State $m \gets null$ 
 	\For{$s \in opEnd[i]$}
 		\State $t \gets minE[i-|s|] + 1$
-		\If{$bestOp == null$ or $t < m$}
+		\If{$m == null$ or $t < m$}
 			\State $m \gets t$ 
 			\State $bestOp \gets s$
 		\EndIf

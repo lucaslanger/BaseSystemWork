@@ -48,17 +48,12 @@ Recent years have seen the development of efficient and provably correct spectra
 \input{mpsr}
 \input{algorithms}
 \input{experiments}
+\input{discussion}
 
-\section{Discussion}
+%\section{Acknowledgments}
+%Funding and friends...
 
-In all the experiments conducted one aspect dominates: M-PSRs offer significantly better predictive performance for reduced model sizes than PSRs. In addition, Data-Driven PSRs offer improvement over generic M-PSRs by learning transition operators specific to the environment. Although not covered in experiments M-PSRs also offer a computational advantage for queries as they use far fewer matrices. This can be of large significance in applications where queries are done online such as for planning.
-
-\lucas{The above is roughly what we had discussed for the discussion, should reword and add more if we have room}
-
-\section{Acknowledgments}
-Funding and friends...
-
-\input{appendix}
+%\input{appendix}
 
 \bibliographystyle{aaai}
 \bibliography{references}
