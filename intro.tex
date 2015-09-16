@@ -1,13 +1,10 @@
 \section{Introduction}
 
-Learning models of partially observable dynamical systems is very important in practice --- several alternatives...
+Learning models of partially observable dynamical systems arises in many practical applications, including robotics, medical monitoring, market analysis etc.  An approach which has interesting theoretical properties is that of predictive state representations (PSRs)~\cite{littmanpsr,singh04,rosencrantz04}, in which the model consists off a set of predictions about the future evolution of the system, conditioned on past outcomes.  We focus on linear PSRs, in which predictions for any future trajectories can be obtained as a linear combination of a finite set of ``core" predictions. In recent work, a variety of spectral learning algorithms have been proposed for tackling this problem, e.g.~\cite{bootspsr,Hamilton2013}. Such algorithms are appealing in part because of their strong theoretical properties, such as statistical consistency and learning efficiency~\cite{hsu09,bailly10}.  Unfortunately, the uptake of these algorithms in practice is still limited.  This is due partly to the fact that existing spectral learning algorithms are general-purpose, and do not explicitly try to leverage regularities in the data.  However, applications often have certain types of structure which, if taken into account, can facilitate more efficient learning.  
 
-General algorithms are not designed to exploit frequen patterns/structure in sequences of observations to speed-up learning --- but in practice with large observations and highly structured environments this might be necessary to achieve decent results
-
-We propose a new model of predictive state representation for environments with discrete observations: the multi-step PSR (M-PSR)
-
-We show how the standard spectral learning for PSR extends to M-PSR
-
-Then we present a data-driven algorithm for selecting a particular M-PSR from data sampled from a structured partially observable environment
-
-We evaluate the performance of our algorithms in an extensive collection of synthetic environments and conclude that...
+In this paper, we focus on a specific type of structure which arises frequently in dynamical systems: behaviour which takes place at different time scales.  In signal processing, this is often the type of structure leveraged to provide efficient algorithms.  Similar efficiencies can be obtained by using multiple time scales in planning and reinforcement learning~\cite{sutton99}.
+We propose a new model of PSRs for environments with discrete observations, which we call the multi-step PSR (M-PSR).  Intuitively, an M-PSR includes not only single-step observations, but also contiguous sequences of observations.  This allows capturing structure occurring over a larger time scale. 
+We show how the standard spectral learning for PSRs extends to M-PSRs, and
+ present a data-driven algorithm for selecting a particular M-PSR based on sampled data.
+ Empirical results in simulated navigation tasks show that M-PSRs improve the quality and speed of learning, compared to classical PSRs, over a range of environment sizes, number of observation symbols and amounts of data.
+ 
