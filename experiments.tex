@@ -14,9 +14,9 @@ In this section, we assess the performance of PSRs and different kinds of M-PSRs
 In all the experiments, an agent is positioned in  a partially observable environment and  navigates  stochastically based on a transition function $\delta:S \times S\rightarrow[0,1]$. An observation symbol is produced on every transition. When the agent exits, we record the concatenation of the symbols produced, which represents the observation sequence for the completed trajectory.  We perform experiments in two environments: a Double Loop maze and a Pacman-style environment. These are both depicted in the supplementary material.
 
 
-For the Base M-PSR (i.e., the timing models), we construct the empirical Hankel matrix by taking $P,S = \{a^i, \forall i<=n\}$, where $n$ is an application-dependent parameter. For Double Loop environments we set $n = 150$, while for the Pacman domain, $n = 600$. For these choices of $n$, we verify that as the amount of data increases, the learned PSR with the true model size converges to the true model. For the Base M-PSR, we set $b=2,K=8$, so that the longest string in $\Sigma'$ is $a^{256}$.
+For the Base M-PSR (i.e., the timing models), we construct the empirical Hankel matrix by taking $\Ps, \Ss = \{a^i, \forall i \leq n\}$, where $n$ is an application-dependent parameter. For Double Loop environments we set $n = 150$, while for the Pacman domain, $n = 600$. For these choices of $n$, we verify that as the amount of data increases, the learned PSR with the true model size converges to the true model. For the Base M-PSR, we set $b=2, K=8$, so that the longest string in $\Sigma'$ is $a^{256}$.
 
-For the tasks with multiple observations, a slightly more complex approach is required to choose $P$ and $S$. For the prefixes $P$, we select the $k$ most frequent prefixes from our observation set. For the suffixes $S$, we take all suffixes that occur in $P$. We also require prefix completeness. That is, if $p'$ is a prefix of $p \in P$, then $p' \in P$. This heuristic for constructing empirical Hankel matrices was given in previous work~\cite{icml12}. For the Base M-PSR, we take $K=8$ and $B=2$ for both symbols $\Sigma=\{g,b\}$, where $g$ stands for green and $b$ for blue. For the Tree M-PSR, we set $L=7$ for a total of 128 operators, a far larger limit  than for the other M-PSRs. 
+For the tasks with multiple observations, a slightly more complex approach is required to choose $\Ps$ and $\Ss$. For the prefixes $\Ps$, we select the $k$ most frequent prefixes from our observation set. For the suffixes $\Ss$, we take all suffixes that occur in $\Ps$. We also require prefix completeness. That is, if $p'$ is a prefix of $p \in \Ps$, then $p' \in \Ps$. This heuristic for constructing empirical Hankel matrices was given in previous work~\cite{icml12}. For the Base M-PSR, we take $K=8$ and $B=2$ for both symbols $\Sigma=\{g,b\}$, where $g$ stands for green and $b$ for blue. For the Tree M-PSR, we set $L=7$ for a total of 128 operators, a far larger limit  than for the other M-PSRs. 
 
 %\lucas{Borja's heuristics for choosing P,S need citation and explanation}
 
@@ -24,17 +24,17 @@ For the tasks with multiple observations, a slightly more complex approach is re
 
 To measure the performance of a PSR/M-PSR we use the following norm:
 \begin{equation*}
-||f - \hat{f}|| = \sqrt{\sum_{x \in observations}(f(x) - \hat{f(x)})^2}
+\|f - \hat{f}\|_2 = \sqrt{\sum_{x \in \Sstar}(f(x) - \hat{f}(x))^2} \enspace,
 \end{equation*}
 where $f$ denotes the true probability distribution over observations and $\hat{f}$ denotes the function associated with the learned M-PSR/PSR. In our environments, $f$ can be computed exactly, as we have access to the underlying HMMs.
 
-Since the set of observations $\Sigma^{\star}$ is infinite, we compute approximations to this error norm by fixing a set of strings $T$ and summing over it. For the Base M-PSR (timing) case, we take $T = \{a^i, \forall i<=C\}$ with $C=600$. Importantly, $C$ has to be  large enough, such that $\sum_{i=0}^{C}f(a^i)>0.99$. For the multiple observation case, we take all possible strings that can be produced from the prefixes and suffixes present in our dataset: $T = \{ps, \forall p \in P, \forall s \in S\} $
+Since the set of observations $\Sigma^{\star}$ is infinite, we compute approximations to this error norm by fixing a set of strings $T$ and summing over it. For the Base M-PSR (timing) case, we take $T = \{a^i, \forall i \leq C\}$ with $C=600$. Importantly, $C$ has to be  large enough, such that $\sum_{i=0}^{C} f(a^i)>0.99$. For the multiple observation case, we take all possible strings that can be produced from the prefixes and suffixes present in our dataset: $T = \{ps, \forall p \in \Ps, \forall s \in \Ss\} $
 
 %\lucas{Need citation for bound on norm2 error}
 
 \subsection{Double Loop Timing}
 
-We start by considering the Double Loop environment, and the task of learning timing models. The length of a loop is the number of states in the loop. A trajectory begins with the agent starting at the intersection of the two loops. Here, the agent has a 50\% probability of entering either loop. At intermediate states, the agent moves to the next state in the loop with probability $1-P$ or remains in its current state with probability $P$. Exit states are located halfway into each loop. The agent leaves the environment at exit states with 50\% probability. This means that if loop lengths are $l_1=64$ and $l_2=16$, we observations will come in the form of $n_1*l_1+n_2*l_2+(1-\alpha)*l1_/2 + \alpha*l2/2$, with $\alpha=1$ representing an exit through loop1 and $\alpha=0$ an exit through loop2.
+We start by considering the Double Loop environment, and the task of learning timing models. The length of a loop is the number of states in the loop. A trajectory begins with the agent starting at the intersection of the two loops. Here, the agent has a 50\% probability of entering either loop. At intermediate states, the agent moves to the next state in the loop with probability $1-P$ or remains in its current state with probability $P$. Exit states are located halfway into each loop. The agent leaves the environment at exit states with 50\% probability. This means that if loop lengths are $l_1=64$ and $l_2=16$, we observations will come in the form of $n_1 l_1 + n_2 l_2 + (1-\alpha) l_1 / 2 + \alpha l_2 / 2$, with $\alpha=1$ representing an exit through loop 1 and $\alpha=0$ an exit through loop 2.
 
 %\subsection{Number of Trajectories}
 
@@ -43,7 +43,7 @@ varying the self-transition probability $P$, in order to to simulate noise in th
 
 
 
-In Figure~\ref{fig-numops}, we illustrate how varying the number of multi-step transition operators affects performance for the 64-16 double loop. IAs expected, a higher number of operators improves performance, but the effect tapers off  at about 20 operators. Here the most important operators seem to be: $\{a,a^{8},a^{24},a^{32},a^{72}\}$ which are closely tied to the environment's periodic structure.
+In Figure~\ref{fig-numops}, we illustrate how varying the number of multi-step transition operators affects performance for the 64-16 double loop. As expected, a higher number of operators improves performance, but the effect tapers off  at about 20 operators. Here the most important operators seem to be: $\{a,a^{8},a^{24},a^{32},a^{72}\}$ which are closely tied to the environment's periodic structure.
 
 \begin{figure}[ht!]
 \centering
@@ -104,11 +104,12 @@ In Figures~\ref{fig-pachigh},\ref{fig-pacsf1} and \ref{fig-pacsf5} we vary the s
 \subsection{Multiple Observations: Coloured Loops}
 
 We now move to the multiple observation case. We construct a Double Loop environment where observations in the first loop are all is green, with the length of the loop being $l_1=27$, and the second loop is blue, with length $l_2=17$. We fix the length of each trajectory at 
-$(l_1 + l_2)*3$
+$3 (l_1 + l_2)$
 
 We build empirical estimates for the Hankel matrix as follows:
 \begin{equation*}
- f(x)=\dfrac{count([s \in Obs, s=x])}{count([s \in Obs, |s| \geq x])}
+%f(x)=\dfrac{count([s \in Obs, s=x])}{count([s \in Obs, |s| \geq x])} 
+f(x) = \frac{|\mathrm{train} \cap x \sstar |}{|\mathrm{train} \cap \Sigma^{\geq |x|}|} \enspace.
 \end{equation*}  
 This means that the PSRs will compute the probability of $x$ occurring as a prefix.
 

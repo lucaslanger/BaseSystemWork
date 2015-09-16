@@ -86,4 +86,10 @@ Sutton, R.~S.; Precup, D.; and Singh, S.
   reinforcement learning}.
 \newblock {\em Artificial Intelligence}.
 
+\bibitem[\protect\citeauthoryear{Wolfe and Singh}{2006}]{wolfe06}
+Wolfe, B., and Singh, S.
+\newblock 2006.
+\newblock Predictive state representations with options.
+\newblock {\em International Conference on Machine Learning (ICML)}.
+
 \end{thebibliography}
