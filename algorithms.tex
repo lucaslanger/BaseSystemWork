@@ -144,6 +144,12 @@ Note that for the single observation case, this is equivalent to the optimal coi
 
 The optimization problem above can be solved by dynamic programming. To do so, one inductively computes the optimal string encoding for the prefix $x_1 \cdots x_i$ for all $1 \leq i \leq |x|$. This can be obtained by minimizing over all $\sigma \in \Sigma'$ which terminate at the index $i$ of $x$. We provide the full pseudo-code for this encoding function in the first section of the appendix.
 
+\subsection{State Update}
+
+When using traditional PSRs in online environments, one typically updates the state vector (weighting on states) when a new observation is added. This eliminates repeatedly transforming the initial state over the observation history when making predictions. Conveniently, the dynamic programming algorithm for minimizing the length of encodings provides a natural way to do state updates for M-PSRs. To do so we cache state vectors from the past along with their encoding length. When new observations are read, we determine the minimal encoding for the extended observation string in the same way as was done in the dynamic programming algorithm in the section above. Because this minimization is over the valid sequences in $\Sigma'$ (valid meaning that the sequence is a suffix of the observation history), one needs to cache at most $\max_{s \in \Sigma'} |s|$ states vectors. 
+
+
+
 \subsection{Greedy Selection of Multi-Step Observations}
 
 %\textbf{Obs}: The set of observation sequences in one's dataset 
