@@ -129,9 +129,14 @@ This algorithm yields an M-PSR with $n$ states. It was proved in~\cite{bootspsr}
 %For a given string Q, the algorithm inductively computes the optimal string encoding for the prefix Q[:i]. It does so by minimizing over all $s \in \Sigma'$ which terminate at the index i of Q. We provide the full pseudo code for the encoding function in the appendix.
 
 Given $\Sigma$ and $\Sigma'$, a generic coding function $\kappa : \sstar \to {\Sigma'}^\star$ can be obtained by minimizing the coding length $|\kappa(x)|$ of every string $x \in \sstar$. More formally, we consider the coding $\kappa$ given by
+
 \begin{equation*}
-\kappa(x) = \argmin_{y \in {\Sigma'}^\star, \; \partial(y) = x} |y| \enspace.
+\kappa(x) ~= \argmin_{ z \in \Sigma', \; x=yz, \; |y|<|x|} |\kappa(y)(z)| \enspace 
 \end{equation*}
+
+%\begin{equation*}
+%\kappa(x) = \argmin_{y \in {\Sigma'}^\star, \; \partial(y) %= x} |y| \enspace.
+%\end{equation*}
 Note that for the single observation case, this is equivalent to the optimal coin change problem, which is a textbook example of dynamic programming. This has advantage of minimizing the number of operators $\A_\sigma$ that will need to be multiplied to compute the value of the M-PSR on a string $x$. At the same time, operators expressing long transition sequences capture intermediate contributions of all states even if chooses to use a small model. Intuitively, this should provide M-PSRs with better performance for smaller models.  
 
 %\lucas{Feel free to edit the last two sentences}
@@ -146,7 +151,7 @@ The optimization problem above can be solved by dynamic programming. To do so, o
 
 \subsection{State Update}
 
-When using traditional PSRs in online environments, one typically updates the state vector (weighting on states) when a new observation is added. This eliminates repeatedly transforming the initial state over the observation history when making predictions. Conveniently, the dynamic programming algorithm for minimizing the length of encodings provides a natural way to do state updates for M-PSRs. To do so we cache state vectors from the past along with their encoding length. When new observations are read, we determine the minimal encoding for the extended observation string in the same way as was done in the dynamic programming algorithm in the section above. Because this minimization is over the valid sequences in Sigma’ which terminate the observation string, one needs to cache at most max|seq| states. 
+When using traditional PSRs in online environments, one typically updates the state vector (weighting on states) as new observations are read. This eliminates repeatedly transforming the initial state over the history of observations $h$ when making predictions. Conveniently, the dynamic programming algorithm for minimizing the length of string encodings provides a natural way to do state updates for M-PSRs. To do so, we cache state vectors from the past along with their encoding length. When a new observation $\sigma$ is read, we determine the minimal encoding for the extended observation string $h \sigma$ with the same recurrence relation as the previous section. Because this minimization is over $\{s \in \Sigma'| ~ \exists p \in \Sigma^* ~ ps= h\sigma\}$, one needs to cache at most $\max_{s \in \Sigma'} |s|$ state vectors and encoding lengths. 
 
 
 
