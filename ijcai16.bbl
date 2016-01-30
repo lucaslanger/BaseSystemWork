@@ -84,4 +84,11 @@ B.~Wolfe and S.~Singh.
 \newblock Predictive state representations with options.
 \newblock {\em International Conference on Machine Learning (ICML)}, 2006.
 
+\bibitem[\protect\citeauthoryear{Zhang \bgroup \em et al.\egroup
+  }{2015}]{zhang2015spectral}
+Chicheng Zhang, Jimin Song, Kamalika Chaudhuri, and Kevin Chen.
+\newblock Spectral learning of large structured hmms for comparative
+  epigenomics.
+\newblock {\em Neural Information Processing Systems (NIPS)}, 2015.
+
 \end{thebibliography}

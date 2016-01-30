@@ -3,44 +3,44 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: ijcai16.aux
 The style file: named.bst
 Database file #1: references.bib
-You've used 14 entries,
+You've used 15 entries,
             2439 wiz_defined-function locations,
-            620 strings with 6285 characters,
-and the built_in function-call counts, 4651 in all, are:
-= -- 447
-> -- 226
+            624 strings with 6487 characters,
+and the built_in function-call counts, 5009 in all, are:
+= -- 482
+> -- 249
 < -- 0
-+ -- 76
-- -- 74
-* -- 335
-:= -- 797
-add.period$ -- 42
-call.type$ -- 14
-change.case$ -- 92
-chr.to.int$ -- 14
-cite$ -- 14
-duplicate$ -- 208
-empty$ -- 352
-format.name$ -- 91
-if$ -- 939
++ -- 84
+- -- 82
+* -- 364
+:= -- 861
+add.period$ -- 45
+call.type$ -- 15
+change.case$ -- 100
+chr.to.int$ -- 15
+cite$ -- 15
+duplicate$ -- 221
+empty$ -- 372
+format.name$ -- 100
+if$ -- 1008
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 15
-newline$ -- 73
-num.names$ -- 42
-pop$ -- 107
+missing$ -- 16
+newline$ -- 78
+num.names$ -- 45
+pop$ -- 114
 preamble$ -- 1
-purify$ -- 107
+purify$ -- 116
 quote$ -- 0
-skip$ -- 155
+skip$ -- 166
 stack$ -- 0
-substring$ -- 72
-swap$ -- 34
+substring$ -- 77
+swap$ -- 36
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 108
+type$ -- 116
 warning$ -- 0
-while$ -- 28
-width$ -- 17
-write$ -- 170
+while$ -- 30
+width$ -- 18
+write$ -- 182

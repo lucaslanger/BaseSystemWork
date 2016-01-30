@@ -1,7 +1,7 @@
 BIBTEX = bibtex
 PDFLATEX = pdflatex
 
-FILE_BASE = baseSystem
+FILE_BASE = ijcai16
 FILE_TEX = $(FILE_BASE).tex
 
 all: pdfbib
