@@ -1,15 +1,15 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2015.4.16)  30 JAN 2016 18:12
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.1.29)  31 JAN 2016 20:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **ijcai16.tex
 (./ijcai16.tex
-LaTeX2e <2014/05/01>
-Babel <3.9l> and hyphenation patterns for 79 languages loaded.
-(/usr/local/texlive/2014/texmf-dist/tex/latex/base/article.cls
-Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
-(/usr/local/texlive/2014/texmf-dist/tex/latex/base/size10.clo
-File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+LaTeX2e <2011/06/27>
+Babel <3.9h> and hyphenation patterns for 78 languages loaded.
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
 \c@section=\count80
@@ -26,34 +26,34 @@ File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 Conference Style, version of 6 September 1995 (revised Nov 2010)
 \titlebox=\skip43
 Named Citation Style, version of 30 November 1994
-) (/usr/local/texlive/2014/texmf-dist/tex/latex/psnfss/times.sty
+) (/usr/share/texlive/texmf-dist/tex/latex/psnfss/times.sty
 Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
 )
-(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/graphicx.sty
-Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/keyval.sty
-Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks14
 )
-(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2014/10/28 v1.0p Standard LaTeX Graphics (DPC,SPQR)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 
-(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/trig.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/graphics.cfg
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
 File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
 )
 Package graphics Info: Driver file: pdftex.def on input line 91.
 
-(/usr/local/texlive/2014/texmf-dist/tex/latex/pdftex-def/pdftex.def
+(/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
 
-(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
 Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
 )
-(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
 Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
 \Gread@gobject=\count87
@@ -61,24 +61,24 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 \Gin@req@height=\dimen103
 \Gin@req@width=\dimen104
 )
-(/usr/local/texlive/2014/texmf-dist/tex/latex/amsmath/amsmath.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2013/01/14 v2.14 AMS math features
 \@mathmargin=\skip44
 
 For additional information on amsmath, use the `?' option.
-(/usr/local/texlive/2014/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
 Package: amstext 2000/06/29 v2.01
 
-(/usr/local/texlive/2014/texmf-dist/tex/latex/amsmath/amsgen.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0
 \@emptytoks=\toks15
 \ex@=\dimen105
 ))
-(/usr/local/texlive/2014/texmf-dist/tex/latex/amsmath/amsbsy.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d
 \pmbraise@=\dimen106
 )
-(/usr/local/texlive/2014/texmf-dist/tex/latex/amsmath/amsopn.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 1999/12/14 v2.01 operator names
 )
 \inf@bad=\count88
@@ -119,18 +119,18 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
 LaTeX Info: Redefining \[ on input line 2665.
 LaTeX Info: Redefining \] on input line 2666.
 )
-(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 
-(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
-(/usr/local/texlive/2014/texmf-dist/tex/latex/amscls/amsthm.sty
-Package: amsthm 2009/07/02 v2.20.1
+(/usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty
+Package: amsthm 2004/08/06 v2.20
 \thm@style=\toks20
 \thm@bodyfont=\toks21
 \thm@headfont=\toks22
@@ -141,11 +141,11 @@ Package: amsthm 2009/07/02 v2.20.1
 \thm@headsep=\skip49
 \dth@everypar=\toks25
 )
-(/usr/local/texlive/2014/texmf-dist/tex/latex/algorithms/algorithm.sty
+(/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithm.sty
 Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
 nment
 
-(/usr/local/texlive/2014/texmf-dist/tex/latex/float/float.sty
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count100
 \float@exts=\toks26
@@ -153,16 +153,16 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@everytoks=\toks27
 \@floatcapt=\box29
 )
-(/usr/local/texlive/2014/texmf-dist/tex/latex/base/ifthen.sty
-Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 )
 \@float@every@algorithm=\toks28
 \c@algorithm=\count101
 )
-(/usr/local/texlive/2014/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
+(/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
 Package: algpseudocode 
 
-(/usr/local/texlive/2014/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
+(/usr/share/texlive/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
 Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
 
 Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
@@ -195,10 +195,10 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 23.
 LaTeX Font Info:    ... okay on input line 23.
 LaTeX Font Info:    Try loading font information for OT1+ptm on input line 23.
 
-(/usr/local/texlive/2014/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
-(/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii
+(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count109
 \scratchdimen=\dimen114
@@ -211,15 +211,15 @@ File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 \MPnumerator=\count113
 \makeMPintoPDFobject=\count114
 \everyMPtoPDFconversion=\toks30
-) (/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
 
-(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
 Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
 )
-(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
 Package ifpdf Info: pdfTeX in PDF mode is detected.
 )
@@ -228,22 +228,22 @@ Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
 )
-(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
-(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/grfext.sty
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
 Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
 
-(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
 Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
 ))
-(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
 
-(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
 Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
 
-(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
 Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
 Package etexcmds Info: Could not find \expanded.
 (etexcmds)             That can mean that you are not using pdfTeX 1.50 or
@@ -255,7 +255,7 @@ Package grfext Info: Graphics extension search list:
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 452.
 
-(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
@@ -263,12 +263,12 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 25.
 LaTeX Font Info:    Try loading font information for U+msa on input line 25.
 
-(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsa.fd
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 25.
 
-(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsb.fd
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
@@ -285,7 +285,7 @@ Overfull \hbox (7.49129pt too wide) detected at line 6
 [][]\OML/cmm/m/it/10 :
  []
 
-[1{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
 
@@ -294,8 +294,8 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 35.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 39.
-)
-(./algorithms.tex [2] [3]) (./experiments.tex
+) (./algorithms.tex
+[2] [3]) (./experiments.tex
 <uCOREPICS/DL/64-16-100.png, id=28, 578.16pt x 433.62pt>
 File: uCOREPICS/DL/64-16-100.png Graphic file (type png)
 
@@ -332,35 +332,38 @@ Overfull \hbox (6.2596pt too wide) in paragraph at lines 6--7
 File: uCOREPICS/DL/NumOpsTiming.png Graphic file (type png)
 
 <use uCOREPICS/DL/NumOpsTiming.png>
-Package pdftex.def Info: uCOREPICS/DL/NumOpsTiming.png used on input line 50.
+Package pdftex.def Info: uCOREPICS/DL/NumOpsTiming.png used on input line 45.
 (pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
- [4 <./uCOREPICS/DL/NumOpsTiming.png>]
-<uCOREPICS/DL/47-27-10000.png, id=38, 578.16pt x 433.62pt>
+
+<uCOREPICS/DL/47-27-10000.png, id=34, 578.16pt x 433.62pt>
 File: uCOREPICS/DL/47-27-10000.png Graphic file (type png)
 
 <use uCOREPICS/DL/47-27-10000.png>
-Package pdftex.def Info: uCOREPICS/DL/47-27-10000.png used on input line 63.
+Package pdftex.def Info: uCOREPICS/DL/47-27-10000.png used on input line 55.
 (pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
 
+Underfull \vbox (badness 1215) has occurred while \output is active []
+
+ [4 <./uCOREPICS/DL/NumOpsTiming.png>]
 <uCOREPICS/Pacman/Pacman500.png, id=39, 578.16pt x 433.62pt>
 File: uCOREPICS/Pacman/Pacman500.png Graphic file (type png)
 
 <use uCOREPICS/Pacman/Pacman500.png>
-Package pdftex.def Info: uCOREPICS/Pacman/Pacman500.png used on input line 77.
+Package pdftex.def Info: uCOREPICS/Pacman/Pacman500.png used on input line 66.
 (pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
 
 <uCOREPICS/Pacman/Pacman10k.png, id=40, 578.16pt x 433.62pt>
 File: uCOREPICS/Pacman/Pacman10k.png Graphic file (type png)
 
 <use uCOREPICS/Pacman/Pacman10k.png>
-Package pdftex.def Info: uCOREPICS/Pacman/Pacman10k.png used on input line 85.
+Package pdftex.def Info: uCOREPICS/Pacman/Pacman10k.png used on input line 74.
 (pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
 
 <uCOREPICS/Pacman/PacmanSF=1.png, id=41, 578.16pt x 433.62pt>
 File: uCOREPICS/Pacman/PacmanSF=1.png Graphic file (type png)
 
 <use uCOREPICS/Pacman/PacmanSF=1.png>
-Package pdftex.def Info: uCOREPICS/Pacman/PacmanSF=1.png used on input line 94.
+Package pdftex.def Info: uCOREPICS/Pacman/PacmanSF=1.png used on input line 83.
 
 (pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
 
@@ -368,8 +371,8 @@ Package pdftex.def Info: uCOREPICS/Pacman/PacmanSF=1.png used on input line 94.
 File: uCOREPICS/Pacman/PacmanSF=5.png Graphic file (type png)
 
 <use uCOREPICS/Pacman/PacmanSF=5.png>
-Package pdftex.def Info: uCOREPICS/Pacman/PacmanSF=5.png used on input line 100
-.
+Package pdftex.def Info: uCOREPICS/Pacman/PacmanSF=5.png used on input line 89.
+
 (pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
 
 
@@ -378,31 +381,33 @@ LaTeX Warning: Text page 5 contains only floats.
 [5 <./uCOREPICS/DL/64-16-100.png> <./uCOREPICS/DL/64-16-10000.png> <./uCOREPICS
 /DL/NoiseInfo.png> <./uCOREPICS/DL/basePows.png> <./uCOREPICS/DL/47-27-10000.pn
 g> <./uCOREPICS/Pacman/Pacman500.png> <./uCOREPICS/Pacman/Pacman10k.png> <./uCO
-REPICS/Pacman/PacmanSF=1.png>]
-<uCOREPICS/DLMO/MO_50.png, id=54, 578.16pt x 433.62pt>
+REPICS/Pacman/PacmanSF=1.png> <./uCOREPICS/Pacman/PacmanSF=5.png>]
+<uCOREPICS/DLMO/MO_50.png, id=55, 578.16pt x 433.62pt>
 File: uCOREPICS/DLMO/MO_50.png Graphic file (type png)
 
 <use uCOREPICS/DLMO/MO_50.png>
-Package pdftex.def Info: uCOREPICS/DLMO/MO_50.png used on input line 122.
+Package pdftex.def Info: uCOREPICS/DLMO/MO_50.png used on input line 111.
 (pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
 
-<uCOREPICS/DLMO/MO_1k.png, id=55, 578.16pt x 433.62pt>
+<uCOREPICS/DLMO/MO_1k.png, id=56, 578.16pt x 433.62pt>
 File: uCOREPICS/DLMO/MO_1k.png Graphic file (type png)
 
 <use uCOREPICS/DLMO/MO_1k.png>
-Package pdftex.def Info: uCOREPICS/DLMO/MO_1k.png used on input line 128.
+Package pdftex.def Info: uCOREPICS/DLMO/MO_1k.png used on input line 117.
 (pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
 
-<uCOREPICS/DLMO/numOpComparison.png, id=56, 578.16pt x 433.62pt>
+<uCOREPICS/DLMO/numOpComparison.png, id=57, 578.16pt x 433.62pt>
 File: uCOREPICS/DLMO/numOpComparison.png Graphic file (type png)
 
 <use uCOREPICS/DLMO/numOpComparison.png>
 Package pdftex.def Info: uCOREPICS/DLMO/numOpComparison.png used on input line 
-138.
+127.
 (pdftex.def)             Requested size: 170.71652pt x 128.03589pt.
-) (./discussion.tex [6 <./uCOREPICS/Pacman/PacmanSF=5.png> <./uCOREPICS/DLMO/MO
-_50.png> <./uCOREPICS/DLMO/MO_1k.png> <./uCOREPICS/DLMO/numOpComparison.png>]) 
-(./ijcai16.bbl
+) (./discussion.tex) (./ijcai16.bbl
+Underfull \vbox (badness 2012) has occurred while \output is active []
+
+ [6 <./uCOREPICS/DLMO/MO_50.png> <./uCOREPICS/DLMO/MO_1k.png> <./uCOREPICS/DLMO
+/numOpComparison.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 35--38
 []\OT1/ptm/m/n/10 W. Droste, M. Kuich and
  []
@@ -422,37 +427,34 @@ Underfull \hbox (badness 1460) in paragraph at lines 70--74
 []\OT1/ptm/m/n/10 S. Singh, M. R. James, and M. R.
  []
 
-) [7] (./ijcai16.aux)
+) [7
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+] (./ijcai16.aux) ) 
 Here is how much of TeX's memory you used:
- 3319 strings out of 493109
- 44945 string characters out of 6135004
- 115528 words of memory out of 5000000
- 6675 multiletter control sequences out of 15000+600000
+ 3319 strings out of 493304
+ 44511 string characters out of 6139871
+ 114979 words of memory out of 5000000
+ 6669 multiletter control sequences out of 15000+600000
  24035 words of font info for 64 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
+ 957 hyphenation exceptions out of 8191
  38i,10n,26p,1295b,249s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
-exlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/te
-xlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/tex
-live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texl
-ive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texliv
-e/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/
-2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/
-2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/20
-14/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2014/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2014/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2014/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2014/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2014/texmf-di
-st/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2014/texm
-f-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2014/texmf-dist/fon
-ts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/u
-rw/times/utmri8a.pfb>
-Output written on ijcai16.pdf (7 pages, 784833 bytes).
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}<
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5
+.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/urw/times/utmri8a.pfb>
+Output written on ijcai16.pdf (7 pages, 782770 bytes).
 PDF statistics:
  120 PDF objects out of 1000 (max. 8388607)
  68 compressed objects within 1 object stream
