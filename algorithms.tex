@@ -173,19 +173,19 @@ We use the following notation:
 
 \State $bestEncoding[] \gets String[|x|+1]$
 \State $minEncoding[] \gets Int[|x|+1]$
-\State $opsEnding[] \gets String[|x|+1][]$
+\State $opsEnding[] \gets String[|x|+1]$
 
 \State $bestEncoding[0] = x[0]$
 \State $minEncoding[0] = 0$
 
 \For{i in $[1,|x|]$}
-	 \State $ospEnding[i] \gets \{s \in \Sigma', x[i-|s|:i] = s\}$
+	 \State $opsEnding[i] \gets \{s \in \Sigma', x[i-|s|:i] = s\}$
 \EndFor
 
 \For{i in $[1,|x|]$}
 	\State $bestOp \gets null$
 	\State $m \gets 0$ 
-	\For{$s \in opEnd[i]$}
+	\For{$s \in opsEnding[i]$}
 		\State $t \gets minE[i-|s|] + 1$
 		\If{$bestOp = null$ or $t < m$}
 			\State $m \gets t$ 
