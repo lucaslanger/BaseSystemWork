@@ -244,7 +244,7 @@ When using classical PSR in online environments one typically updates the state 
 	\For{each s $\in Sub_M$ }
 		\State $c \gets 0$
 		\For{each obs in Train}
-			\State $c \gets c+DPEncode(obs, \Sigma \cup s)-bestEncoding[obs]$
+			\State $c \gets c+DPEncode(obs, \Sigma' \cup s)-bestEncoding[obs]$
 		\EndFor
 		
 		\If{$c<m$}
