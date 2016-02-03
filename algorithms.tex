@@ -1,12 +1,12 @@
 \section{Learning Algorithm for M-PSR}
 
-This section describes a learning algorithm for M-PSR combining standard spectral techniques~\cite{bootspsr} with a greedy algorithm for building an extended set of symbols $\Sigma'$ containing frequent patterns of observations.
+This section describes a learning algorithm for M-PSR combining standard spectral techniques~\cite{bootspsr} with a algorithm for building an extended set of symbols $\Sigma'$ containing frequent patterns of observations.
 
 \subsection{Spectral Learning Algorithm}
 
 We start by extending the spectral learning algorithm to M-PSR under the assumption that $\kappa$ and $\Sigma'$ are known. In this case, the learning procedure only needs to recover the operators $\A_\sigma$ for all $\sigma \in \Sigma'$, and the initial and final weights $\aone, \ainf$. We first recall some basic notation about Hankel matrices~\cite{CarlylePaz71,Fliess74}, and then proceed to describe the learning algorithm. To simplify the description of the learning algorithm we assume that the function $f : \sstar \to \R$ associated with the target M-PSR can be evaluated for every string. In practice these are unknown, but can be effectively estimated from data because they correspond to probabilities of observations. 
 
-Given $f : \sstar \to \R$, we will use its \emph{Hankel matrix} representation $\H_f \in \R^{\sstar \times \sstar}$, which is an infinite matrix with rows and columns are indexed by strings in $\sstar$ and whose entries satisfy $\H_f(u,v) = f(u v)$. To efficiently work with this matrix, we only consider finite sub-blocks indexed by a finite set of prefixes $\Ps \subset \sstar$ and suffixes $\Ss \subset \sstar$. Both $\Ps$ and $\Ss$ are input parameters given to the algorithm; see \cite{icml12} for a discussion on how to choose these in practice. The pair $\Bs = (\Ps,\Ss)$ is called a basis, and it determines a sub-block $\H_\Bs \in \R^{\Ps \times \Ss}$ of $\H_f$ with entries given by $\H_\Bs(u,v) = \H_f(u,v)$ for all $u \in \Ps$ and $v \in \Ss$. For a fixed basis, we also consider the vectors $\mat{h}_{\Ss} \in \R^{\Ss}$ with entries given by $\mat{h}_{\Ss}(v) = \H_f(\epsilon,v)$ for every $v \in \Ss$, and $\mat{h}_{\Ps} \in \R^{\Ps}$ with $\mat{h}_{\Ps}(u) = \H_f(u,\epsilon)$.
+Given $f : \sstar \to \R$, we will use its \emph{Hankel matrix} representation $\H_f \in \R^{\sstar \times \sstar}$, which is an infinite matrix with rows and columns indexed by strings in $\sstar$ and whose entries satisfy $\H_f(u,v) = f(u v)$. To efficiently work with this matrix, we only consider finite sub-blocks indexed by a finite set of prefixes $\Ps \subset \sstar$ and suffixes $\Ss \subset \sstar$. Both $\Ps$ and $\Ss$ are input parameters given to the algorithm; see \cite{icml12} for a discussion on how to choose these in practice. The pair $\Bs = (\Ps,\Ss)$ is called a basis, and it determines a sub-block $\H_\Bs \in \R^{\Ps \times \Ss}$ of $\H_f$ with entries given by $\H_\Bs(u,v) = \H_f(u,v)$ for all $u \in \Ps$ and $v \in \Ss$. For a fixed basis, we also consider the vectors $\mat{h}_{\Ss} \in \R^{\Ss}$ with entries given by $\mat{h}_{\Ss}(v) = \H_f(\epsilon,v)$ for every $v \in \Ss$, and $\mat{h}_{\Ps} \in \R^{\Ps}$ with $\mat{h}_{\Ps}(u) = \H_f(u,\epsilon)$.
 
 Note that the definitions above only depend on $\Sigma$. In order to recover operators $\A_\sigma$ for all $\sigma \in \Sigma'$ we need to consider multi-step shifts of the finite Hankel matrix $\H_{\Bs}$. In particular, given $\sigma \in \Sigma'$ we define the sub-block $\H_\sigma \in \R^{\Ps \times \Ss}$ whose entries are given by $\H_\sigma(u,v) = f(u \, \sigma \, v)$. This can be interpreted as either using the lift $f(\kappa(u) \, \sigma \, \kappa(v))$ or the decoding $f(u \, \partial(\sigma) \, v)$, but the actual value in the matrix $\H_\sigma$ will be the same.
 
@@ -147,7 +147,61 @@ Note that for the single observation case, this is equivalent to the optimal coi
 %At the same time, if the operators $\A_\sigma$ are noisy due to the learning process, multiplying a small number of them should also be beneficial in terms of minimising the amount of error accumulated in these multiplications.
 %
 
-The optimization problem above can be solved by dynamic programming. To do so, one inductively computes the optimal string encoding for the prefix $x_1 \cdots x_i$ for all $1 \leq i \leq |x|$. This can be obtained by minimizing over all $\sigma \in \Sigma'$ which terminate at the index $i$ of $x$.
+The pseudocode of the algorithm is given in Algorithm 1. It inductively computes the optimal string encoding for the prefix $x_1 \cdots x_i$ for all $1 \leq i \leq |x|$. This can be obtained by minimizing over all $\sigma \in \Sigma'$ which terminate at the index $i$ of $x$.
+We use the following notation:
+
+\textbf{bestEncoding}: A map from indices $i$ of the query string $x$ to the optimal encoding of $x[:i]$.
+
+\textbf{minEncoding}: A map from indices $i$ of the query string $x$ to $|bestEncoding[i]|$
+
+\textbf{opsEnding}: A map from indices $i$ of $x$ to the set of strings in $\Sigma'$: $\{s \in \Sigma',$ $x[i-|s|:i] = s\}$
+
+\algnewcommand\algorithmicinput{\textbf{INPUT:}}
+\algnewcommand\algorithmicoutput{\textbf{OUTPUT:}}
+
+\algnewcommand\INPUT{\item[\algorithmicinput]}
+\algnewcommand\OUTPUT{\item[\algorithmicoutput]}
+
+\begin{algorithm}
+\caption{Encoding Algorithm}
+\label{Encoding Algorithm}
+\begin{algorithmic}[1]
+\INPUT $x$
+\OUTPUT $\kappa(x)$
+
+\Procedure{DPEncode}{}
+
+\State $bestEncoding[] \gets String[|x|+1]$
+\State $minEncoding[] \gets Int[|x|+1]$
+\State $opsEnding[] \gets String[|x|+1][]$
+
+\State $bestEncoding[0] = x[0]$
+\State $minEncoding[0] = 0$
+
+\For{i in $[1,|x|]$}
+	 \State $ospEnding[i] \gets \{s \in \Sigma', x[i-|s|:i] = s\}$
+\EndFor
+
+\For{i in $[1,|x|]$}
+	\State $bestOp \gets null$
+	\State $m \gets 0$ 
+	\For{$s \in opEnd[i]$}
+		\State $t \gets minE[i-|s|] + 1$
+		\If{$bestOp = null$ or $t < m$}
+			\State $m \gets t$ 
+			\State $bestOp \gets s$
+		\EndIf
+	\EndFor
+	\State $minEncoding[i+1] \gets m$
+	\State $bestEncoding[i+1] \gets bestEncoding[i-|bestOp|] + bestOp$
+\EndFor
+
+\State \Return $bestEncoding[|x|]$
+
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
 %We provide the full pseudo-code for this encoding function in the first section of the appendix.
 
 \subsection{State Update}
@@ -168,12 +222,60 @@ When using classical PSR in online environments one typically updates the state 
 %
 %The algorithm evaluates substrings by how much they reduce the number of transition operators used on the observation data. The algorithm adds the best operator iteratively with $\Sigma'$ initialized to $\Sigma$. More formally at the i'th iteration of the algorithm the following is computed: $min_{sub \in SubObs} \sum\nolimits_{obs \in Obs}|\kappa(obs,\Sigma'_i \cup sub)|$. The algorithm terminates after $NumOps-|\Sigma\|$ iterations. Again, we provide the pseudo code for selecting $\Sigma'$ in the appendix.
 
-Selecting multi-step transition sequences to build $\Sigma'$ can be achieved with an adaptive greedy algorithm. A $\Sigma'$ that correctly captures the frequent observations produced by a target environment should promote short encodings when coupled with the coding function $\kappa$ described above. In practice, we want $\Sigma'$ to contain substrings appearing in the training data which are long, frequent, and diverse. From an intuitive standpoint, one can view structure in observation sequences as relating to the level of entropy in the distribution over multi-step observations produced by the system, and thus interpret this approach as a data compression scheme. 
+\begin{algorithm}
+\caption{Base Selection Algorithm}
+\label{Base Selection Algorithm}
+\begin{algorithmic}[1]
+\INPUT $Train$, $Sub_M$
+\OUTPUT $\Sigma'$
 
-In general terms, the algorithm works as follows. In a preprocessing we step we find all possible substrings in $\sstar$ that appear in the training dataset. For computational reasons this can be constrained only to the $M$ most frequent substrings, where $M$ is a parameter chosen by the user. Frequency of occurence is measured by number of training trajectories that contain a given substring. The construction of $\Sigma'$ is then initialised by $\Sigma$ and then proceeds iteratively by adding a new multi-step symbol at each phase. A phase starts by evaluating all substrings in terms of how much reduction in the number of transition operators used to encode the whole training set would be achieved if the symbol was added to $\Sigma'$. The algorithm then adds to $\Sigma'$ the multi-step symbol corresponding to the best substring, i.e.\ the one that would reduce the most the whole coding cost (with respect to $\kappa$). More formally, at the $i$th iteration the algorithm finds:
+\Procedure{Base Selection}{}
+\State $\Sigma' \gets \{s, s \in \sum \}$
+
+\State $bestEncoding \gets null$
+\For{each obs in Train}
+	\State $bestEncoding[obs] \gets |obs|$
+\EndFor
+
+\State $i \gets 0$\
+\While{$i<numOps$}
+	\State $bestOp \gets null$
+	\State $m \gets 0$
+	\For{each s $\in Sub_M$ }
+		\State $c \gets 0$
+		\For{each obs in Train}
+			\State $c \gets c+DPEncode(obs, \Sigma \cup s)-prevBestE(obs)$
+		\EndFor
+		
+		\If{$c<m$}
+			\State $bestOp \gets s$
+			\State $m \gets c$
+		\EndIf
+		
+	\EndFor
+
+	\State $\Sigma' \gets \Sigma' \cup bestOp$
+	\For{each obs in Train}
+		\State $bestEncoding[obs] \gets DPEncode(obs,\Sigma'$) 
+	\EndFor	
+	
+	\State $i \gets i + 1$
+\EndWhile 
+\State \Return $\Sigma'$
+
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+
+Selecting multi-step transition sequences to build $\Sigma'$ can be achieved with an adaptive greedy algorithm, depicted in Algorithm 2. A $\Sigma'$ that correctly captures the frequent observations produced by a target environment should promote short encodings when coupled with the coding function $\kappa$ described above. In practice, we want $\Sigma'$ to contain substrings appearing in the training data which are long, frequent, and diverse. From an intuitive standpoint, one can view structure in observation sequences as relating to the level of entropy in the distribution over multi-step observations produced by the system, and thus interpret this approach as a data compression scheme. 
+
+In general terms, the algorithm works as follows. In a preprocessing step, we find all possible substrings in $\sstar$ that appear in the training dataset. For computational reasons this can be constrained only to the $M$ most frequent substrings, where $M$ is a parameter chosen by the user. Frequency of occurence is measured by number of training trajectories that contain a given substring. The construction of $\Sigma'$ is then initialised by $\Sigma$ and proceeds iteratively by adding a new multi-step symbol at each phase. A phase starts by evaluating all substrings in terms of how much reduction in the number of transition operators used to encode the whole training set would be achieved if the symbol was added to $\Sigma'$. The algorithm then adds to $\Sigma'$ the multi-step symbol corresponding to the best substring, i.e.\ the one that would reduce the most the whole coding cost (with respect to $\kappa$). More formally, at the $i$th iteration the algorithm finds:
 \begin{equation*}
 \argmin_{u \in \mathrm{sub}_M} \sum_{x \in \mathrm{train}} |\kappa_{\Sigma_i' \cup \{u\}}(x)| \enspace,
 \end{equation*}
 where $\mathrm{train}$ is the training set, $\mathrm{sub}_M$ is the set of substrings under consideration of length at most $M$, $\Sigma_i'$ is the set of multi-step observations at the beginning of phase $i$ and we use $\kappa_{\Sigma'}$ to denote the encoding function with respect to a given set of multi-step observations for clarity. The algorithm terminates after $\Sigma'$ reaches a predetermined size.
+
+
 
 %\borja{TODO: Introduce the $\mathrm{train}$ and $\mathrm{sub}_M$ notation used above before, in the text}
