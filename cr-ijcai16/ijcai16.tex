@@ -124,10 +124,11 @@ f_{\psrA}(x_1 \cdots x_t) = \aone^\top \A_{x_1} \cdots \A_{x_t} \ainf = \aone^\t
 %\lucas{Need to add explanation, since interpretation of f(x) can be different. Also using A(k(x)) as a notation for going from encoding to matrix product}
 The value of $f_{\psrA}(x)$ is interpreted as the probability that the system produces the sequence of observations $x = x_1 \cdots x_t$ starting from the initial state specified by $\aone$. Depending on the semantics of the model, this can be a probability that the system generates $x$ and \emph{stops}, or the probability that the system generates $x$ and \emph{continues}.
 %
-Given a partial history $u$ of the evolution of the system the state of a PSR can be updated from $\aone$ to $\alphavec_u = \aone \A_u$. This update allows for conditional queries about future observations. For example, the probability of observing a string $v$ given that we have already observed $u$ is:
-\begin{equation*}
-f_{\psrA,u}(v) = \frac{\alphavec_u \A_v \ainf}{\nu_{\psrA}(u)} \enspace,
-\end{equation*}
+Given a partial history $u$ of the evolution of the system the state of a PSR can be updated from $\aone$ to $\alphavec_u = \aone \A_u$. This update allows for conditional queries about future observations. For example, the probability of observing a string $v$ given that we have already observed $u$ is
+$f_{\psrA,u}(v) = \alphavec_u \A_v \ainf / \nu_{\psrA}(u)$,
+%\begin{equation*}
+%f_{\psrA,u}(v) = \frac{\alphavec_u \A_v \ainf}{\nu_{\psrA}(u)} \enspace,
+%\end{equation*}
 where $\nu_{\psrA}(u)$ is a normalizing constant.
 %to obtain a proper conditional distribution whose expression depends on the actual semantics of the PSR (stop vs. continuation probabilities).
 
@@ -327,11 +328,11 @@ Note that for the single observation case, this is equivalent to the optimal coi
 Algorithm 1 gives pseudocode for computing this function. It inductively computes the optimal string encoding for the prefix $x_1 \cdots x_i$ for all $1 \leq i \leq |x|$. This can be obtained by minimizing over all $\sigma \in \Sigma'$ which terminate at the index $i$ of $x$.
 We use the following notation:
 
-\textbf{bestEncoding}: A map from indices $i$ of the query string $x$ to the optimal encoding of $x[:i]$.
+$bestEnc$: A map from indices $i$ of the query string $x$ to the optimal encoding of $x[:i]$.
 
-\textbf{minEncoding}: A map from indices $i$ of the query string $x$ to $|bestEncoding[i]|$
+$minEnc$: A map from indices $i$ of the query string $x$ to $|bestEncoding[i]|$
 
-\textbf{opsEnding}: A map from indices $i$ of $x$ to the set of strings in $\Sigma'$: $\{s \in \Sigma',$ $x[i-|s|:i] = s\}$
+$opsEnd$: A map from indices $i$ of $x$ to the set of strings in $\Sigma'$: $\{s \in \Sigma',$ $x[i-|s|:i] = s\}$
 
 \algnewcommand\algorithmicinput{\textbf{INPUT:}}
 \algnewcommand\algorithmicoutput{\textbf{OUTPUT:}}
@@ -498,29 +499,38 @@ where $\mathrm{train}$ is the training set, $\mathrm{sub}_M$ is the set of subst
 
 \section{Experiments}\label{sec:exp}
 
-\begin{figure*}[ht!]
-\centering
-\includegraphics[width=44mm]{64-16-100.png}\includegraphics[width=44mm]{64-16-10000.png}\includegraphics[width=44mm]{NoiseInfo.png}\includegraphics[width=44mm]{basePows.png}%
-\vspace*{-4mm}
-\caption{Results for the Double Loop of size 64-16 with (in order) a low amount of data, high amount of data and varying amount of noise (right two panels)\label{fig-double}\vspace*{-4mm}}
-\end{figure*}
-
-In this section, we assess the performance of PSRs and M-PSRs in various environments, with different model sizes, and learned from both large and small datasets. For all the plots, the x-axis is model size of the PSR/M-PSRs and the y-axis is an error measurement of the learned PSR/M-PSRs.
-
-In all the experiments, an agent is positioned in  a partially observable environment and navigates stochastically based on state to state transition probabilities. An observation symbol is produced on every transition. When the agent exits, we record the concatenation of the symbols produced, which represents the observation sequence.  We perform experiments in two environments: a Double Loop maze and a Pacman-style environment, depicted in Figure~\ref{overflow}.
-
 \begin{figure}[t]
 \centering
-\raisebox{-0.5\height}{\includegraphics[width=35mm]{doubleLoopImage.png}}
+\raisebox{-0.5\height}{\includegraphics[width=28mm]{doubleLoopImage.png}}
 %\caption{Double Loop Environment\label{overflow}}
 %\end{figure}
 %
 %\begin{figure}[ht!]
 %\centering
-\raisebox{-0.5\height}{\includegraphics[width=40mm,height=50mm]{graphPacMan.png}}
+\hspace{1em}
+\raisebox{-0.5\height}{\includegraphics[width=45mm]{graphPacMan.png}}
+%\raisebox{-0.5\height}{\includegraphics[width=40mm,height=50mm]{graphPacMan.png}}
 %\vspace*{-4mm}
-\caption{The Double Loop environment (left) and the Pacman Labyrinth (right)\label{overflow}\vspace*{-4mm}}
+\caption{The Double Loop environment (left) and the Pacman Labyrinth (right)\label{fig-overflow}\vspace*{-4mm}}
 \end{figure}
+
+\begin{figure*}[ht!]
+\centering
+\includegraphics[width=44mm]{64-16-100.png}%
+\includegraphics[width=44mm]{64-16-10000.png}%
+\includegraphics[width=44mm]{NoiseInfo.png}%
+%\includegraphics[width=44mm]{basePows.png}%
+\includegraphics[width=44mm]{47-27-10000.png}%
+%\vspace*{-4mm}
+%\caption{High Data Double Loop 47-27\label{fig-dl47}\vspace*{-4mm}}
+\caption{Results for the Double Loop of size 64-16: (1) 100 samples, $p = 0$ (2) 10000 samples, $p = 0$ (3) 10000 samples, $p = 0.2$; and the Double Loop of size 47-27: (4) 100 samples, $p = 0$.
+%effect of exponent in Base M-PSR
+\label{fig-double}\vspace*{-4mm}}
+\end{figure*}
+
+In this section, we assess the performance of PSRs and M-PSRs in various environments, with different model sizes, and learned from both large and small datasets. For all the plots, the x-axis is model size of the PSR/M-PSRs and the y-axis is an error measurement of the learned PSR/M-PSRs.
+
+In all the experiments, an agent is positioned in  a partially observable environment and navigates stochastically based on state to state transition probabilities. An observation symbol is produced on every transition. When the agent exits, we record the concatenation of the symbols produced, which represents the observation sequence.  We perform experiments in two environments: a Double Loop maze and a Pacman-style environment, depicted in Figure~\ref{fig-overflow}.
 
 For the Base M-PSR (i.e., the timing models), we construct the empirical Hankel matrix by taking $\Ps, \Ss = \{\sigma^i, \forall i \leq N\}$, where $N$ is an application-dependent parameter. For Double Loop environments, we set $N = 150$, while for the Pacman domain, $N = 600$. For these choices of $N$, we verify that as the amount of data increases, the learned PSR with the true model size converges to the true model. For the Base M-PSR, we set $b=2, K=8$, so that the longest string in $\Sigma'$ is $\sigma^{256}$.
 
@@ -540,36 +550,21 @@ For the Base M-PSR (timing) case, we take $T = \{\sigma^i : i \leq C\}$ with $C=
 
 We start by considering the Double Loop environment, and the task of learning timing models. The length of a loop is the number of states in the loop. A trajectory begins with the agent at the intersection of the two loops. Here, the agent has a 50\% probability of entering either loop. At intermediate states, the agent moves to the next state in the loop with probability $1-p$ or remains in its current state with probability $p$. Exit states are located halfway into each loop. The agent leaves the environment at exit states with 50\% probability. 
 
-
-\begin{figure}[ht!]
-\centering
-\includegraphics[width=40mm]{NumOpsTiming.png}\vspace*{-4mm}
-\caption{Effect of the number of operators on performance in 64-16 loop\label{fig-numops}\vspace*{-4mm}}
-\end{figure} 
-
-
 %\subsection{Number of Trajectories}
 
-Figure~\ref{fig-double} provides results for the case in which one loop consists of 64 states and the other of 16 states. The leftmost panel presents the results when learning from  100 observation sequences, while the results in the next panel are obtained using 10000 observations. In both cases, the M-PSRs  outperform the simple PSR for small model sizes. The right panels show the effect of 
-varying the self-transition probability $p$, in order to to simulate noise in the environment. The two panels show curves of $p=0.2$ and $p=0$ respectively. We find that the environment with noisy loops is more compressible, that is, one can achieve better performance for low model sizes, but the performance becomes worse as the model size attains the environment's true size. M-PSRs still significantly outperform the standard PSR for reduced model sizes.  The rightmost panel also illustrates the effect of $K$ on the performance of the Base M-PSRs. We note that larger values of $K$ have better performance, up to $K=7$.
-
-\begin{figure}[ht!]
-\centering
-\includegraphics[width=40mm]{47-27-10000.png}\vspace*{-4mm}
-\caption{High Data Double Loop 47-27\label{fig-dl47}\vspace*{-4mm}}
-\end{figure}
+Figure~\ref{fig-double} (1-3) provides results for the case in which one loop consists of 64 states and the other of 16 states. Panel (1) presents the results when learning from  100 observation sequences, while the results in panel (2) are obtained using 10000 observations. In both cases, the M-PSRs outperform the simple PSR for small model sizes. Panel (3) shows the effect of varying the self-transition probability to $p = 0.2$, in order to simulate noise in the environment. We find that the environment with noisy loops is more compressible, that is, one can achieve better performance for low model sizes, but the performance becomes worse as the model size attains the environment's true size. M-PSRs still significantly outperform the standard PSR for reduced model sizes. Panel (2) in Figure~\ref{fig-colnumops} illustrates the effect of $K$ on the performance of the Base M-PSRs. We note that larger values of $K$ have better performance, up to $K=7$.
 
 \begin{figure*}[ht!]
 %
 %\begin{figure}[ht!]
 %\centering
-\includegraphics[width=42mm]{Pacman500.png}
+\includegraphics[width=44mm]{Pacman500.png}%
 %\caption{Low Data Pacman Labyrinth\label{fig-paclow}}
 %\end{figure}
 %
 %
 %\centering
-\includegraphics[width=42mm]{Pacman10k.png}
+\includegraphics[width=44mm]{Pacman10k.png}%
 %\caption{High Data Pacman Labyrinth\label{fig-pachigh}}
 %\end{figure}
 %
@@ -577,43 +572,68 @@ varying the self-transition probability $p$, in order to to simulate noise in th
 %
 %\begin{figure}[ht!]
 %\centering
-\includegraphics[width=42mm]{PacmanSF-1.png}
+\includegraphics[width=44mm]{PacmanSF-1.png}%
 %\caption{Stretch Factor: 1\label{fig-pacsf1}}
 %\end{figure}
 %
 %\begin{figure}[ht!]
 %\centering
-\includegraphics[width=42mm]{PacmanSF-5.png}\vspace*{-4mm}
-\caption{Results for the Pacman environment with (in order from left to right) low amount of data, high amount of data and stretch factor equal to 1 and 5 (right panels)\label{fig-pacsf5}\vspace*{-4mm}}
+\includegraphics[width=44mm]{PacmanSF-5.png}%
+%\vspace*{-4mm}
+\caption{Results for the Pacman environment with (in order from left to right) low amount of data, high amount of data and stretch factor equal to 1 and 5 (right panels)\label{fig-pacsf5}%
+%\vspace*{-4mm}
+}
 \end{figure*}
+
+
+%\begin{figure}[ht!]
+%\centering
+%\includegraphics[width=40mm]{NumOpsTiming.png}\vspace*{-4mm}
+%\caption{Effect of the number of operators on performance in 64-16 loop\label{fig-numops}\vspace*{-4mm}}
+%\end{figure} 
+%
+%\begin{figure}[ht!]
+%\centering
+%%\includegraphics[width=40mm]{47-27-10000.png}\vspace*{-4mm}
+%%\includegraphics[width=44mm]{basePows.png}%
+%%effect of exponent in Base M-PSR
+%\caption{High Data Double Loop 47-27\label{fig-dl47}\vspace*{-4mm}}
+%\end{figure}
+
 
 \begin{figure*}[t!]
 \centering
-\includegraphics[width=42mm]{MO_50.png}
+\includegraphics[width=44mm]{basePows.png}%
+%\includegraphics[width=42mm]{MO_50.png}
 %\caption{Low Data Colored Loops 27-17\label{fig-collow}}
 %\end{figure}
 %
 %\begin{figure}[ht!]
 %\centering
-\includegraphics[width=42mm]{MO_1k.png}
+\includegraphics[width=44mm]{NumOpsTiming.png}%
+\includegraphics[width=44mm]{MO_1k.png}%
 %\caption{High Data Colored Loops 27-17\label{fig-colhigh}}
 %\end{figure}
 %
 %\begin{figure}[ht!]
 %\centering
-\includegraphics[width=42mm]{numOpComparison.png}\vspace*{-4mm}
-\caption{Results for Coloured Double loops 27-17, in low data regime (left), high data regime (middle) and as a function of different numbers of operators (right)\label{fig-colnumops}\vspace*{-4mm}}
+\includegraphics[width=44mm]{numOpComparison.png}%
+%\vspace*{-4mm}
+\caption{(1) Effect of exponent in Base M-PSR (Double Loop 64-16) (2) Effect of the number of operators (Double Loop 64-16) (3) Effect of model size (Colored Double Loop 27-17) (4) Effect of the number of operators (Colored Double Loop 27-17)\label{fig-colnumops}%
+%\vspace*{-4mm}
+}
+%Results for Coloured Double loops 27-17, in low data regime (left), high data regime (middle) and as a function of different numbers of operators (right)
 \end{figure*}
 
-In Figure~\ref{fig-numops}, we illustrate how varying the number of multi-step transition operators affects performance for the 64-16 double loop. As expected, a higher number of operators improves performance, but the effect tapers off at about 20 operators. Here, the most important operators are: $\{\sigma,\sigma^{8},\sigma^{24},\sigma^{32},\sigma^{72}\}$ which are closely tied to the environment's periodic structure.
+In Figure~\ref{fig-colnumops} (2), we illustrate how varying the number of multi-step transition operators affects performance for the 64-16 double loop. As expected, a higher number of operators improves performance, but the effect tapers off at about 20 operators. Here, the most important operators are: $\{\sigma,\sigma^{8},\sigma^{24},\sigma^{32},\sigma^{72}\}$ which are closely tied to the environment's periodic structure.
 
 %\subsection{Loop Lengths}
 
-In Figure~\ref{fig-dl47}, we plot the results of a 47-27 labyrinth.  Here, because of the lengths of the loops, observations will not be as compactly expressed from the Base M-PSR. Again, M-PSRs outperform the standard PSR for reduced model sizes.
+In Figure~\ref{fig-double} (4), we plot the results of a 47-27 labyrinth.  Here, because of the lengths of the loops, observations will not be as compactly expressed from the Base M-PSR. Again, M-PSRs outperform the standard PSR for reduced model sizes.
 
 \subsection{Pacman Labyrinth Timing}
 
-We now turn our attention to the environment on the right of Figure~\ref{overflow}. The weights in the transitions represent the ``length'' of the corridors they represent, and at each state the agent has equal probability of following any corridor starting in that state. To test the effect of the geometry of the environment we add a parameter $sF$ (stretch factor) which is used to multiply the length of the corridors (by adding extra intermediate states). In the left panels of Figure~\ref{fig-pacsf5} we vary the number of observations used for learning. M-PSRs outperform the traditional PSR regardless of the amount of data.  In the right two panels, we vary the stretch factor parameter, while  keeping the size of the dataset fixed. We find that a higher value of $sF$ provides increased improvement of the M-PSR relative to the standard PSR.
+We now turn our attention to the environment on the right of Figure~\ref{fig-overflow}. The weights in the transitions represent the ``length'' of the corridors they represent, and at each state the agent has equal probability of following any corridor starting in that state. To test the effect of the geometry of the environment we add a parameter $sF$ (stretch factor) which is used to multiply the length of the corridors (by adding extra intermediate states). In the left panels of Figure~\ref{fig-pacsf5} we vary the number of observations used for learning. M-PSRs outperform the traditional PSR regardless of the amount of data. In the right two panels, we vary the stretch factor parameter, while  keeping the size of the dataset fixed. We find that a higher value of $sF$ provides increased improvement of the M-PSR relative to the standard PSR.
 
 \subsection{Multiple Observations: Coloured Loops}
 
@@ -626,7 +646,7 @@ f(x) = \frac{|\mathrm{train} \cap x \sstar |}{|\mathrm{train} \cap \Sigma^{\geq 
 \end{equation*}  
 This means that the PSRs will compute the probability of $x$ occurring as a prefix.
 
-As for the timing case, we vary the amount of data used to  learn the PSRS/M-PSRs in the left panels of Figure~\ref{fig-colnumops}, and we find that M-PSRs perform far better, especially the Data-Driven M-PSR. In the right panel we vary the number of multi-step transition operators learned. The important operators learned are $\{g,b,g^{27},b^{17}\}$, which is again very encouraging, as it reflects the structure of this particular environment.
+As for the timing case, we find that M-PSRs perform far better, especially the Data-Driven M-PS. Results are displayed in panel (3) of Figure~\ref{fig-colnumops}. In the panel (4) we vary the number of multi-step transition operators learned. The important operators learned are $\{g,b,g^{27},b^{17}\}$, which is again very encouraging, as it reflects the structure of this particular environment.
 
 \section{Discussion}
 
@@ -634,8 +654,8 @@ We presented an approach to leveraging multiple temporal scales in the behaviour
 
 %Although this was not specifically illustrated in the experiments, M-PSRs offer a computational advantage when performing conditional probability queries as they use far fewer matrices than regular PSRs. This can be very important for online applications, such as in planning environments.
 
-\section*{Acknowledgments}
-SOME FUNDING?
+%\section*{Acknowledgments}
+%SOME FUNDING?
 
 \bibliographystyle{named}
 \bibliography{references}
