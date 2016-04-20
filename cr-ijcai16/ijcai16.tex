@@ -112,25 +112,11 @@ A linear \emph{predictive state representation} (PSR) for an autonomous dynamica
 %f_{\psrA}(x) = 
 f_{\psrA}(x_1 \cdots x_t) = \aone^\top \A_{x_1} \cdots \A_{x_t} \ainf = \aone^\top \A_x \ainf \enspace.
 \end{equation*}
-%The value of $f_{\psrA}(x)$ is interpreted as the probability that the system produces the sequence of observations $x = x_1 \cdots x_t$ starting from the initial state specified by $\aone$. Note that one can also perform conditional queries. 
-%
-%\begin{equation*}
-%f(\sigma^m|\sigma^n) = \dfrac{\alpha_{\lambda} A(\kappa(\sigma^m)) \alpha_\infty}{\alpha_\lambda (I-A_{\sigma})^{-1}  \alpha_{\infty} }
-%\end{equation*}
-%
-%\begin{equation*}
-%f(\sigma_1^{m_1} \sigma_2^{m_2} \cdots \sigma_k^{m_k}|\sigma_1^{n_1} \sigma_2^{n_2} \cdots \sigma_k^{n_k}) = \dfrac{\alpha_{\lambda}  A(\kappa(\sigma_1^{m_1}\sigma_2^{m_2}\cdots\sigma_k^{m_k})) \alpha_{\infty}}{\alpha_\lambda  A(\kappa(\sigma_1^{n_1}\sigma_2^{n_2}\cdots\sigma_k^{n_k}))  \alpha_{\infty} }
-%\end{equation*}
-%\lucas{Need to add explanation, since interpretation of f(x) can be different. Also using A(k(x)) as a notation for going from encoding to matrix product}
 The value of $f_{\psrA}(x)$ is interpreted as the probability that the system produces the sequence of observations $x = x_1 \cdots x_t$ starting from the initial state specified by $\aone$. Depending on the semantics of the model, this can be a probability that the system generates $x$ and \emph{stops}, or the probability that the system generates $x$ and \emph{continues}.
 %
 Given a partial history $u$ of the evolution of the system the state of a PSR can be updated from $\aone$ to $\alphavec_u = \aone \A_u$. This update allows for conditional queries about future observations. For example, the probability of observing a string $v$ given that we have already observed $u$ is
 $f_{\psrA,u}(v) = \alphavec_u \A_v \ainf / \nu_{\psrA}(u)$,
-%\begin{equation*}
-%f_{\psrA,u}(v) = \frac{\alphavec_u \A_v \ainf}{\nu_{\psrA}(u)} \enspace,
-%\end{equation*}
 where $\nu_{\psrA}(u)$ is a normalizing constant.
-%to obtain a proper conditional distribution whose expression depends on the actual semantics of the PSR (stop vs. continuation probabilities).
 
 To define a multi-step PSR, we augment a PSR with two extra objects: a set of \emph{multi-step observations} $\Sigma' \subset \Sigma^+$ containing non-empty strings formed by basic observations, and a \emph{coding function} $\kappa : \Sigma^\star \to {\Sigma'}^{\star}$ that takes a string of basic observations and produces an equivalent string composed of multi-step observations.
 %
@@ -146,37 +132,17 @@ Using this notation, we define a \emph{multi-step PSR} (M-PSR) as a tuple $\psrA
 We now describe several examples of M-PSR, putting special emphasis on models that will be used in our experiments.
 
 \subsubsection{Base M-PSR}
-%A PSR with a single observation $\Sigma = \{a\}$ can be used to measure the time -- i.e.\ number of discrete time-steps -- until a certain event happens \cite{ODM}. In this case, a natural approach to build an M-PSR for timing models is to build a set of multi-step observations containing sequences whose lengths are powers of a fixed base. That is, given an integer $b > 0$, we build the set of multi-step observations as $\Sigma' = \{a,a^b, a^{b^2}, \ldots, a^{b^K}\}$ for some positive $K$. A natural choice of coding map in this case is the one that represents any length $t$ as a number in base $b$, with the difference that the largest power $b$ that is allowed is $b^K$. This corresponds to writing (in a unique way) $t = t_0 b^0 + t_1 b^1 + t_2 b^2 + \cdots + t_K b^K$, where $0 \leq t_k \leq b - 1$ for $0 \leq k \leq K-1$, and $t_K \geq 0$. With this decomposition we obtain the coding map $\kappa(a^t) = (a^{b^K})^{t_K} (a^{b^{K-1}})^{t_{K-1}} \cdots (a^b)^{t_1} (a)^{t_0}$. Note that we choose to write powers of longer multi-step observations first, followed by powers of shorter multi-step observations. For further reference, we will call this model the Base M-PSR.. 
 A PSR with a single observation $\Sigma = \{\sigma\}$ can be used to measure the time -- i.e.\ number of discrete time-steps -- until a certain event happens~\cite{ODM}. In this case, a natural approach to build an M-PSR for timing models is to build a set of multi-step observations containing sequences of $\sigma$'s whose lengths are powers of a fixed base. That is, given an integer $b \geq 2$, the set of multi-step observations is $\Sigma' = \{\sigma,\sigma^b, \sigma^{b^2}, \ldots, \sigma^{b^K}\}$ for some positive $K$. A natural choice of coding map in this case is the one that represents any length $t \geq 0$ as a number in base $b$, with the difference that the largest power $b$ that is allowed is $b^K$. This corresponds to writing (in a unique way) $t = t_0 b^0 + t_1 b^1 + t_2 b^2 + \cdots + t_K b^K$, where $0 \leq t_k \leq b - 1$ for $0 \leq k \leq K$, and $t_K \geq 0$. With this decomposition, the coding map is given by $\kappa(\sigma^t) = (\sigma^{b^K})^{t_K} (\sigma^{b^{K-1}})^{t_{K-1}} \cdots (\sigma^b)^{t_1} (\sigma)^{t_0}$. Note that we choose to write powers of longer multi-step observations first, followed by powers of shorter multi-step observations. For further reference, we will call this model the \emph{Base M-PSR}.
 
-%\lucas{changed K-1 to K}
-%\borja{changed it again: $t_K$ has no upper bound}
-
-%Borja's ending:
-%For further reference, we will call this model the %\emph{base M-PSR} (with base $b$ and largest power $K$) %for modelling distributions over time.
-
-%\borja{Re-wrote the presentation of the base M-PSR a little bit}
-
-%For the multiple observation case one can also use a Base M-PSR. In this case $\Sigma' = \{\sigma_1,\sigma_2,\sigma_1^b,\sigma_2^{b},\sigma_1^{b^2},\sigma_2^{b^2}, ...,\sigma_1^{b^k},\sigma_2^{b^k}\}$. Here $\sigma_1$ and $\sigma_2$ are two observations symbols' this can of course be extended for any finite number of observations. For the encoding map $\kappa$ we first split the string into sequences of a fixed symbol and then use the same encoding as for timing. As an example: $\kappa(\sigma_1^5 \sigma_2^3)=(\sigma_1^{4})(\sigma_1)(\sigma_2^2)(\sigma_2)$.
 Base M-PSRs can also be extended to the case with multiple basic observations, $|\Sigma| > 1$. For example, if there are two observations $\Sigma = \{\sigma_1, \sigma_2\}$, we can take $\Sigma' = \{\sigma_1,\sigma_2,\sigma_1^b,\sigma_2^{b},\sigma_1^{b^2},\sigma_2^{b^2}, ...,\sigma_1^{b^K},\sigma_2^{b^K}\}$. The encoding map $\kappa$ first splits the string into sequences of consecutive repeated symbols and then uses the same encoding as before. For example: $\kappa(\sigma_1^5 \sigma_2^3)=(\sigma_1^2)^2(\sigma_1)(\sigma_2^2)(\sigma_2)$ when using $b = 2$ and $K = 1$.
 
 \subsubsection{Tree M-PSR}
  
-%Another example for the multiple observation case is what we call the Tree M-PSR. For the Tree M-PSR, we set $\Sigma'= \{s \in \Sigma^\star, len(s)<= L\}$. Here L is a parameter of choice, but note that $|\Sigma'|={|\Sigma|}^L$, thus in practice L must remain small as learning operators is computationally intensive. For the decoding map $\kappa$, we first split a string x as $x=x_1x_2...x_nx_f$, where $len(x_i)==L, \forall i<=n$ and $len(x_f)=len(x)-(n \cdot L)$. With this we set $\kappa(x) = \{x_1,x_2,...,x_n,x_f\}$.
 A more flexible generalization of the Base M-PSR for the multiple observation case is what we call the \emph{Tree M-PSR}. In a Tree M-PSR, we set $\Sigma'= \{x \in \Sigma^\star : |x| \leq L\}$, where $L$ is a parameter. The decoding map $\kappa$ first splits a string $x$ as $x=u_1 u_2 \cdots u_m u_f$, where $|u_i| = L$ for $1 \leq i \leq n$ and $|u_f| =|x|-(m \cdot L) < L$, and then sets $\kappa(x) = (u_1)(u_2) \cdots (u_m) (u_f)$. Note that this encoding promotes the use of multi-step symbols corresponding to longer strings more often than those corresponding to shorter strings. Note that we have $|\Sigma'|= O({|\Sigma|}^L)$, so in practice $L$ must remain small if we want the M-PSR to be representable using a small number of parameters. 
-
-%\borja{LUCAS: I see an inconsistency here. If you add to $\Sigma'$ strings of length $1,2,\ldots,L$, then once you're done using the symbols of length $L$ in $\kappa$ you should start using symbols of length $L-1$, and so on. But the text seems to suggest that you jump from symbols of length $L$ to symbols of length $1$, in which case it'd be better to choose $\Sigma' = \Sigma \cup \Sigma^L$ directly. Note I changed some of your notation when making edits.}
-%
-%\lucas{I don't see where the inconsistency is. Maybe i'm missing something but $u_f$ is just the string remainder $|u_f|$ < L, so we don't jump from L to 1. Ex: L = 3 "abcab" -> ("abc")("ab")}
-%\borja{understood, corrected the wording}
 
 \subsubsection{Data-Driven M-PSR}
 
-%The constructions of the M-PSRs above are not dependent on the environment. In our experiments section, we find that performance of M-PSRs depend heavily on how $\Sigma'$ reflects the observations in one's environment. Thus, we develop an algorithm for choosing $\Sigma'$. In addition, we provide a $\kappa$ which one can apply to any M-PSR and which delivers good experimental performance. Together, these yield another type of M-PSR, which we call the Data-Driven M-PSR.
-
 The constructions above have some parameters that can be tuned depending on the particular application, but in general they are not directly dependent on the sequences of observations more frequently produced by the target environment. Intuition suggests that the performance of M-PSRs will depend heavily on how well $\Sigma'$ reflects frequent observation patterns; this is corroborated by the experiments in Section~\ref{sec:exp}. Thus, we develop an algorithm for adaptively choosing $\Sigma'$ from data. For this to work, we need to provide a generic coding function $\kappa$ that can be applied to any M-PSR. This encoding needs to deliver good predictive performance and computationally cheap queries. We call the output of this learning process a \emph{Data-Driven M-PSR}. The details of this approach are described in the next section.
-
-%\lucas{Split one long sentence into two shorter ones}
 
 \section{Learning Algorithm for M-PSR}
 
@@ -194,136 +160,13 @@ Using the notation above we can give a simple description of the learning algori
 %
 This algorithm yields an M-PSR with $n$ states. It was proved in~\cite{bootspsr} that this algorithm is statistically consistent for PSRs (under a mild condition on $\Bs$). A straightforward argument shows that these same guarantees extend to M-PSR.
 
-%\borja{Need to fill this. Probably copy-paste from the ODM paper will do.}
-%
-%\borja{BEGIN OF COPY-PASTE. NEEDS EDITS}
-%
-%A convenient algebraic way to summarize all the information conveyed by $f$ is
-%with its \emph{Hankel matrix}, a bi-infinite matrix $\H_f \in \R^{\Sstar \times \Sstar}$ with rows and
-%columns indexed by strings in $\Sstar$.
-%%
-%Strings indexing rows and columns are interpreted as prefixes and suffixes respectively.
-%The entries in $\H_f$ are given by $\H_f(u,v) = f(u,v)$ for every $u, v
-%\in \Sstar$.
-%
-%% THIS IS FOR THE SDM
-%%$\H_f(u,v) = f_u(v) = f(u v) / f(u)$,
-%%\textbf{TODO (Borja):} Beware the case $f(u) = 0$ !!
-%
-%Although $\H_f$ is an infinite matrix, in some cases it can have finite rank.
-%%
-%In particular, a well-known result states that $\H_f$ has rank at most $n$ if
-%and only if  there exists a PSR $\psrA$ with $n$ states satisfying
-%$f_{\psrA} = f$ \cite{CarlylePaz71,Fliess74}.
-%%
-%This result is the basis of recently developed spectral learning algorithms for
-%PSRs \cite{bootspsr}, which we review in Sec.~\ref{sec:learning}.
-%
-%Instead of looking at the full Hankel matrix, algorithms usually work with finite
-%sub-blocks of this matrix.
-%%
-%A convenient way to specify such blocks is to give the ``names'' to the rows and
-%columns.
-%%
-%Specifically, given a finite set of prefixes $\Ps \subset \Sstar$ and a finite
-%set of suffixes $\Ss \subset \Sstar$, the pair $\Bs = (\Ps,\Ss)$ is
-%a \emph{basis} defining the sub-block $\H_\Bs \in \R^{\Ps \times \Ss}$ of
-%$\H_f$, whose entries are given by $\H_\Bs(u,v) = \H_f(u,v)$.
-%% for every $u \in
-%%\Ps$ and $v \in \Ss$.
-%%
-%Note that every sub-block built in this way satisfies $\rank(\H_\Bs) \leq
-%\rank(\H_f)$; when equality is attained, the basis $\Bs$ is
-%\emph{complete}.
-%
-%Sometimes it is also convenient to look at one-step shifts of the finite
-%Hankel matrices.
-%%
-%Let $\H \in \R^{\Ps \times \Ss}$ be a finite sub-block of
-%$\H_f$ specified by a basis $\Bs = (\Ps,\Ss)$.
-%%
-%Then, for every symbol $\sigma \in \Sigma$, we define the sub-block $\H_\sigma \in
-%\R^{\Ps \times \Ss}$ whose entries are given by $\H_\sigma(u,v) = \H_f(u,\sigma
-%v)$.
-%%
-%For a fixed basis, we also consider the vectors $\mat{h}_{\Ss}
-%\in \R^{\Ss}$ with entries given by $\mat{h}_{\Ss}(v) = \H_f(\lambda,v)$
-%for every $v \in \Ss$, and $\mat{h}_{\Ps} \in \R^{\Ps}$ with $\mat{h}_{\Ps}(u) =
-%\H_f(u,\lambda)$.
-%
-%The Hankel matrix $\H_f$ is tightly related to the \emph{system dynamics matrix}
-%(SDM) of the stochastic process described by $f$~\cite{singh04}, but while the entries of the
-%Hankel matrix represent \emph{joint} probabilities over prefixes and suffixes,
-%the corresponding entry in the SDM is the \emph{conditional} probability of
-%observing a suffix given the prefix.
-%
-%
-%The algorithm takes as input $\Sigma$ and a basis
-%$\Bs$ in $\Sstar$, uses them to estimate the corresponding Hankel matrices, and
-%then recovers a PSR by performing singular value decomposition and
-%linear algebra operations on these matrices.
-%%
-%%Estimating Hankel matrices containing probabilities of observed trajectories
-%%from a sample is straightforward, and the details of the spectral learning
-%%algorithm are reviewed below.
-%%
-%Although the method works almost out-of-the-box, in practice the results tend
-%to be sensitive to the choice of basis.
-%%
-%Thus, after briefly recapitulating how the spectral learning algorithm proceeds,
-%we will devote the rest of the section to describe a procedure for building a
-%basis which is tailored for the case of learning option duration models.
-%
-%%\textbf{TODO: Now we should talk in here about Hankel matrices}
-%
-%Suppose the basis $\Bs$ is fixed and the desired number of states $n$ is given.
-%%
-%Suppose that a set of sampled trajectories was used to estimate the
-%Hankel matrices $\H, \H_\sigma \in \R^{\Ps \times \Ss}$ and vectors
-%$\mat{h}_{\Ps} \in \R^{\Ps}$, $\mat{h}_{\Ss} \in \R^{\Ss}$ defined in
-%Sec.~\ref{sec:hankel}.
-%%
-%The algorithm starts by taking the truncated SVD $\mat{U}_n \mat{D}_n
-%\mat{V}_n^\top$ of $\H$, where $\mat{D}_n \in \R^{n \times n}$ contains the first
-%$n$ singular values of $\H$, and $\mat{U}_n \in \R^{\Ps \times n}$ and $\mat{V}_n
-%\in \R^{\Ss \times n}$ contain the first left and right singular vectors
-%respectively.
-%%
-%Finally, we compute the transition operators of a PSR as $\A_\sigma =
-%\mat{D}_n^{-1} \mat{U}_n^\top \H_\sigma \mat{V}_n$, and the initial and final
-%weights as $\aone^\top = \mat{h}_{\Ss}^\top \mat{V}_n$ and $\ainf =
-%\mat{D}_n^{-1} \mat{U}_n^\top \mat{h}_{\Ps}$.
-%%
-%This yields a PSR with $n$ states. It was proved in~\cite{bootspsr} this
-%algorithm is statistically consistent: if the population Hankel matrices are
-%known and the basis $\Bs$ is complete, then the learned PSR is equivalent to the
-%one that generated the data.
-%
-%
-%\borja{END OF COPY-PASTE}
-
 \subsection{A Generic Coding Function}
-
-%Here we provide a dynamic programming algorithm which can serve as $\kappa$ for any M-PSR. Given a query string Q, and a set of transition sequences $\Sigma'$, the algorithm minimizes the number of sequences used in the partition $\kappa(Q)$. In other words, the algorithm minimizes $|\kappa(Q)|$ over all possible encodings of Q. For the single observation case, the algorithm is equivalent to the coin change problem.
-%
-%For a given string Q, the algorithm inductively computes the optimal string encoding for the prefix Q[:i]. It does so by minimizing over all $s \in \Sigma'$ which terminate at the index i of Q. We provide the full pseudo code for the encoding function in the appendix.
 
 Given $\Sigma$ and $\Sigma'$, a generic coding function $\kappa : \sstar \to {\Sigma'}^\star$ can be obtained by minimizing the coding length $|\kappa(x)|$ of every string $x \in \sstar$. More formally, consider the coding
 \begin{equation*}
 \kappa(x) ~= \argmin_{ z \in \Sigma', \; x=yz, \; |y|<|x|} |\kappa(y)(z)| \enspace 
 \end{equation*}
-%\begin{equation*}
-%\kappa(x) = \argmin_{y \in {\Sigma'}^\star, \; \partial(y) %= x} |y| \enspace.
-%\end{equation*}
 Note that for the single observation case, this is equivalent to the optimal coin change problem, which is a textbook example of dynamic programming. This has the advantage of minimizing the number of operators $\A_\sigma$ that will need to be multiplied to compute the value of the M-PSR on a string $x$. At the same time, operators expressing long transition sequences can capture the contributions of all intermediate states even if the chosen model size is too small to represent every state traversed by a single-observation model. We will see in Section~\ref{sec:exp} that this is one of the reasons why M-PSRs show better performance than PSR for smaller models.
-
-%\lucas{Feel free to edit the last two sentences}
-
-%This is a significant advantage if one works with a smaller number of states. To demonstrate this intuition we contrast the computation of the operators with a PSR with an M-PSR.
-
-
-%At the same time, if the operators $\A_\sigma$ are noisy due to the learning process, multiplying a small number of them should also be beneficial in terms of minimising the amount of error accumulated in these multiplications.
-%
 
 Algorithm 1 gives pseudocode for computing this function. It inductively computes the optimal string encoding for the prefix $x_1 \cdots x_i$ for all $1 \leq i \leq |x|$. This can be obtained by minimizing over all $\sigma \in \Sigma'$ which terminate at the index $i$ of $x$.
 We use the following notation:
@@ -348,10 +191,6 @@ $opsEnd$: A map from indices $i$ of $x$ to the set of strings in $\Sigma'$: $\{s
 \OUTPUT $\kappa(x)$
 
 \Procedure{DPEncode}{}
-
-%\State $bestEnc[] \gets String[|x|+1]$
-%\State $minEnc[] \gets Int[|x|+1]$
-%\State $opsEnd[] \gets String[|x|+1]$
 
 \State $bestEnc[0] = x[0]$
 \State $minEnc[0] = 0$
@@ -380,65 +219,11 @@ $opsEnd$: A map from indices $i$ of $x$ to the set of strings in $\Sigma'$: $\{s
 \end{algorithmic}
 \end{algorithm}
 
-%\begin{algorithm}
-%\caption{Encoding Algorithm}
-%\label{Encoding Algorithm}
-%\begin{algorithmic}[1]
-%\INPUT $x$
-%\OUTPUT $\kappa(x)$
-%
-%\Procedure{DPEncode}{}
-%
-%\State $bestEncoding[] \gets String[|x|+1]$
-%\State $minEncoding[] \gets Int[|x|+1]$
-%\State $opsEnding[] \gets String[|x|+1]$
-%
-%\State $bestEncoding[0] = x[0]$
-%\State $minEncoding[0] = 0$
-%
-%\For{i in $[1,|x|]$}
-%	 \State $opsEnding[i] \gets \{s \in \Sigma', x[i-|s|:i] = s\}$
-%\EndFor
-%
-%\For{i in $[1,|x|]$}
-%	\State $bestOp \gets null$
-%	\State $m \gets 0$ 
-%	\For{$s \in opsEnding[i]$}
-%		\State $t \gets minEncoding[i-|s|] + 1$
-%		\If{$bestOp = null$ or $t < m$}
-%			\State $m \gets t$ 
-%			\State $bestOp \gets s$
-%		\EndIf
-%	\EndFor
-%	\State $minEncoding[i+1] \gets m$
-%	\State $bestEncoding[i+1] \gets bestEncoding[i-|bestOp|] + bestOp$
-%\EndFor
-%
-%\State \Return $bestEncoding[|x|]$
-%
-%\EndProcedure
-%\end{algorithmic}
-%\end{algorithm}
-
-%We provide the full pseudo-code for this encoding function in the first section of the appendix.
-
 \subsection{State Update}
 
 When using classical PSR in online environments one typically updates the state vector every time a new observation is available. This eliminates the need for repeatedly transforming the initial state over the whole history of observations $h$ when making predictions. In the case of M-PSRs, the dynamic programming algorithm for minimizing the length of string encodings provides a naturally convenient way to perform efficient state updates. To do so, we cache past state vectors along with their encoding length. When a new observation $\sigma$ is read, we determine the encoding for the extended observation string $h \sigma$ with the same recurrence relation as in the previous section. Because this minimization is over $\{s \in \Sigma' \,:\, \exists p \in \sstar \, ps= h\sigma\}$, one needs to cache at most $\max_{s \in \Sigma'} |s|$ state vectors and encoding lengths. 
 
 \subsection{Greedy Selection of Multi-Step Observations}
-
-%\textbf{Obs}: The set of observation sequences in one's dataset 
-%
-%\textbf{SubObs} :All possible substrings of sequences in Obs
-%
-%\textbf{NumOps}: The number of operators included in $\Sigma'$. I.e NumOps =  $|\Sigma'|$
-%
-%Here we present a greedy heuristic which learns the multi-step transition sequences $\Sigma'$ from observation data. Having a $\Sigma'$ which reflects the types of observations produces by one's system will allow of short encodings when coupled with the encoding algorithm. In practice, this greedy algorithm will pick substrings from one's observation set which are long, frequent, and diverse. From an intuitive standpoint, one can view structure in observation sequences as relating to the level of entropy in the system's observations. 
-%
-%As a preprocessing step, we reduce the space of substrings textbf{subObs} to the k most frequent substrings in our observation set. Here frequent means the number of observation sequences a given substring $s \in subObs$ occurs in. 
-%
-%The algorithm evaluates substrings by how much they reduce the number of transition operators used on the observation data. The algorithm adds the best operator iteratively with $\Sigma'$ initialized to $\Sigma$. More formally at the i'th iteration of the algorithm the following is computed: $min_{sub \in SubObs} \sum\nolimits_{obs \in Obs}|\kappa(obs,\Sigma'_i \cup sub)|$. The algorithm terminates after $NumOps-|\Sigma\|$ iterations. Again, we provide the pseudo code for selecting $\Sigma'$ in the appendix.
 
 \begin{algorithm}
 \caption{Base Selection Algorithm}
@@ -493,24 +278,13 @@ In general terms, the algorithm works as follows. In a preprocessing step, we fi
 \end{equation*}
 where $\mathrm{train}$ is the training set, $\mathrm{sub}_M$ is the set of substrings under consideration of length at most $M$, $\Sigma_i'$ is the set of multi-step observations at the beginning of phase $i$ and we use $\kappa_{\Sigma'}$ to denote the encoding function with respect to a given set of multi-step observations for clarity. The algorithm terminates after $\Sigma'$ reaches a predetermined size.
 
-
-
-%\borja{TODO: Introduce the $\mathrm{train}$ and $\mathrm{sub}_M$ notation used above before, in the text}
-
 \section{Experiments}\label{sec:exp}
 
 \begin{figure}[t]
 \centering
 \raisebox{-0.5\height}{\includegraphics[width=28mm]{doubleLoopImage.png}}
-%\caption{Double Loop Environment\label{overflow}}
-%\end{figure}
-%
-%\begin{figure}[ht!]
-%\centering
 \hspace{1em}
 \raisebox{-0.5\height}{\includegraphics[width=45mm]{graphPacMan.png}}
-%\raisebox{-0.5\height}{\includegraphics[width=40mm,height=50mm]{graphPacMan.png}}
-%\vspace*{-4mm}
 \caption{The Double Loop environment (left) and the Pacman Labyrinth (right)\label{fig-overflow}\vspace*{-4mm}}
 \end{figure}
 
@@ -519,12 +293,8 @@ where $\mathrm{train}$ is the training set, $\mathrm{sub}_M$ is the set of subst
 \includegraphics[width=44mm]{64-16-100.png}%
 \includegraphics[width=44mm]{64-16-10000.png}%
 \includegraphics[width=44mm]{NoiseInfo.png}%
-%\includegraphics[width=44mm]{basePows.png}%
 \includegraphics[width=44mm]{47-27-10000.png}%
-%\vspace*{-4mm}
-%\caption{High Data Double Loop 47-27\label{fig-dl47}\vspace*{-4mm}}
 \caption{Results for the Double Loop of size 64-16: (1) 100 samples, $p = 0$ (2) 10000 samples, $p = 0$ (3) 10000 samples, $p = 0.2$; and the Double Loop of size 47-27: (4) 100 samples, $p = 0$.
-%effect of exponent in Base M-PSR
 \label{fig-double}\vspace*{-4mm}}
 \end{figure*}
 
@@ -536,98 +306,38 @@ For the Base M-PSR (i.e., the timing models), we construct the empirical Hankel 
 
 For the tasks with multiple observations, a slightly more complex approach is required to choose $\Ps$ and $\Ss$. For the prefixes $\Ps$, we select the $k$ most frequent prefixes from our observation set. For the suffixes $\Ss$, we take all suffixes that occur in $\Ps$. We also require prefix completeness. That is, if $p'$ is a prefix of $p \in \Ps$, then $p' \in \Ps$. This heuristic for constructing empirical Hankel matrices was also used in~\cite{icml12}. For the Base M-PSR, we take $K=8$ and $B=2$ for both symbols $\Sigma=\{g,b\}$, where $g$ stands for green and $b$ for blue. For the Tree M-PSR, we set $L=7$ for a total of 128 operators, a far larger limit  than for the other M-PSRs. 
 
-%\subsection{Measuring Performance}
-
 To measure the performance of our learning algorithms we compute the difference between the values computed by $f$, the true probability distribution over observations, and $\hat{f}$, the function associated with the learned M-PSR/PSR. In our environments, $f$ can be computed exactly, as we have access to the underlying HMMs. Since there are infinitely many strings, we only compute the difference over a fixed set $T \subset \sstar$ which depends on the problem. Thus, reported errors are given by
 \begin{equation*}
 \|f - \hat{f}\|_T = \sqrt{\sum_{x \in T}(f(x) - \hat{f}(x))^2} \enspace.
 \end{equation*}
 For the Base M-PSR (timing) case, we take $T = \{\sigma^i : i \leq C\}$ with $C=600$. Importantly, $C$ has to be  large enough to ensure the error measure provides a measure of accuracy over the most frequent strings, say $\sum_{i=0}^{C} f(\sigma^i)>0.99$. For the multiple observation case, we take all possible strings that can be produced from the prefixes and suffixes in our dataset: $T = \{ps : p \in \Ps, s \in \Ss\}$. In all our experiments we use the same $\Ps$ and $\Ss$ to learn PSR and the different types of M-PSR.
 
-%\lucas{Need citation for bound on norm2 error}
-
 \subsection{Double Loop Timing}
 
 We start by considering the Double Loop environment, and the task of learning timing models. The length of a loop is the number of states in the loop. A trajectory begins with the agent at the intersection of the two loops. Here, the agent has a 50\% probability of entering either loop. At intermediate states, the agent moves to the next state in the loop with probability $1-p$ or remains in its current state with probability $p$. Exit states are located halfway into each loop. The agent leaves the environment at exit states with 50\% probability. 
 
-%\subsection{Number of Trajectories}
-
 Figure~\ref{fig-double} (1-3) provides results for the case in which one loop consists of 64 states and the other of 16 states. Panel (1) presents the results when learning from  100 observation sequences, while the results in panel (2) are obtained using 10000 observations. In both cases, the M-PSRs outperform the simple PSR for small model sizes. Panel (3) shows the effect of varying the self-transition probability to $p = 0.2$, in order to simulate noise in the environment. We find that the environment with noisy loops is more compressible, that is, one can achieve better performance for low model sizes, but the performance becomes worse as the model size attains the environment's true size. M-PSRs still significantly outperform the standard PSR for reduced model sizes. Panel (2) in Figure~\ref{fig-colnumops} illustrates the effect of $K$ on the performance of the Base M-PSRs. We note that larger values of $K$ have better performance, up to $K=7$.
 
 \begin{figure*}[ht!]
-%
-%\begin{figure}[ht!]
-%\centering
 \includegraphics[width=44mm]{Pacman500.png}%
-%\caption{Low Data Pacman Labyrinth\label{fig-paclow}}
-%\end{figure}
-%
-%
-%\centering
 \includegraphics[width=44mm]{Pacman10k.png}%
-%\caption{High Data Pacman Labyrinth\label{fig-pachigh}}
-%\end{figure}
-%
-%
-%
-%\begin{figure}[ht!]
-%\centering
 \includegraphics[width=44mm]{PacmanSF-1.png}%
-%\caption{Stretch Factor: 1\label{fig-pacsf1}}
-%\end{figure}
-%
-%\begin{figure}[ht!]
-%\centering
 \includegraphics[width=44mm]{PacmanSF-5.png}%
-%\vspace*{-4mm}
 \caption{Results for the Pacman environment with (in order from left to right) low amount of data, high amount of data and stretch factor equal to 1 and 5 (right panels)\label{fig-pacsf5}%
-%\vspace*{-4mm}
 }
 \end{figure*}
-
-
-%\begin{figure}[ht!]
-%\centering
-%\includegraphics[width=40mm]{NumOpsTiming.png}\vspace*{-4mm}
-%\caption{Effect of the number of operators on performance in 64-16 loop\label{fig-numops}\vspace*{-4mm}}
-%\end{figure} 
-%
-%\begin{figure}[ht!]
-%\centering
-%%\includegraphics[width=40mm]{47-27-10000.png}\vspace*{-4mm}
-%%\includegraphics[width=44mm]{basePows.png}%
-%%effect of exponent in Base M-PSR
-%\caption{High Data Double Loop 47-27\label{fig-dl47}\vspace*{-4mm}}
-%\end{figure}
-
 
 \begin{figure*}[t!]
 \centering
 \includegraphics[width=44mm]{basePows.png}%
-%\includegraphics[width=42mm]{MO_50.png}
-%\caption{Low Data Colored Loops 27-17\label{fig-collow}}
-%\end{figure}
-%
-%\begin{figure}[ht!]
-%\centering
 \includegraphics[width=44mm]{NumOpsTiming.png}%
 \includegraphics[width=44mm]{MO_1k.png}%
-%\caption{High Data Colored Loops 27-17\label{fig-colhigh}}
-%\end{figure}
-%
-%\begin{figure}[ht!]
-%\centering
 \includegraphics[width=44mm]{numOpComparison.png}%
-%\vspace*{-4mm}
 \caption{(1) Effect of exponent in Base M-PSR (Double Loop 64-16) (2) Effect of the number of operators (Double Loop 64-16) (3) Effect of model size (Colored Double Loop 27-17) (4) Effect of the number of operators (Colored Double Loop 27-17)\label{fig-colnumops}%
-%\vspace*{-4mm}
 }
-%Results for Coloured Double loops 27-17, in low data regime (left), high data regime (middle) and as a function of different numbers of operators (right)
 \end{figure*}
 
 In Figure~\ref{fig-colnumops} (2), we illustrate how varying the number of multi-step transition operators affects performance for the 64-16 double loop. As expected, a higher number of operators improves performance, but the effect tapers off at about 20 operators. Here, the most important operators are: $\{\sigma,\sigma^{8},\sigma^{24},\sigma^{32},\sigma^{72}\}$ which are closely tied to the environment's periodic structure.
-
-%\subsection{Loop Lengths}
 
 In Figure~\ref{fig-double} (4), we plot the results of a 47-27 labyrinth.  Here, because of the lengths of the loops, observations will not be as compactly expressed from the Base M-PSR. Again, M-PSRs outperform the standard PSR for reduced model sizes.
 
@@ -651,11 +361,6 @@ As for the timing case, we find that M-PSRs perform far better, especially the D
 \section{Discussion}
 
 We presented an approach to leveraging multiple temporal scales in the behaviour of dynamical systems, in order to learn predictive state representations.  The proposed model, M-PSR, can be learned by adapting existing spectral approaches. To the best of our knowledge, the only other work that attempts to include temporal abstraction in PSRs is due to \cite{wolfe06}, who use temporally extended actions, or options~\cite{sutton99}, and build PSRs on top of these. However, this model has a very different flavour from our approach, as we bundle together observations into multiple steps. In particular, our approach is applicable even when there are no actions, such as in the case of HMMs, whereas this previous work requires structure in the action space. In all the experiments we conducted, M-PSRs offer significantly better predictive performance for reduced model sizes than PSRs. In addition, Data-Driven PSRs offer improvements over generic M-PSRs by learning the transition operators specific to the environment, which is very important when prior information about appropriate time scales for modelling is not known. Our evaluation focused on illustrating the advantage of the proposed model especially when the amount of data available is small, and in noisy environments. These experiments suggest that M-PSR with small number of states provide much better approximations to a given environment than PSR with the same number of states. We think this is a very promising property, and we plan to study it in detail in future work. We used simulated domains in our experiments in order to compare with a ground truth. However, we anticipate that the proposed models would be useful in real tasks, for example in financial market prediction. In this case, one could discretize market levels into bins, and use M-PSRs to learn predictive models over multiple time steps, in order to capture both long-term trends and fast fluctuations. We also plan to experiment with this approach in the domain of processing physiological signal recordings, which similarly exhibit short and long-term trends. On the theoretical side, it would be interesting to analyze the existence of an ``optimal" set of symbols for the data-driven M-PSR, and to develop further algorithms for finding it.
-
-%Although this was not specifically illustrated in the experiments, M-PSRs offer a computational advantage when performing conditional probability queries as they use far fewer matrices than regular PSRs. This can be very important for online applications, such as in planning environments.
-
-%\section*{Acknowledgments}
-%SOME FUNDING?
 
 \bibliographystyle{named}
 \bibliography{references}
